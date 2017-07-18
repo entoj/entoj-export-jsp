@@ -1,0 +1,34 @@
+${ h:foo(model.text) }
+${ h:foo(model.text, '#Lipsum', '#Lorem') }
+${ h:bar(h:foo(model.text, x), 'y') }
+${ h:foo(['one', two]) }
+
+
+${ empty url ? '' : url }
+${ empty url ? 'string' : url }
+${ empty url ? 1 : url }
+${ empty url ? variable : url }
+<c:set var="value" value="${ empty false ? 'hooraa' : false }" />
+<c:if test="${ empty false ? '' : false == 'yes' }"></c:if>
+
+
+${ empty url }
+<c:set var="value" value="${ empty false }" />
+<c:if test="${ not empty false }"></c:if>
+
+
+${ h:moduleClasses(url) }
+<c:set var="value" value="${ h:moduleClasses(['primary', 'green'], 'e-cta') }" />
+
+
+${ '/base/global/assets'.concat(url) }
+<c:set var="path" value="${ '/base/global/assets'.concat('primary') }" />
+
+
+<fmt:message var="translation" key="${ 'key' }" />
+<fmt:message key="${ 'key' }" />
+
+
+<c:set var="html">${ content }</c:set>
+<c:set var="html">${ 'content' }</c:set>
+${ content }

@@ -1,0 +1,4 @@
+<f:variable name="className" value="{model.headline}-teaser" />
+<f:variable name="model.nr" value="{model.id + 1}" />
+<f:variable name="simple" value="1.5" />
+<f:if condition="{type}"><f:then><e:variable name="className" value="{moduleClass}" /></f:then><f:else><e:variable name="className" value="default" /></f:else></f:if>
