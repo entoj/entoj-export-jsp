@@ -5,10 +5,10 @@ const Exporter = require('entoj-system').export.Exporter;
 const GlobalRepository = require('entoj-system').model.GlobalRepository;
 const BuildConfiguration = require('entoj-system').model.configuration.BuildConfiguration;
 const JinjaParser = require('entoj-system').export.parser.JinjaParser;
-const FluidRenderer = require('./FluidRenderer.js').FluidRenderer;
-const FluidTransformer = require('./FluidTransformer.js').FluidTransformer;
-const FluidConfiguration = require('./FluidConfiguration.js').FluidConfiguration;
-const FluidModuleConfiguration = require('../configuration/FluidConfiguration.js').FluidConfiguration;
+const JspRenderer = require('./JspRenderer.js').JspRenderer;
+const JspTransformer = require('./JspTransformer.js').JspTransformer;
+const JspConfiguration = require('./JspConfiguration.js').JspConfiguration;
+const JspModuleConfiguration = require('../configuration/JspModuleConfiguration.js').JspModuleConfiguration;
 const assertParameter = require('entoj-system').utils.assert.assertParameter;
 
 
@@ -16,21 +16,21 @@ const assertParameter = require('entoj-system').utils.assert.assertParameter;
  * @memberOf export
  * @extends export.Renderer
  */
-class FluidExporter extends Exporter
+class JspExporter extends Exporter
 {
     /**
      * @ignore
      */
-    constructor(globalRepository, buildConfiguration, fluidConfiguration)
+    constructor(globalRepository, buildConfiguration, jspModuleConfiguration, jspRenderer, jspTransformer)
     {
-        super(globalRepository, buildConfiguration, new JinjaParser(), new FluidRenderer(), new FluidTransformer());
+        super(globalRepository, buildConfiguration, new JinjaParser(), jspRenderer, jspTransformer);
 
         // Check params
-        assertParameter(this, 'fluidConfiguration', fluidConfiguration, true, FluidModuleConfiguration);
+        assertParameter(this, 'jspModuleConfiguration', jspModuleConfiguration, true, JspModuleConfiguration);
 
         // Assign options
-        this._fluidConfiguration = fluidConfiguration;
-        this._configurationClass = FluidConfiguration;
+        this._jspModuleConfiguration = jspModuleConfiguration;
+        this._configurationClass = JspConfiguration;
     }
 
 
@@ -39,7 +39,7 @@ class FluidExporter extends Exporter
      */
     static get className()
     {
-        return 'export/FluidExporter';
+        return 'export/JspExporter';
     }
 
 
@@ -48,16 +48,16 @@ class FluidExporter extends Exporter
      */
     static get injections()
     {
-        return { 'parameters': [GlobalRepository, BuildConfiguration, FluidModuleConfiguration] };
+        return { 'parameters': [GlobalRepository, BuildConfiguration, JspModuleConfiguration, JspRenderer, JspTransformer] };
     }
 
 
     /**
-     * @type {configuration.FluidConfiguration}
+     * @type {configuration.JspModuleConfiguration}
      */
-    get fluidConfiguration()
+    get jspModuleConfiguration()
     {
-        return this._fluidConfiguration;
+        return this._jspModuleConfiguration;
     }
 
 
@@ -72,10 +72,10 @@ class FluidExporter extends Exporter
     {
         return new this._configurationClass(entity, macro, settings,
             this.parser, this.renderer, this.transformer,
-            this.globalRepository, this.buildConfiguration, this.fluidConfiguration);
+            this.globalRepository, this.buildConfiguration, this.jspModuleConfiguration);
     }
 }
 
 
 // Exports
-module.exports.FluidExporter = FluidExporter;
+module.exports.JspExporter = JspExporter;

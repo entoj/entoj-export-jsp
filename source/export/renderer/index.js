@@ -5,12 +5,17 @@ module.exports =
 {
     // Filters
     JspAssetUrlFilterRenderer: require('./JspAssetUrlFilterRenderer.js').JspAssetUrlFilterRenderer,
+    JspAttributesFilterRenderer: require('./JspAttributesFilterRenderer.js').JspAttributesFilterRenderer,
     JspDefaultFilterRenderer: require('./JspDefaultFilterRenderer.js').JspDefaultFilterRenderer,
     JspEmptyFilterRenderer: require('./JspEmptyFilterRenderer.js').JspEmptyFilterRenderer,
-    //JspModuleClassesFilterRenderer: require('./JspModuleClassesFilterRenderer.js').JspModuleClassesFilterRenderer,
+    JspModuleClassesFilterRenderer: require('./JspModuleClassesFilterRenderer.js').JspModuleClassesFilterRenderer,
     JspTranslateFilterRenderer: require('./JspTranslateFilterRenderer.js').JspTranslateFilterRenderer,
     JspLengthFilterRenderer: require('./JspLengthFilterRenderer.js').JspLengthFilterRenderer,
     JspMarkupFilterRenderer: require('./JspMarkupFilterRenderer.js').JspMarkupFilterRenderer,
+    JspFormatDateFilterRenderer: require('./JspFormatDateFilterRenderer.js').JspFormatDateFilterRenderer,
+    JspEscapeFilterRenderer: require('./JspEscapeFilterRenderer.js').JspEscapeFilterRenderer,
+    JspLoadFilterRenderer: require('./JspLoadFilterRenderer.js').JspLoadFilterRenderer,
+    JspUniqueFilterRenderer: require('./JspUniqueFilterRenderer.js').JspUniqueFilterRenderer,
 
     // Standards
     JspArrayNodeRenderer: require('./JspArrayNodeRenderer.js').JspArrayNodeRenderer,

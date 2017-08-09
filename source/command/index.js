@@ -3,5 +3,5 @@
  */
 module.exports =
 {
-    FluidExportCommand: require('./FluidExportCommand.js').FluidExportCommand
+    JspExportCommand: require('./JspExportCommand.js').JspExportCommand
 };

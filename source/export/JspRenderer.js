@@ -2,7 +2,6 @@
 
 // Requirements
 const Renderer = require('entoj-system').export.Renderer;
-const renderers = require('./renderer/index.js');
 
 
 /**
@@ -12,27 +11,33 @@ const renderers = require('./renderer/index.js');
 class JspRenderer extends Renderer
 {
     /**
-     * @ignore
-     */
-    constructor(nodeRenderers, options)
-    {
-        let instances = nodeRenderers;
-        if (!instances || !instances.length)
-        {
-            instances = Object.keys(renderers).map(function(name)
-            {
-                return new renderers[name]();
-            });
-        }
-        super(instances, options);
-    }
-
-    /**
      * @inheritDocs
      */
     static get className()
     {
         return 'export/JspRenderer';
+    }
+
+
+    /**
+     * @inheritDocs
+     */
+    renderPreface(configuration)
+    {
+        let result = '';
+        result+= '<%@ page contentType="text/html; charset=UTF-8" session="false" %>';
+        result+= '<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>';
+        result+= '<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>';
+        return Promise.resolve(result);
+    }
+
+
+    /**
+     * @inheritDocs
+     */
+    static get injections()
+    {
+        return { 'parameters': ['export/JspRenderer.nodeRenderers', 'export/JspRenderer.options'] };
     }
 }
 

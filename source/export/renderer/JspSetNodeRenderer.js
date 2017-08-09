@@ -53,7 +53,7 @@ class JspSetNodeRenderer extends NodeRenderer
             {
                 const name = yield configuration.renderer.renderNode(node.variable, configuration);
                 const data = node.value.find('ComplexVariableNode').value;
-                result+= '<jsp:useBean id="' + name + '" class="java.util.TreeMap" />';
+                result+= '<jsp:useBean id="' + name + '" class="java.util.LinkedHashMap" />';
                 const render = (name, data) =>
                 {
                     let result = '';
@@ -61,7 +61,7 @@ class JspSetNodeRenderer extends NodeRenderer
                     {
                         if (isPlainObject(data[key]))
                         {
-                            result+= '<jsp:useBean id="' + name + '_' + key + '" class="java.util.TreeMap" />';
+                            result+= '<jsp:useBean id="' + name + '_' + key + '" class="java.util.LinkedHashMap" />';
                             result+= render(name + '_' + key, data[key]);
                             result+= '<c:set target="${ ' + name + ' }" property="' + key + '" value="${ ' + name + '_' + key + ' }" />';
                         }

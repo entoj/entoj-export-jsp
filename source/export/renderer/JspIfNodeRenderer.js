@@ -58,7 +58,7 @@ class JspIfNodeRenderer extends NodeRenderer
                 result+= ')';
             }
             // If ...
-            else if (!node.elseChildren.length)
+            else if (!node.elseChildren.length && !node.elseIfChildren.length)
             {
                 result+= '<c:if test="${ ';
                 result+= yield configuration.renderer.renderNode(node.condition, configuration);
@@ -66,17 +66,33 @@ class JspIfNodeRenderer extends NodeRenderer
                 result+= yield configuration.renderer.renderList(node.children, configuration);
                 result+= '</c:if>';
             }
-            // If ... else ...
+            // If ... elseif ... else ...
             else
             {
-                result+= '<c:choose><c:when test="${ ';
+                result+= '<c:choose>';
+                result+= '<c:when test="${ ';
                 result+= yield configuration.renderer.renderNode(node.condition, configuration);
                 result+= ' }">';
                 result+= yield configuration.renderer.renderList(node.children, configuration);
                 result+= '</c:when>';
-                result+= '<c:otherwise>';
-                result+= yield configuration.renderer.renderList(node.elseChildren, configuration);
-                result+= '</c:otherwise></c:choose>';
+                if (node.elseIfChildren.length)
+                {
+                    for (const elseIfNode of node.elseIfChildren)
+                    {
+                        result+= '<c:when test="${ ';
+                        result+= yield configuration.renderer.renderNode(elseIfNode.condition, configuration);
+                        result+= ' }">';
+                        result+= yield configuration.renderer.renderList(elseIfNode.children, configuration);
+                        result+= '</c:when>';
+                    }
+                }
+                if (node.elseChildren.length)
+                {
+                    result+= '<c:otherwise>';
+                    result+= yield configuration.renderer.renderList(node.elseChildren, configuration);
+                    result+= '</c:otherwise>';
+                }
+                result+= '</c:choose>';
             }
             return result;
         });

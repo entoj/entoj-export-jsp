@@ -3,5 +3,5 @@
  */
 module.exports =
 {
-    JspConfiguration: require('./JspConfiguration.js').JspConfiguration
+    JspModuleConfiguration: require('./JspModuleConfiguration.js').JspModuleConfiguration
 };

@@ -1,0 +1,362 @@
+{
+    "type": "NodeList",
+    "children": [
+        {
+            "type": "IfNode",
+            "children": [],
+            "condition": {
+                "type": "ConditionNode",
+                "children": [
+                    {
+                        "type": "FilterNode",
+                        "children": [],
+                        "name": "notempty",
+                        "arguments": [],
+                        "value": {
+                            "type": "VariableNode",
+                            "fields": [
+                                "model",
+                                "headline"
+                            ]
+                        }
+                    },
+                    {
+                        "type": "BooleanOperandNode",
+                        "value": "and"
+                    },
+                    {
+                        "type": "FilterNode",
+                        "children": [],
+                        "name": "notempty",
+                        "arguments": [],
+                        "value": {
+                            "type": "VariableNode",
+                            "fields": [
+                                "model",
+                                "copy"
+                            ]
+                        }
+                    },
+                    {
+                        "type": "BooleanOperandNode",
+                        "value": "or"
+                    },
+                    {
+                        "type": "FilterNode",
+                        "children": [],
+                        "name": "empty",
+                        "arguments": [],
+                        "value": {
+                            "type": "VariableNode",
+                            "fields": [
+                                "model",
+                                "headline"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "elseIfChildren": [],
+            "elseChildren": []
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "IfNode",
+            "children": [],
+            "condition": {
+                "type": "ConditionNode",
+                "children": [
+                    {
+                        "type": "FilterNode",
+                        "children": [],
+                        "name": "notempty",
+                        "arguments": [],
+                        "value": {
+                            "type": "VariableNode",
+                            "fields": [
+                                "model",
+                                "headline"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "elseIfChildren": [],
+            "elseChildren": []
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "IfNode",
+            "children": [],
+            "condition": {
+                "type": "ConditionNode",
+                "children": [
+                    {
+                        "type": "FilterNode",
+                        "children": [],
+                        "name": "empty",
+                        "arguments": [],
+                        "value": {
+                            "type": "VariableNode",
+                            "fields": [
+                                "model",
+                                "headline"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "elseIfChildren": [],
+            "elseChildren": []
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "IfNode",
+            "children": [],
+            "condition": {
+                "type": "ConditionNode",
+                "children": [
+                    {
+                        "type": "FilterNode",
+                        "children": [],
+                        "name": "notempty",
+                        "arguments": [],
+                        "value": {
+                            "type": "VariableNode",
+                            "fields": [
+                                "model",
+                                "headline"
+                            ]
+                        }
+                    },
+                    {
+                        "type": "LiteralNode",
+                        "value": ""
+                    }
+                ]
+            },
+            "elseIfChildren": [],
+            "elseChildren": []
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "IfNode",
+            "children": [],
+            "condition": {
+                "type": "ConditionNode",
+                "children": [
+                    {
+                        "type": "FilterNode",
+                        "children": [],
+                        "name": "empty",
+                        "arguments": [],
+                        "value": {
+                            "type": "VariableNode",
+                            "fields": [
+                                "model",
+                                "headline"
+                            ]
+                        }
+                    },
+                    {
+                        "type": "LiteralNode",
+                        "value": ""
+                    }
+                ]
+            },
+            "elseIfChildren": [],
+            "elseChildren": []
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "IfNode",
+            "children": [],
+            "condition": {
+                "type": "ConditionNode",
+                "children": [
+                    {
+                        "type": "FilterNode",
+                        "children": [],
+                        "name": "notempty",
+                        "arguments": [],
+                        "value": {
+                            "type": "VariableNode",
+                            "fields": [
+                                "model",
+                                "headline"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "elseIfChildren": [],
+            "elseChildren": []
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "IfNode",
+            "children": [],
+            "condition": {
+                "type": "ConditionNode",
+                "children": [
+                    {
+                        "type": "FilterNode",
+                        "children": [],
+                        "name": "empty",
+                        "arguments": [],
+                        "value": {
+                            "type": "VariableNode",
+                            "fields": [
+                                "model",
+                                "headline"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "elseIfChildren": [],
+            "elseChildren": []
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "IfNode",
+            "children": [],
+            "condition": {
+                "type": "ConditionNode",
+                "children": [
+                    {
+                        "type": "FilterNode",
+                        "children": [],
+                        "name": "notempty",
+                        "arguments": [],
+                        "value": {
+                            "type": "VariableNode",
+                            "fields": [
+                                "model",
+                                "headline"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "elseIfChildren": [],
+            "elseChildren": []
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "IfNode",
+            "children": [],
+            "condition": {
+                "type": "ConditionNode",
+                "children": [
+                    {
+                        "type": "FilterNode",
+                        "children": [],
+                        "name": "empty",
+                        "arguments": [],
+                        "value": {
+                            "type": "VariableNode",
+                            "fields": [
+                                "model",
+                                "headline"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "elseIfChildren": [],
+            "elseChildren": []
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "IfNode",
+            "children": [],
+            "condition": {
+                "type": "ConditionNode",
+                "children": [
+                    {
+                        "type": "VariableNode",
+                        "fields": [
+                            "model",
+                            "headline"
+                        ]
+                    },
+                    {
+                        "type": "OperandNode",
+                        "value": "=="
+                    },
+                    {
+                        "type": "VariableNode",
+                        "fields": [
+                            "model",
+                            "copy"
+                        ]
+                    }
+                ]
+            },
+            "elseIfChildren": [],
+            "elseChildren": []
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "IfNode",
+            "children": [],
+            "condition": {
+                "type": "ConditionNode",
+                "children": [
+                    {
+                        "type": "VariableNode",
+                        "fields": [
+                            "model",
+                            "headline"
+                        ]
+                    },
+                    {
+                        "type": "OperandNode",
+                        "value": "=="
+                    },
+                    {
+                        "type": "LiteralNode",
+                        "value": false
+                    }
+                ]
+            },
+            "elseIfChildren": [],
+            "elseChildren": []
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        }
+    ]
+}

@@ -10,7 +10,7 @@ module.exports.options = function(dynamic, fixtureConfiguration)
     {
         configurationCreator: function(entity, macro, settings, parser, renderer, transformer, globalRepository, buildConfiguration)
         {
-            const JspModuleConfiguration = require(JSP_SOURCE + '/configuration/JspConfiguration.js').JspConfiguration;
+            const JspModuleConfiguration = require(JSP_SOURCE + '/configuration/JspModuleConfiguration.js').JspModuleConfiguration;
             const JspConfiguration = require(JSP_SOURCE + '/export/JspConfiguration.js').JspConfiguration;
             const fluidModuleConfiguration = new JspModuleConfiguration(global.fixtures.globalConfiguration);
             return new JspConfiguration(entity, macro, settings, parser, renderer, transformer, globalRepository, buildConfiguration, fluidModuleConfiguration);

@@ -1,0 +1,165 @@
+{
+    "type": "NodeList",
+    "children": [
+        {
+            "type": "OutputNode",
+            "children": [
+                {
+                    "type": "ExpressionNode",
+                    "children": [
+                        {
+                            "type": "FilterNode",
+                            "children": [],
+                            "name": "concat",
+                            "arguments": [
+                                {
+                                    "type": "ArgumentNode",
+                                    "value": {
+                                        "type": "LiteralNode",
+                                        "value": 1
+                                    }
+                                }
+                            ],
+                            "value": {
+                                "type": "LiteralNode",
+                                "value": "hi"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "OutputNode",
+            "children": [
+                {
+                    "type": "ExpressionNode",
+                    "children": [
+                        {
+                            "type": "FilterNode",
+                            "children": [],
+                            "name": "concat",
+                            "arguments": [
+                                {
+                                    "type": "ArgumentNode",
+                                    "value": {
+                                        "type": "LiteralNode",
+                                        "value": 1
+                                    }
+                                }
+                            ],
+                            "value": {
+                                "type": "FilterNode",
+                                "children": [],
+                                "name": "concat",
+                                "arguments": [
+                                    {
+                                        "type": "ArgumentNode",
+                                        "value": {
+                                            "type": "LiteralNode",
+                                            "value": "ho"
+                                        }
+                                    }
+                                ],
+                                "value": {
+                                    "type": "LiteralNode",
+                                    "value": "hi"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "OutputNode",
+            "children": [
+                {
+                    "type": "ExpressionNode",
+                    "children": [
+                        {
+                            "type": "FilterNode",
+                            "children": [],
+                            "name": "concat",
+                            "arguments": [
+                                {
+                                    "type": "ArgumentNode",
+                                    "value": {
+                                        "type": "LiteralNode",
+                                        "value": "ho"
+                                    }
+                                }
+                            ],
+                            "value": {
+                                "type": "FilterNode",
+                                "children": [],
+                                "name": "concat",
+                                "arguments": [
+                                    {
+                                        "type": "ArgumentNode",
+                                        "value": {
+                                            "type": "LiteralNode",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "value": {
+                                    "type": "LiteralNode",
+                                    "value": "hi"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "SetNode",
+            "value": {
+                "type": "ExpressionNode",
+                "children": [
+                    {
+                        "type": "FilterNode",
+                        "children": [],
+                        "name": "concat",
+                        "arguments": [
+                            {
+                                "type": "ArgumentNode",
+                                "value": {
+                                    "type": "LiteralNode",
+                                    "value": "ho"
+                                }
+                            }
+                        ],
+                        "value": {
+                            "type": "LiteralNode",
+                            "value": 1
+                        }
+                    }
+                ]
+            },
+            "variable": {
+                "type": "VariableNode",
+                "fields": [
+                    "result"
+                ]
+            }
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        }
+    ]
+}

@@ -1,4 +1,4 @@
-<f:render partial="Elements/e-cta" arguments="{text: '{model.button}'}" />
-<f:render partial="Modules/m-teaser" arguments="{model: '{self}'}">children</f:render>
-<f:render partial="Elements/e-headline" arguments="{classes: '{moduleName}--check'}" />
-<f:render partial="Elements/e-headline" arguments="{level: '{level + 1}'}" />
+<%@ page contentType="text/html; charset=UTF-8" session="false" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%><jsp:include page="includes/Elements/e-cta.jsp"><jsp:param name="type" value="${ 'primary' }" /><jsp:param name="text" value="${ model.button }" /><jsp:param name="link" value="${ null }" /><jsp:param name="classes" value="${ null }" /></jsp:include>
+<jsp:include page="includes/Modules/m-teaser.jsp"><jsp:param name="type" value="${ content }" /><jsp:param name="classes" value="${ '' }" /><jsp:param name="model" value="${ self }" /></jsp:include>
+<jsp:include page="includes/Elements/e-headline.jsp"><jsp:param name="text" value="${ '' }" /><jsp:param name="level" value="${ 1 }" /><jsp:param name="skin" value="${ 'light' }" /><jsp:param name="classes" value="${ moduleName + '--check' }" /></jsp:include>
+<jsp:include page="includes/Elements/e-headline.jsp"><jsp:param name="text" value="${ '' }" /><jsp:param name="level" value="${ level + 1 }" /><jsp:param name="skin" value="${ 'light' }" /><jsp:param name="classes" value="${ '' }" /></jsp:include>

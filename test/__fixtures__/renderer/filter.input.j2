@@ -12,6 +12,10 @@
 {% set value = false|default('hooraa') %}
 {% if false|default == 'yes' %}{% endif %}
 
+{# escape #}
+{{ url|escape }}
+{% set value = false|escape %}
+
 {# not/empty #}
 {{ url|empty }}
 {% set value = false|empty %}
@@ -31,5 +35,13 @@
 
 {# markup #}
 {% set html = content|markup %}
-{% set html = 'content'|markup %}
+{% set html = 'content'|markup('default') %}
 {{ content|markup }}
+
+{# formatDate #}
+{% set date = timestamp|formatDate %}
+{% set date = timestamp|formatDate('DD.MM.YYYY') %}
+{{ timestamp|formatDate }}
+
+{# load #}
+{% set model = model|load %}

@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" session="false" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 ${ h:foo(model.text) }
 ${ h:foo(model.text, '#Lipsum', '#Lorem') }
 ${ h:bar(h:foo(model.text, x), 'y') }
@@ -12,13 +13,17 @@ ${ empty url ? variable : url }
 <c:if test="${ empty false ? '' : false == 'yes' }"></c:if>
 
 
+<c:out value="${ url }" />
+<c:set var="value"><c:out value="${ false }" /></c:set>
+
+
 ${ empty url }
 <c:set var="value" value="${ empty false }" />
 <c:if test="${ not empty false }"></c:if>
 
 
-${ h:moduleClasses(url) }
-<c:set var="value" value="${ h:moduleClasses(['primary', 'green'], 'e-cta') }" />
+${  } ${ not empty url ? .concat('--').concat(url) : '' }
+<c:set var="value" value="${ 'e-cta' } ${ not empty 'primary' ? 'e-cta'.concat('--').concat('primary') : '' } ${ not empty 'green' ? 'e-cta'.concat('--').concat('green') : '' }" />
 
 
 ${ '/base/global/assets'.concat(url) }
@@ -32,3 +37,8 @@ ${ '/base/global/assets'.concat(url) }
 <c:set var="html">${ content }</c:set>
 <c:set var="html">${ 'content' }</c:set>
 ${ content }
+
+
+<c:set var="date"><fmt:formatDate value="${ timestamp.time }" type="date" pattern="YYYY-MM-DD" /></c:set>
+<c:set var="date"><fmt:formatDate value="${ timestamp.time }" type="date" pattern="DD.MM.YYYY" /></c:set>
+<fmt:formatDate value="${ timestamp.time }" type="date" pattern="YYYY-MM-DD" />

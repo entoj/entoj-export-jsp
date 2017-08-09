@@ -58,7 +58,7 @@ class JspExportTask extends ExportTask
      */
     get exportName()
     {
-        return 'Jsp';
+        return 'jsp';
     }
 }
 

@@ -4,14 +4,14 @@
  * Requirements
  * @ignore
  */
-const JspFilterNodeRenderer = require('./JspFilterNodeRenderer.js').JspFilterNodeRenderer;
+const JspFilterReplacementRenderer = require('./JspFilterReplacementRenderer.js').JspFilterReplacementRenderer;
 const co = require('co');
 
 
 /**
- *
+ * Renders the |moduleClasses filter
  */
-class JspModuleClassesFilterRenderer extends JspFilterNodeRenderer
+class JspModuleClassesFilterRenderer extends JspFilterReplacementRenderer
 {
     /**
      * @inheritDoc
@@ -40,22 +40,45 @@ class JspModuleClassesFilterRenderer extends JspFilterNodeRenderer
         {
             return Promise.resolve('');
         }
+        const scope = this;
         const promise = co(function*()
         {
             let result = '';
 
-            let moduleClass = '';
-            if (node.arguments.length)
+            const filter = node.find('FilterNode', { name: scope.filterName });
+            if (!filter)
             {
-                moduleClass = yield configuration.renderer.renderNode(node.arguments[0].value, configuration);
+                throw new Error('Could not locate moduleClasses filter in ' + node.type);
             }
 
+            // Get moduleClass
+            let moduleClass = '';
+            if (filter.arguments.length)
+            {
+                moduleClass = yield configuration.renderer.renderNode(filter.arguments[0].value, configuration);
+            }
+
+            // Set?
+            if (scope.isSet(node, configuration))
+            {
+                result+= '<c:set var="';
+                result+= yield configuration.renderer.renderNode(node.variable, configuration);
+                result+= '" value="';
+            }
+
+            // Build -- variants
             result+= '${ ' + moduleClass + ' }';
-            const items = node.value.is('ArrayNode') ? node.value.children : [node.value];
+            const items = filter.value.is('ArrayNode') ? filter.value.children : [filter.value];
             for (const item of items)
             {
                 const value = yield configuration.renderer.renderNode(item, configuration);
                 result+= ' ${ not empty ' + value + ' ? ' + moduleClass + '.concat(\'--\').concat(' + value + ') : \'\' }';
+            }
+
+            // Set?
+            if (scope.isSet(node, configuration))
+            {
+                result+= '" />';
             }
 
             return result;

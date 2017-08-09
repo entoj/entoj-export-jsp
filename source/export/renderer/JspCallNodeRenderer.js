@@ -24,6 +24,57 @@ class JspCallNodeRenderer extends NodeRenderer
 
 
     /**
+     * @return {mixed}
+     */
+    prepareArgumentValue(value)
+    {
+        let result = value;
+        if (result == 'false' || result === false || typeof result === 'undefined')
+        {
+            result = 'null';
+        }
+        return result;
+    }
+
+
+    /**
+     * @return {Promise<Array>}
+     */
+    prepareArguments(node, macroConfiguration, configuration)
+    {
+        const scope = this;
+        const promise = co(function*()
+        {
+            const result = {};
+
+            // Get default params from inline docs
+            for (const param of macroConfiguration.macro.parameters)
+            {
+                result[param.name] = '${ ' + scope.prepareArgumentValue(param.defaultValue) + ' }';
+            }
+
+            // Get arguments
+            for (const arg of node.arguments)
+            {
+                result[arg.name] = '${ ' + scope.prepareArgumentValue(yield configuration.renderer.renderNode(arg.value, configuration)) + ' }';
+            }
+
+            // Get overrides
+            if (configuration.arguments)
+            {
+                for (const arg in configuration.arguments)
+                {
+                    result[arg] = '${ ' + scope.prepareArgumentValue(configuration.arguments[arg]) + ' }';
+                }
+            }
+
+            return result;
+        });
+        return promise;
+    }
+
+
+    /**
      * @return {Promise<Boolean>}
      */
     willRender(node, configuration)
@@ -41,26 +92,29 @@ class JspCallNodeRenderer extends NodeRenderer
         {
             return Promise.resolve('');
         }
+        const scope = this;
         const promise = co(function*()
         {
             let result = '';
-            const config = yield configuration.getMacroConfiguration(node.name);
-            if (!config)
+
+            // Get macro
+            const macroConfiguration = yield configuration.getMacroConfiguration(node.name);
+            if (!macroConfiguration)
             {
                 throw new MissingConfigurationError('CallNodeRenderer::render - no configuration for macro ' + node.name + ' found.');
             }
-            result+= '<jsp:include page="' + config.filename + '">';
-            if (node.arguments)
+
+            // Get arguments
+            const args = yield scope.prepareArguments(node, macroConfiguration, configuration);
+
+            // Render
+            result+= '<jsp:include page="' + macroConfiguration.filename + '">';
+            for (const arg in args)
             {
-                for (const arg of node.arguments)
-                {
-                    result+= '<jsp:param name="' + arg.name + '" ';
-                    result+= 'value="${ ';
-                    result+= yield configuration.renderer.renderNode(arg.value, configuration);
-                    result+= ' }"/>';
-                }
+                result+= '<jsp:param name="' + arg + '" value="' + args[arg] + '" />';
             }
             result+= '</jsp:include>';
+
             return result;
         });
         return promise;

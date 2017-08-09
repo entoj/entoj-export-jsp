@@ -43,7 +43,7 @@ class JspAssetUrlFilterRenderer extends JspFilterNodeRenderer
         const promise = co(function*()
         {
             let result = '';
-            const baseUrl = configuration.buildConfiguration.get('export.assetsBaseUrl', configuration.jspConfiguration.assetsBaseUrl);
+            const baseUrl = configuration.buildConfiguration.get('export.assetsBaseUrl', configuration.jspModuleConfiguration.assetsBaseUrl);
             result+= '\'' + baseUrl + '\'.concat(';
             result+= yield configuration.renderer.renderNode(node.value, configuration);
             result+= ')';

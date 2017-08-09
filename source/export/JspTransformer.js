@@ -2,7 +2,7 @@
 
 // Requirements
 const Transformer = require('entoj-system').export.Transformer;
-const transformers = require('./transformer/index.js');
+
 
 /**
  * @memberOf export
@@ -11,24 +11,20 @@ const transformers = require('./transformer/index.js');
 class JspTransformer extends Transformer
 {
     /**
-     * @ignore
+     * @inheritDocs
      */
-    constructor()
+    static get className()
     {
-        const instances = Object.keys(transformers).map(function(name)
-        {
-            return new transformers[name]();
-        });
-        super(instances);
+        return 'export/JspTransformer';
     }
 
 
     /**
      * @inheritDocs
      */
-    static get className()
+    static get injections()
     {
-        return 'export/JspTransformer';
+        return { 'parameters': ['export/JspTransformer.nodeTransformers'] };
     }
 }
 

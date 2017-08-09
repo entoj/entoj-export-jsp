@@ -1,2 +1,11 @@
-<f:if condition="{model.copy} || {model.headline} == ''">COPY</f:if>
-<f:if condition="{model.copy}"><f:then>COPY</f:then><f:else>NOCOPY</f:else></f:if>
+<%@ page contentType="text/html; charset=UTF-8" session="false" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%><c:if test="${ model.copy or model.headline == '' }">COPY</c:if>
+<c:choose><c:when test="${ model.copy }">COPY</c:when><c:otherwise>NOCOPY</c:otherwise></c:choose>
+<c:choose><c:when test="${ hungry }">
+  I am hungry
+</c:when><c:when test="${ tired }">
+  I am tired
+</c:when><c:when test="${ thirsty }">
+  I am thirsty
+</c:when><c:otherwise>
+  I am good!
+</c:otherwise></c:choose>

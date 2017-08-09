@@ -1,4 +1,4 @@
-<f:variable name="className" value="{model.headline}-teaser" />
-<f:variable name="model.nr" value="{model.id + 1}" />
-<f:variable name="simple" value="1.5" />
-<f:if condition="{type}"><f:then><e:variable name="className" value="{moduleClass}" /></f:then><f:else><e:variable name="className" value="default" /></f:else></f:if>
+<%@ page contentType="text/html; charset=UTF-8" session="false" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%><c:set var="className" value="${ model.headline + '-teaser' }" />
+<c:set var="model.nr" value="${ model.id + 1 }" />
+<c:set var="simple" value="${ 1.5 }" />
+<c:set var="className" value="${ (type) ? (moduleClass) : ('default') }" />

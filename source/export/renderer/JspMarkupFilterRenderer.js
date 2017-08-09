@@ -9,7 +9,7 @@ const co = require('co');
 
 
 /**
- * Renders the |markup filter
+ * Renders the |markup filter.
  */
 class JspMarkupFilterRenderer extends JspFilterReplacementRenderer
 {

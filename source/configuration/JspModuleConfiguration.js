@@ -12,12 +12,12 @@ const assertParameter = require('entoj-system').utils.assert.assertParameter;
 /**
  * @memberOf configuration
  */
-class JspConfiguration extends Base
+class JspModuleConfiguration extends Base
 {
     /**
      * @param  {model.configuration.GlobalConfiguration} globalConfiguration
      */
-    constructor(globalConfiguration)
+    constructor(globalConfiguration, options)
     {
         super();
 
@@ -25,10 +25,14 @@ class JspConfiguration extends Base
         assertParameter(this, 'globalConfiguration', globalConfiguration, true, GlobalConfiguration);
 
         // Create configuration
-        this._exportPath = globalConfiguration.get('jsp.exportPath', '${cache}/fluid/export');
-        this._builtinViewHelperNamespace = globalConfiguration.get('jsp.builtinViewHelperNamespace', 'f');
-        this._entojViewHelperNamespace = globalConfiguration.get('jsp.entojViewHelperNamespace', 'e');
-        this._assetsBaseUrl = globalConfiguration.get('jsp.assetsBaseUrl', '');
+        const prefix = options
+            ? options.prefix || 'jsp'
+            : 'jsp';
+        this._exportPath = globalConfiguration.get(prefix + '.exportPath', '${cache}/'+ prefix + '/export');
+        this._builtinViewHelperNamespace = globalConfiguration.get(prefix + '.builtinViewHelperNamespace', 'f');
+        this._localViewHelperNamespace = globalConfiguration.get(prefix + '.localViewHelperNamespace', 'e');
+        this._assetsBaseUrl = globalConfiguration.get(prefix + '.assetsBaseUrl', '');
+        this._imageBaseUrl = globalConfiguration.get(prefix + '.imageBaseUrl', '');
     }
 
 
@@ -46,7 +50,7 @@ class JspConfiguration extends Base
      */
     static get className()
     {
-        return 'configuration/JspConfiguration';
+        return 'configuration/JspModuleConfiguration';
     }
 
 
@@ -73,13 +77,13 @@ class JspConfiguration extends Base
 
 
     /**
-     * The namespace used to adress entoj view helpers
+     * The namespace used to adress local (entoj) view helpers
      *
      * @type {String}
      */
-    get entojViewHelperNamespace()
+    get localViewHelperNamespace()
     {
-        return this._entojViewHelperNamespace;
+        return this._localViewHelperNamespace;
     }
 
 
@@ -99,4 +103,4 @@ class JspConfiguration extends Base
  * Exports
  * @ignore
  */
-module.exports.JspConfiguration = JspConfiguration;
+module.exports.JspModuleConfiguration = JspModuleConfiguration;

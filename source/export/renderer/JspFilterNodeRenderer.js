@@ -52,18 +52,37 @@ class JspFilterNodeRenderer extends NodeRenderer
         const promise = co(function*()
         {
             let result = '';
-            result+= 'h:' + node.name + '(';
-            const args = [];
-            args.push(yield configuration.renderer.renderNode(node.value, configuration));
-            if (node.arguments)
+
+            if (node.isChildOf('ExpressionNode'))
             {
-                for (const argument of node.arguments)
+                result+= yield configuration.renderer.renderNode(node.value, configuration);
+                result+= '.' + node.name + '(';
+                const args = [];
+                if (node.arguments)
                 {
-                    args.push(yield configuration.renderer.renderNode(argument.value, configuration));
+                    for (const argument of node.arguments)
+                    {
+                        args.push(yield configuration.renderer.renderNode(argument.value, configuration));
+                    }
                 }
+                result+= args.join(', ');
+                result+= ')';
             }
-            result+= args.join(', ');
-            result+= ')';
+            else
+            {
+                result+= 'h:' + node.name + '(';
+                const args = [];
+                args.push(yield configuration.renderer.renderNode(node.value, configuration));
+                if (node.arguments)
+                {
+                    for (const argument of node.arguments)
+                    {
+                        args.push(yield configuration.renderer.renderNode(argument.value, configuration));
+                    }
+                }
+                result+= args.join(', ');
+                result+= ')';
+            }
             return result;
         });
         return promise;
