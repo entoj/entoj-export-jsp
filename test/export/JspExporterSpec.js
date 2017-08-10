@@ -125,5 +125,18 @@ describe(JspExporter.className, function()
             });
             return promise;
         });
+
+
+        it('should allow to export templates', function()
+        {
+            const promise = co(function*()
+            {
+                const settings =
+                {
+                };
+                yield expectFixture('template', 't-bare', undefined, settings, true);
+            });
+            return promise;
+        });
     });
 });
