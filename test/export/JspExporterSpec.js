@@ -7,8 +7,11 @@ const JspExporter = require(JSP_SOURCE + '/export/JspExporter.js').JspExporter;
 const JspModuleConfiguration = require(JSP_SOURCE + '/configuration/JspModuleConfiguration.js').JspModuleConfiguration;
 const JspRenderer = require(JSP_SOURCE + '/export/JspRenderer.js').JspRenderer;
 const JspTransformer = require(JSP_SOURCE + '/export/JspTransformer.js').JspTransformer;
+const DocumentationCallable = require('entoj-system').model.documentation.DocumentationCallable;
 const exporterSpec = require('entoj-system/test').export.ExporterShared;
 const projectFixture = require('entoj-system/test').fixture.project;
+const co = require('co');
+const fs = require('fs');
 
 
 /**
@@ -17,14 +20,38 @@ const projectFixture = require('entoj-system/test').fixture.project;
 describe(JspExporter.className, function()
 {
     /**
-     * Configuration Test
+     * Exporter Test
      */
-    function prepareParameters(parameters)
+    function prepareParameters(parameters, fullyConfigure)
     {
-        const fixture = projectFixture.createStatic(true);
-        const moduleConfiguration = new JspModuleConfiguration(fixture.globalConfiguration);
-        const jspRenderer = new JspRenderer();
-        const jspTransformer = new JspTransformer();
+        const options =
+        {
+            settings:
+            {
+                jsp:
+                {
+                    configurationName: 'default'
+                }
+            }
+        };
+        if (fullyConfigure)
+        {
+            options.mappings =
+            [
+                {
+                    type: require(JSP_SOURCE + '/export/JspRenderer.js').JspRenderer,
+                    '!nodeRenderers': Object.values(require(JSP_SOURCE + '/export/renderer/index.js'))
+                },
+                {
+                    type: require(JSP_SOURCE + '/export/JspTransformer.js').JspTransformer,
+                    '!nodeTransformers': Object.values(require(JSP_SOURCE + '/export/transformer/index.js'))
+                }
+            ];
+        }
+        const fixture = projectFixture.createDynamic(options);
+        const moduleConfiguration = fixture.context.di.create(JspModuleConfiguration);
+        const jspRenderer = fixture.context.di.create(JspRenderer);
+        const jspTransformer = fixture.context.di.create(JspTransformer);
         if (parameters && parameters.length)
         {
             parameters.push(moduleConfiguration, jspRenderer, jspTransformer);
@@ -35,6 +62,68 @@ describe(JspExporter.className, function()
             return [fixture.globalRepository, fixture.buildConfiguration, moduleConfiguration, jspRenderer, jspTransformer];
         }
     }
-
     exporterSpec(JspExporter, 'export/JspExporter', prepareParameters);
+
+
+    /**
+     * JspExporter Test
+     */
+    function expectFixture(fixture, entityQuery, macroQuery, settings, updateSpec)
+    {
+        const promise = co(function*()
+        {
+            const testee = new JspExporter(...prepareParameters(undefined, true));
+            const result = yield testee.export('base', entityQuery, macroQuery, settings);
+            if (updateSpec)
+            {
+                fs.writeFileSync(JSP_FIXTURES + '/exporter/' + fixture + '.jsp', result.contents, { encoding: 'utf8' });
+            }
+            expect(result.contents).to.be.equal(fs.readFileSync(JSP_FIXTURES + '/exporter/' + fixture + '.jsp', { encoding: 'utf8' }));
+            return result;
+        });
+        return promise;
+    }
+
+    describe('#export', function()
+    {
+        it('should export the default macro of given entity', function()
+        {
+            const promise = co(function*()
+            {
+                const result = yield expectFixture('default-macro', 'e-image');
+                expect(result.configuration.macro).to.be.instanceof(DocumentationCallable);
+                expect(result.configuration.macro.name).to.be.equal('e_image');
+            });
+            return promise;
+        });
+
+
+        it('should export the configured macro of given entity', function()
+        {
+            const promise = co(function*()
+            {
+                const result = yield expectFixture('selected-macro', 'm-teaser', 'm_teaser_hero');
+                expect(result.configuration.macro).to.be.instanceof(DocumentationCallable);
+                expect(result.configuration.macro.name).to.be.equal('m_teaser_hero');
+            });
+            return promise;
+        });
+
+
+        it('should allow to preconfigure macro parameters values', function()
+        {
+            const promise = co(function*()
+            {
+                const settings =
+                {
+                    parameters:
+                    {
+                        classes: 'configured'
+                    }
+                };
+                yield expectFixture('macro-arguments', 'e-image', undefined, settings);
+            });
+            return promise;
+        });
+    });
 });
