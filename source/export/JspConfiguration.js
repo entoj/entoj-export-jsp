@@ -15,16 +15,16 @@ class JspConfiguration extends Configuration
     /**
      * @ignore
      */
-    constructor(entity, macro, settings, parser, renderer, transformer, globalRepository, buildConfiguration, jspModuleConfiguration)
+    constructor(entity, macro, settings, parser, renderer, transformer, globalRepository, buildConfiguration, moduleConfiguration)
     {
         super(entity, macro, settings, parser, renderer, transformer, globalRepository, buildConfiguration);
 
         // Check params
-        assertParameter(this, 'jspModuleConfiguration', jspModuleConfiguration, true, JspModuleConfiguration);
+        assertParameter(this, 'moduleConfiguration', moduleConfiguration, true, JspModuleConfiguration);
 
         // Assign options
-        this._jspModuleConfiguration = jspModuleConfiguration;
-        this._identifier = jspModuleConfiguration.configurationName;
+        this._moduleConfiguration = moduleConfiguration;
+        this._identifier = moduleConfiguration.configurationName;
     }
 
 
@@ -40,9 +40,9 @@ class JspConfiguration extends Configuration
     /**
      * @type {configuration.JspConfiguration}
      */
-    get jspModuleConfiguration()
+    get moduleConfiguration()
     {
-        return this._jspModuleConfiguration;
+        return this._moduleConfiguration;
     }
 
 
@@ -51,7 +51,7 @@ class JspConfiguration extends Configuration
      */
     refineConfiguration(configuration)
     {
-        configuration.jsp = this.jspModuleConfiguration;
+        configuration.moduleConfiguration = this.moduleConfiguration;
         if (this.settings.filename)
         {
             configuration.filename = '';

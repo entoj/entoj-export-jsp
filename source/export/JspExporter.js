@@ -21,15 +21,15 @@ class JspExporter extends Exporter
     /**
      * @ignore
      */
-    constructor(globalRepository, buildConfiguration, jspModuleConfiguration, jspRenderer, jspTransformer)
+    constructor(globalRepository, buildConfiguration, moduleConfiguration, renderer, transformer)
     {
-        super(globalRepository, buildConfiguration, new JinjaParser(), jspRenderer, jspTransformer);
+        super(globalRepository, buildConfiguration, new JinjaParser(), renderer,transformer);
 
         // Check params
-        assertParameter(this, 'jspModuleConfiguration', jspModuleConfiguration, true, JspModuleConfiguration);
+        assertParameter(this, 'moduleConfiguration', moduleConfiguration, true, JspModuleConfiguration);
 
         // Assign options
-        this._jspModuleConfiguration = jspModuleConfiguration;
+        this._moduleConfiguration = moduleConfiguration;
         this._configurationClass = JspConfiguration;
     }
 
@@ -55,9 +55,9 @@ class JspExporter extends Exporter
     /**
      * @type {configuration.JspModuleConfiguration}
      */
-    get jspModuleConfiguration()
+    get moduleConfiguration()
     {
-        return this._jspModuleConfiguration;
+        return this._moduleConfiguration;
     }
 
 
@@ -72,7 +72,7 @@ class JspExporter extends Exporter
     {
         return new this._configurationClass(entity, macro, settings,
             this.parser, this.renderer, this.transformer,
-            this.globalRepository, this.buildConfiguration, this.jspModuleConfiguration);
+            this.globalRepository, this.buildConfiguration, this.moduleConfiguration);
     }
 }
 
