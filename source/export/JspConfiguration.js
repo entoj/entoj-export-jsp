@@ -24,7 +24,7 @@ class JspConfiguration extends Configuration
 
         // Assign options
         this._jspModuleConfiguration = jspModuleConfiguration;
-        this._identifier = 'jsp';
+        this._identifier = jspModuleConfiguration.configurationName;
     }
 
 

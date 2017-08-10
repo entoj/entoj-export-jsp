@@ -28,6 +28,7 @@ class JspModuleConfiguration extends Base
         const prefix = options
             ? options.prefix || 'jsp'
             : 'jsp';
+        this._configurationName = globalConfiguration.get(prefix + '.configurationName', 'jsp');
         this._exportPath = globalConfiguration.get(prefix + '.exportPath', '${cache}/'+ prefix + '/export');
         this._builtinViewHelperNamespace = globalConfiguration.get(prefix + '.builtinViewHelperNamespace', 'f');
         this._localViewHelperNamespace = globalConfiguration.get(prefix + '.localViewHelperNamespace', 'e');
@@ -51,6 +52,17 @@ class JspModuleConfiguration extends Base
     static get className()
     {
         return 'configuration/JspModuleConfiguration';
+    }
+
+
+    /**
+     * The name of the export configurations for entities.
+     *
+     * @type {String}
+     */
+    get configurationName()
+    {
+        return this._configurationName;
     }
 
 
