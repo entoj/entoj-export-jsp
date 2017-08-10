@@ -10,7 +10,7 @@ const EOL = '\n';
 
 
 /**
- *
+ * Renders a macro
  */
 class JspMacroNodeRenderer extends NodeListRenderer
 {
@@ -20,6 +20,24 @@ class JspMacroNodeRenderer extends NodeListRenderer
     static get className()
     {
         return 'export.renderer/JspMacroNodeRenderer';
+    }
+
+
+    /**
+     * @return {mixed}
+     */
+    prepareParameterValue(value, addQuotes)
+    {
+        let result = value;
+        if (result == 'false' || result === false || typeof result === 'undefined')
+        {
+            result = 'null';
+        }
+        else if (addQuotes && typeof value === 'string')
+        {
+            result = '\'' + value + '\'';
+        }
+        return result;
     }
 
 
@@ -41,31 +59,43 @@ class JspMacroNodeRenderer extends NodeListRenderer
         {
             return Promise.resolve('');
         }
+        const scope = this;
         const promise = co(function*()
         {
             // Prepare
             let result = '';
-
-            // Get all default parameters
-            result+= yield configuration.renderer.renderComment('macro ' + node.name + ' parameters');
-            const config = yield configuration.getMacroConfiguration(node.name);
+            const macroConfiguration = yield configuration.getMacroConfiguration(node.name);
             const parameters = {};
-            if (config && config.macro)
+
+            // Get default parameters from docblock
+            if (macroConfiguration && macroConfiguration.macro)
             {
-                // Add documented default values
-                for (const parameter of config.macro.parameters)
+                for (const parameter of macroConfiguration.macro.parameters)
                 {
-                    parameters[parameter.name] = parameter.defaultValue;
+                    parameters[parameter.name] = '${ ' + scope.prepareParameterValue(parameter.defaultValue) + ' }';
                 }
             }
+
             // Add parsed default values
             for (const parameter of node.parameters)
             {
                 const defaultValue = parameter.value
                     ? yield configuration.renderer.renderNode(parameter.value, configuration)
-                    : 'null';
-                parameters[parameter.name] = defaultValue;
+                    : false;
+                parameters[parameter.name] = scope.prepareParameterValue(defaultValue);
             }
+
+            // Override configured arguments
+            if (macroConfiguration.parameters)
+            {
+                for (const param in macroConfiguration.parameters)
+                {
+                    parameters[param] = scope.prepareParameterValue(macroConfiguration.parameters[param], true);
+                }
+            }
+
+            // Render parameters
+            result+= yield configuration.renderer.renderComment('macro ' + node.name + ' parameters');
             for (const paramName in parameters)
             {
                 result+= '<c:set var="' + paramName + '" ';
