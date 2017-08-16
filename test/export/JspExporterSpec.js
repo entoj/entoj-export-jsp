@@ -41,14 +41,15 @@ describe(JspExporter.className, function()
             [
                 {
                     type: require(JSP_SOURCE + '/export/JspRenderer.js').JspRenderer,
-                    '!nodeRenderers': Object.values(require(JSP_SOURCE + '/export/renderer/index.js'))
+                    '!nodeRenderers': require(JSP_SOURCE + '/export/renderer/index.js').rendererList
                 },
                 {
                     type: require(JSP_SOURCE + '/export/JspTransformer.js').JspTransformer,
-                    '!nodeTransformers': Object.values(require(JSP_SOURCE + '/export/transformer/index.js'))
+                    '!nodeTransformers': require(JSP_SOURCE + '/export/transformer/index.js').transformerList
                 }
             ];
         }
+
         const fixture = projectFixture.createDynamic(options);
         const moduleConfiguration = fixture.context.di.create(JspModuleConfiguration);
         const jspRenderer = fixture.context.di.create(JspRenderer);

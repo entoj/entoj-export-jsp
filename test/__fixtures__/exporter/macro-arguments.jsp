@@ -1,6 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" session="false" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%><%@ taglib prefix="entoj" uri="https://entoj.io/entoj"%><!-- macro e_image parameters -->
-<c:set var="model" value="${ not empty param.model ? param.model : null }" />
-<c:set var="settings" value="${ not empty param.settings ? param.settings : null }" />
 <c:set var="classes" value="${ not empty param.classes ? param.classes : 'configured' }" />
 <!-- /macro e_image parameters -->
 <!-- macro e_image body -->

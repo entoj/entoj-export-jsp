@@ -49,7 +49,7 @@ describe(JspRenderer.className, function()
     };
     const prepareParameters = (parameters) =>
     {
-        const classes = Object.keys(JspNodeRenderers).map((name) => JspNodeRenderers[name]);
+        const classes = JspNodeRenderers.rendererList;
         const nodeRenderers = global.fixtures.context.createInstances(classes);
         return [nodeRenderers];
     };

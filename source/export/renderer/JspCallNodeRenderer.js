@@ -6,6 +6,7 @@
  */
 const NodeRenderer = require('entoj-system').export.renderer.NodeRenderer;
 const MissingConfigurationError = require('entoj-system').error.MissingConfigurationError;
+const prepareArguments = require('./helper.js').prepareArguments;
 const co = require('co');
 
 
@@ -20,57 +21,6 @@ class JspCallNodeRenderer extends NodeRenderer
     static get className()
     {
         return 'export.renderer/JspCallNodeRenderer';
-    }
-
-
-    /**
-     * @return {mixed}
-     */
-    prepareArgumentValue(value)
-    {
-        let result = value;
-        if (result == 'false' || result === false || typeof result === 'undefined')
-        {
-            result = 'null';
-        }
-        return result;
-    }
-
-
-    /**
-     * @return {Promise<Array>}
-     */
-    prepareArguments(node, macroConfiguration, configuration)
-    {
-        const scope = this;
-        const promise = co(function*()
-        {
-            const result = {};
-
-            // Get default params from inline docs
-            for (const param of macroConfiguration.macro.parameters)
-            {
-                result[param.name] = '${ ' + scope.prepareArgumentValue(param.defaultValue) + ' }';
-            }
-
-            // Get arguments
-            for (const arg of node.arguments)
-            {
-                result[arg.name] = '${ ' + scope.prepareArgumentValue(yield configuration.renderer.renderNode(arg.value, configuration)) + ' }';
-            }
-
-            // Get overrides
-            if (configuration.arguments)
-            {
-                for (const arg in configuration.arguments)
-                {
-                    result[arg] = '${ ' + scope.prepareArgumentValue(configuration.arguments[arg]) + ' }';
-                }
-            }
-
-            return result;
-        });
-        return promise;
     }
 
 
@@ -92,7 +42,6 @@ class JspCallNodeRenderer extends NodeRenderer
         {
             return Promise.resolve('');
         }
-        const scope = this;
         const promise = co(function*()
         {
             let result = '';
@@ -105,13 +54,13 @@ class JspCallNodeRenderer extends NodeRenderer
             }
 
             // Get arguments
-            const args = yield scope.prepareArguments(node, macroConfiguration, configuration);
+            const args = prepareArguments(node, macroConfiguration, configuration);
 
             // Render
             result+= '<jsp:include page="' + macroConfiguration.filename + '">';
             for (const arg in args)
             {
-                result+= '<jsp:param name="' + arg + '" value="' + args[arg] + '" />';
+                result+= '<jsp:param name="' + arg + '" value="${ ' + args[arg].value + ' }" />';
             }
             result+= '</jsp:include>';
 

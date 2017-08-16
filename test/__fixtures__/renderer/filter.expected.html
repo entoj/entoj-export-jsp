@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" session="false" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%><%@ taglib prefix="entoj" uri="https://entoj.io/entoj"%>
-${ h:foo(model.text) }
-${ h:foo(model.text, '#Lipsum', '#Lorem') }
-${ h:bar(h:foo(model.text, x), 'y') }
-${ h:foo(['one', two]) }
+${ entoj:foo(model.text) }
+${ entoj:foo(model.text, '#Lipsum', '#Lorem') }
+${ entoj:bar(entoj:foo(model.text, x), 'y') }
+${ entoj:foo(['one', two]) }
 
 
 ${ empty url ? '' : url }

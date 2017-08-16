@@ -49,11 +49,11 @@ class JspMacroNodeRenderer extends NodeListRenderer
             const macroConfiguration = yield configuration.getMacroConfiguration(node.name);
 
             // Render parameters
-            const parameters = yield prepareParameters(node, macroConfiguration, configuration);
+            const parameters = prepareParameters(node, macroConfiguration, configuration, 'literals');
             result+= yield configuration.renderer.renderComment('macro ' + node.name + ' parameters');
             for (const paramName in parameters)
             {
-                if (parameters[paramName].value === 'null')
+                if (parameters[paramName].value === null)
                 {
                     continue;
                 }

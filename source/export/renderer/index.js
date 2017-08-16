@@ -3,6 +3,10 @@
  */
 module.exports =
 {
+    // Base
+    JspFilterNodeRenderer: require('./JspFilterNodeRenderer.js').JspFilterNodeRenderer,
+    JspFilterReplacementRenderer: require('./JspFilterReplacementRenderer.js').JspFilterReplacementRenderer,
+
     // Filters
     JspAssetUrlFilterRenderer: require('./JspAssetUrlFilterRenderer.js').JspAssetUrlFilterRenderer,
     JspAttributesFilterRenderer: require('./JspAttributesFilterRenderer.js').JspAttributesFilterRenderer,
@@ -26,7 +30,6 @@ module.exports =
     //JspComplexVariableNodeRenderer: require('./JspComplexVariableNodeRenderer.js').JspComplexVariableNodeRenderer,
     JspConditionNodeRenderer: require('./JspConditionNodeRenderer.js').JspConditionNodeRenderer,
     JspExpressionNodeRenderer: require('./JspExpressionNodeRenderer.js').JspExpressionNodeRenderer,
-    JspFilterNodeRenderer: require('./JspFilterNodeRenderer.js').JspFilterNodeRenderer,
     JspForNodeRenderer: require('./JspForNodeRenderer.js').JspForNodeRenderer,
     JspGroupNodeRenderer: require('./JspGroupNodeRenderer.js').JspGroupNodeRenderer,
     JspIfNodeRenderer: require('./JspIfNodeRenderer.js').JspIfNodeRenderer,
@@ -40,6 +43,45 @@ module.exports =
     JspTextNodeRenderer: require('entoj-system').export.renderer.TextNodeRenderer,
     JspNodeListRenderer: require('entoj-system').export.renderer.NodeListRenderer,
 
-    // Fallback
-    JspAnyNodeRenderer: require('entoj-system').export.renderer.AnyNodeRenderer
+    helper: require('./helper.js'),
+    rendererList:
+    [
+        // Filters
+        require('./JspAssetUrlFilterRenderer.js').JspAssetUrlFilterRenderer,
+        require('./JspAttributesFilterRenderer.js').JspAttributesFilterRenderer,
+        require('./JspDefaultFilterRenderer.js').JspDefaultFilterRenderer,
+        require('./JspEmptyFilterRenderer.js').JspEmptyFilterRenderer,
+        require('./JspModuleClassesFilterRenderer.js').JspModuleClassesFilterRenderer,
+        require('./JspTranslateFilterRenderer.js').JspTranslateFilterRenderer,
+        require('./JspLengthFilterRenderer.js').JspLengthFilterRenderer,
+        require('./JspMarkupFilterRenderer.js').JspMarkupFilterRenderer,
+        require('./JspFormatDateFilterRenderer.js').JspFormatDateFilterRenderer,
+        require('./JspEscapeFilterRenderer.js').JspEscapeFilterRenderer,
+        require('./JspLoadFilterRenderer.js').JspLoadFilterRenderer,
+        require('./JspUniqueFilterRenderer.js').JspUniqueFilterRenderer,
+        require('./JspSvgUrlFilterRenderer.js').JspSvgUrlFilterRenderer,
+        require('./JspSvgViewBoxFilterRenderer.js').JspSvgViewBoxFilterRenderer,
+
+        // Standards
+        require('./JspArrayNodeRenderer.js').JspArrayNodeRenderer,
+        require('./JspBooleanOperandNodeRenderer.js').JspBooleanOperandNodeRenderer,
+        require('./JspCallNodeRenderer.js').JspCallNodeRenderer,
+        require('./JspConditionNodeRenderer.js').JspConditionNodeRenderer,
+        require('./JspExpressionNodeRenderer.js').JspExpressionNodeRenderer,
+        require('./JspFilterNodeRenderer.js').JspFilterNodeRenderer,
+        require('./JspForNodeRenderer.js').JspForNodeRenderer,
+        require('./JspGroupNodeRenderer.js').JspGroupNodeRenderer,
+        require('./JspIfNodeRenderer.js').JspIfNodeRenderer,
+        require('./JspLiteralNodeRenderer.js').JspLiteralNodeRenderer,
+        require('./JspMacroNodeRenderer.js').JspMacroNodeRenderer,
+        require('./JspOperandNodeRenderer.js').JspOperandNodeRenderer,
+        require('./JspOutputNodeRenderer.js').JspOutputNodeRenderer,
+        require('./JspSetNodeRenderer.js').JspSetNodeRenderer,
+        require('./JspVariableNodeRenderer.js').JspVariableNodeRenderer,
+        require('entoj-system').export.renderer.TextNodeRenderer,
+        require('entoj-system').export.renderer.NodeListRenderer,
+
+        // Fallback
+        require('entoj-system').export.renderer.AnyNodeRenderer
+    ]
 };
