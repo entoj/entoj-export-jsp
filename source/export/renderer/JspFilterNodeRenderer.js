@@ -70,7 +70,7 @@ class JspFilterNodeRenderer extends NodeRenderer
             }
             else
             {
-                result+= 'h:' + node.name + '(';
+                result+= configuration.moduleConfiguration.viewHelperNamespace + ':' + node.name + '(';
                 const args = [];
                 args.push(yield configuration.renderer.renderNode(node.value, configuration));
                 if (node.arguments)

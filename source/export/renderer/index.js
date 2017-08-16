@@ -16,6 +16,8 @@ module.exports =
     JspEscapeFilterRenderer: require('./JspEscapeFilterRenderer.js').JspEscapeFilterRenderer,
     JspLoadFilterRenderer: require('./JspLoadFilterRenderer.js').JspLoadFilterRenderer,
     JspUniqueFilterRenderer: require('./JspUniqueFilterRenderer.js').JspUniqueFilterRenderer,
+    JspSvgUrlFilterRenderer: require('./JspSvgUrlFilterRenderer.js').JspSvgUrlFilterRenderer,
+    JspSvgViewBoxFilterRenderer: require('./JspSvgViewBoxFilterRenderer.js').JspSvgViewBoxFilterRenderer,
 
     // Standards
     JspArrayNodeRenderer: require('./JspArrayNodeRenderer.js').JspArrayNodeRenderer,

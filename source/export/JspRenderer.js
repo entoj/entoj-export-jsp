@@ -28,6 +28,7 @@ class JspRenderer extends Renderer
         result+= '<%@ page contentType="text/html; charset=UTF-8" session="false" %>';
         result+= '<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>';
         result+= '<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>';
+        result+= '<%@ taglib prefix="' + configuration.moduleConfiguration.viewHelperNamespace + '" uri="' + configuration.moduleConfiguration.viewHelperUri + '"%>';
         return Promise.resolve(result);
     }
 

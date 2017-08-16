@@ -12,6 +12,7 @@ const exporterSpec = require('entoj-system/test').export.ExporterShared;
 const projectFixture = require('entoj-system/test').fixture.project;
 const co = require('co');
 const fs = require('fs');
+const UPDATE_SPECS = false;
 
 
 /**
@@ -68,13 +69,13 @@ describe(JspExporter.className, function()
     /**
      * JspExporter Test
      */
-    function expectFixture(fixture, entityQuery, macroQuery, settings, updateSpec)
+    function expectFixture(fixture, entityQuery, macroQuery, settings)
     {
         const promise = co(function*()
         {
             const testee = new JspExporter(...prepareParameters(undefined, true));
             const result = yield testee.export('base', entityQuery, macroQuery, settings);
-            if (updateSpec)
+            if (UPDATE_SPECS)
             {
                 fs.writeFileSync(JSP_FIXTURES + '/exporter/' + fixture + '.jsp', result.contents, { encoding: 'utf8' });
             }
@@ -90,7 +91,7 @@ describe(JspExporter.className, function()
         {
             const promise = co(function*()
             {
-                const result = yield expectFixture('default-macro', 'e-image');
+                const result = yield expectFixture('default-macro', 'e-image', undefined, undefined);
                 expect(result.configuration.macro).to.be.instanceof(DocumentationCallable);
                 expect(result.configuration.macro.name).to.be.equal('e_image');
             });
@@ -102,7 +103,7 @@ describe(JspExporter.className, function()
         {
             const promise = co(function*()
             {
-                const result = yield expectFixture('selected-macro', 'm-teaser', 'm_teaser_hero');
+                const result = yield expectFixture('selected-macro', 'm-teaser', 'm_teaser_hero', undefined);
                 expect(result.configuration.macro).to.be.instanceof(DocumentationCallable);
                 expect(result.configuration.macro.name).to.be.equal('m_teaser_hero');
             });
@@ -134,7 +135,7 @@ describe(JspExporter.className, function()
                 const settings =
                 {
                 };
-                yield expectFixture('template', 't-bare', undefined, settings, true);
+                yield expectFixture('template', 't-bare', undefined, settings);
             });
             return promise;
         });

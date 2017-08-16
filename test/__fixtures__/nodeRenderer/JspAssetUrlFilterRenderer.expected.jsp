@@ -1,1 +1,1 @@
-'/base/global/assets'.concat()
+pageContext.request.contextPath.concat('/base/global/assets/').concat()

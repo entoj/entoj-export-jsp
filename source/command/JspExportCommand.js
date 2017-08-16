@@ -26,7 +26,6 @@ class JspExportCommand extends ExportCommand
         this._exportName = 'jsp';
         this._moduleConfigurationClass = JspModuleConfiguration;
         this._exportTaskClass = JspExportTask;
-        this._loggerPrefix = 'command.export.jsp';
     }
 
 

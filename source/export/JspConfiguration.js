@@ -51,30 +51,34 @@ class JspConfiguration extends Configuration
      */
     refineConfiguration(configuration)
     {
-        configuration.moduleConfiguration = this.moduleConfiguration;
+        const result = configuration;
+        result.moduleConfiguration = this.moduleConfiguration;
         if (this.settings.filename)
         {
-            configuration.filename = '';
+            result.filename = '';
             if (this.settings.filename.indexOf('/') === -1)
             {
-                configuration.filename+= 'includes/' + configuration.entity.id.category.pluralName + '/';
+                result.filename+= this.moduleConfiguration.jspBasePath + '/' + result.entity.id.category.pluralName.urlify() + '/';
             }
-            configuration.filename+= (this.settings.filename.substr(0, this.settings.filename.lastIndexOf('.')) || this.settings.filename);
+            result.filename+= (this.settings.filename.substr(0, this.settings.filename.lastIndexOf('.')) || this.settings.filename);
         }
         else
         {
-            configuration.filename = 'includes/' + configuration.entity.id.category.pluralName + '/';
-            if (configuration.macro)
+            result.filename = this.moduleConfiguration.jspBasePath + '/' + result.entity.id.category.pluralName.urlify() + '/';
+            if (result.macro)
             {
-                configuration.filename+= configuration.macro.name.replace(/_/g, '-');
+                result.filename+= result.macro.name.replace(/_/g, '-');
             }
             else
             {
-                configuration.filename+= configuration.entity.idString.replace(/_/g, '-');
+                result.filename+= result.entity.idString.replace(/_/g, '-');
             }
         }
-        configuration.filename+= '.jsp';
-        return Promise.resolve(configuration);
+        if (!result.filename.endsWith('.jsp'))
+        {
+            result.filename+= '.jsp';
+        }
+        return Promise.resolve(result);
     }
 }
 

@@ -10,16 +10,16 @@ const co = require('co');
 
 
 /**
- * Renders the |empty and |notempty filters
+ * Renders the |svgUrl filters
  */
-class JspAssetUrlFilterRenderer extends JspFilterNodeRenderer
+class JspSvgUrlFilterRenderer extends JspFilterNodeRenderer
 {
     /**
      * @inheritDoc
      */
     static get className()
     {
-        return 'export.renderer/JspAssetUrlFilterRenderer';
+        return 'export.renderer/JspSvgUrlFilterRenderer';
     }
 
 
@@ -28,7 +28,7 @@ class JspAssetUrlFilterRenderer extends JspFilterNodeRenderer
      */
     get filterName()
     {
-        return ['assetUrl'];
+        return ['svgUrl'];
     }
 
 
@@ -44,10 +44,10 @@ class JspAssetUrlFilterRenderer extends JspFilterNodeRenderer
         const promise = co(function*()
         {
             let result = '';
-            const baseUrl = configuration.buildConfiguration.get('export.assetsBaseUrl', configuration.moduleConfiguration.assetsBaseUrl);
+            const baseUrl = configuration.buildConfiguration.get('export.svgBaseUrl', configuration.moduleConfiguration.svgBaseUrl);
             result+= 'pageContext.request.contextPath.concat(\'' + ensureTrailingSlash(baseUrl) + '\').concat(';
             result+= yield configuration.renderer.renderNode(node.value, configuration);
-            result+= ')';
+            result+= ').concat(\'.svg#icon\')';
             return result;
         });
         return promise;
@@ -59,4 +59,4 @@ class JspAssetUrlFilterRenderer extends JspFilterNodeRenderer
  * Exports
  * @ignore
  */
-module.exports.JspAssetUrlFilterRenderer = JspAssetUrlFilterRenderer;
+module.exports.JspSvgUrlFilterRenderer = JspSvgUrlFilterRenderer;

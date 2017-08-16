@@ -10,7 +10,7 @@ const co = require('co');
 
 
 /**
- *
+ * Renders a macro call
  */
 class JspCallNodeRenderer extends NodeRenderer
 {

@@ -35,6 +35,29 @@ npm run lint
 
 # Export
 
+```
+{
+    "export":
+    {
+        "cm":
+        [
+            {
+                "macro": "e_cta_linkable", // Macro name
+                "view": "e-cta",
+                "type": "",
+                "variant": "",
+                "settings":
+                {
+                    "view":
+                    {
+                        "e_cta": "asCTADefault"
+                    }
+                }
+            }
+        ]
+    }
+}
+```
 
 
 ---
