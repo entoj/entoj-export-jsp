@@ -54,13 +54,15 @@ class JspCallNodeRenderer extends NodeRenderer
             }
 
             // Get arguments
-            const args = prepareArguments(node, macroConfiguration, configuration);
+            const args = prepareArguments(node, macroConfiguration, configuration, 'nodes');
 
             // Render
             result+= '<jsp:include page="' + macroConfiguration.filename + '">';
             for (const arg in args)
             {
-                result+= '<jsp:param name="' + arg + '" value="${ ' + args[arg].value + ' }" />';
+                result+= '<jsp:param name="' + arg + '" value="${ ';
+                result+= yield configuration.renderer.renderNode(args[arg].value, configuration);
+                result+= ' }" />';
             }
             result+= '</jsp:include>';
 
