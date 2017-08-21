@@ -20,8 +20,10 @@ module.exports =
     JspEscapeFilterRenderer: require('./JspEscapeFilterRenderer.js').JspEscapeFilterRenderer,
     JspLoadFilterRenderer: require('./JspLoadFilterRenderer.js').JspLoadFilterRenderer,
     JspUniqueFilterRenderer: require('./JspUniqueFilterRenderer.js').JspUniqueFilterRenderer,
+    JspSetFilterRenderer: require('./JspSetFilterRenderer.js').JspSetFilterRenderer,
     JspSvgUrlFilterRenderer: require('./JspSvgUrlFilterRenderer.js').JspSvgUrlFilterRenderer,
     JspSvgViewBoxFilterRenderer: require('./JspSvgViewBoxFilterRenderer.js').JspSvgViewBoxFilterRenderer,
+    JspHtmlEncodeFilterRenderer: require('./JspHtmlEncodeFilterRenderer.js').JspHtmlEncodeFilterRenderer,
 
     // Standards
     JspArrayNodeRenderer: require('./JspArrayNodeRenderer.js').JspArrayNodeRenderer,
@@ -59,8 +61,10 @@ module.exports =
         require('./JspEscapeFilterRenderer.js').JspEscapeFilterRenderer,
         require('./JspLoadFilterRenderer.js').JspLoadFilterRenderer,
         require('./JspUniqueFilterRenderer.js').JspUniqueFilterRenderer,
+        require('./JspSetFilterRenderer.js').JspSetFilterRenderer,
         require('./JspSvgUrlFilterRenderer.js').JspSvgUrlFilterRenderer,
         require('./JspSvgViewBoxFilterRenderer.js').JspSvgViewBoxFilterRenderer,
+        require('./JspHtmlEncodeFilterRenderer.js').JspHtmlEncodeFilterRenderer,
 
         // Standards
         require('./JspArrayNodeRenderer.js').JspArrayNodeRenderer,
