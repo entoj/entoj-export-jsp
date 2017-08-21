@@ -41,7 +41,7 @@ describe(JspRenderer.className, function()
     {
         configurationCreator: function(entity, macro, settings, parser, renderer, transformer, globalRepository, buildConfiguration)
         {
-            const jspModuleConfiguration = new JspModuleConfiguration(global.fixtures.globalConfiguration);
+            const jspModuleConfiguration = new JspModuleConfiguration(global.fixtures.globalConfiguration, global.fixtures.buildConfiguration);
             return new JspConfiguration(entity, macro, settings, parser, renderer, transformer, globalRepository, buildConfiguration, jspModuleConfiguration);
         },
         basePath: JSP_FIXTURES + '/renderer',
