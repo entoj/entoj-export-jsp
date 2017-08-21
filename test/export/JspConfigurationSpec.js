@@ -20,7 +20,7 @@ describe(JspConfiguration.className, function()
     function prepareParameters(parameters)
     {
         const fixture = projectFixture.createStatic(true);
-        const moduleConfiguration = new JspModuleConfiguration(fixture.globalConfiguration);
+        const moduleConfiguration = new JspModuleConfiguration(fixture.globalConfiguration, fixture.buildConfiguration);
         if (parameters && parameters.length)
         {
             parameters.push(moduleConfiguration);
