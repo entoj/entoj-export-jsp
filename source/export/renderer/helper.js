@@ -161,11 +161,13 @@ function prepareParameters(node, macroConfiguration, configuration, resultType)
         }
 
         // Set model default
+        /*
         if (macroConfiguration.modelParameter)
         {
             result[macroConfiguration.modelParameter.name] = result[macroConfiguration.modelParameter.name] || {};
             result[macroConfiguration.modelParameter.name].value = 'self';
         }
+        */
 
         // Override configured arguments
         if (macroConfiguration.parameters)
@@ -176,7 +178,7 @@ function prepareParameters(node, macroConfiguration, configuration, resultType)
                 const type = result[parameter]
                     ? result[parameter].type
                     : [];
-                result[parameter].value = prepareValue(macroConfiguration.parameters[parameter], type);
+                result[parameter].value = new LiteralNode({ value: prepareValue(macroConfiguration.parameters[parameter], type) });
             }
         }
 
@@ -208,15 +210,15 @@ function prepareArguments(node, macroConfiguration, configuration, resultType)
         }
 
         // Get overrides
-        if (configuration.arguments)
+        if (macroConfiguration.arguments)
         {
-            for (const argument in configuration.arguments)
+            for (const argument in macroConfiguration.arguments)
             {
                 result[argument] = result[argument] || {};
                 const type = result[argument]
                     ? result[argument].type
                     : [];
-                result[argument].value = prepareValue(configuration.arguments[argument], type);
+                result[argument].value = prepareValue(macroConfiguration.arguments[argument], type);
             }
         }
 
