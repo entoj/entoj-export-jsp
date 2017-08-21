@@ -78,6 +78,7 @@ class JspConfiguration extends Configuration
         {
             result.filename+= '.jsp';
         }
+
         return Promise.resolve(result);
     }
 }
