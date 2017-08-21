@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" session="false" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%><%@ taglib prefix="entoj" uri="https://entoj.io/entoj"%><!-- macro m_teaser_hero parameters -->
-<c:set var="model" value="${ not empty param.model ? param.model : false }" />
 <!-- /macro m_teaser_hero parameters -->
 <!-- macro m_teaser_hero body -->
 

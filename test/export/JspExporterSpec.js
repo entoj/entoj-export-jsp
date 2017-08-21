@@ -78,9 +78,9 @@ describe(JspExporter.className, function()
             const result = yield testee.export('base', entityQuery, macroQuery, settings);
             if (UPDATE_SPECS)
             {
-                fs.writeFileSync(JSP_FIXTURES + '/exporter/' + fixture + '.jsp', result.contents, { encoding: 'utf8' });
+                fs.writeFileSync(JSP_FIXTURES + '/exporter/' + fixture + '.expected.jsp', result.contents, { encoding: 'utf8' });
             }
-            expect(result.contents).to.be.equal(fs.readFileSync(JSP_FIXTURES + '/exporter/' + fixture + '.jsp', { encoding: 'utf8' }));
+            expect(result.contents).to.be.equal(fs.readFileSync(JSP_FIXTURES + '/exporter/' + fixture + '.expected.jsp', { encoding: 'utf8' }));
             return result;
         });
         return promise;
@@ -99,7 +99,6 @@ describe(JspExporter.className, function()
             return promise;
         });
 
-
         it('should export the configured macro of given entity', function()
         {
             const promise = co(function*()
@@ -111,8 +110,7 @@ describe(JspExporter.className, function()
             return promise;
         });
 
-
-        it('should allow to preconfigure macro parameters values', function()
+        it('should allow to preconfigure macro parameters', function()
         {
             const promise = co(function*()
             {
@@ -123,11 +121,44 @@ describe(JspExporter.className, function()
                         classes: 'configured'
                     }
                 };
-                yield expectFixture('macro-arguments', 'e-image', undefined, settings);
+                yield expectFixture('macro-parameters', 'e-image', undefined, settings);
             });
             return promise;
         });
 
+        it('should allow to preconfigure call arguments', function()
+        {
+            const promise = co(function*()
+            {
+                const settings =
+                {
+                    settings:
+                    {
+                        e_cta:
+                        {
+                            arguments:
+                            {
+                                skin: 'dark'
+                            }
+                        }
+                    }
+                };
+                yield expectFixture('call-arguments', 'm-teaser', undefined, settings);
+            });
+            return promise;
+        });
+
+        it('should inline macro calls that uses yield', function()
+        {
+            const promise = co(function*()
+            {
+                const settings =
+                {
+                };
+                yield expectFixture('auto-inline', 'm-teaser', undefined, settings);
+            });
+            return promise;
+        });
 
         it('should allow to export templates', function()
         {
