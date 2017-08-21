@@ -5,6 +5,7 @@
  * @ignore
  */
 const Base = require('entoj-system').Base;
+const BuildConfiguration = require('entoj-system').model.configuration.BuildConfiguration;
 const GlobalConfiguration = require('entoj-system').model.configuration.GlobalConfiguration;
 const assertParameter = require('entoj-system').utils.assert.assertParameter;
 
@@ -17,26 +18,27 @@ class JspModuleConfiguration extends Base
     /**
      * @param  {model.configuration.GlobalConfiguration} globalConfiguration
      */
-    constructor(globalConfiguration, options)
+    constructor(globalConfiguration, buildConfiguration, options)
     {
         super();
 
         //Check params
         assertParameter(this, 'globalConfiguration', globalConfiguration, true, GlobalConfiguration);
+        assertParameter(this, 'buildConfiguration', buildConfiguration, true, BuildConfiguration);
 
         // Create configuration
         const prefix = options
             ? options.prefix || 'jsp'
             : 'jsp';
-        this._configurationName = globalConfiguration.get(prefix + '.configurationName', prefix);
-        this._exportPath = globalConfiguration.get(prefix + '.exportPath', '${cache}/'+ prefix + '/export');
-        this._viewHelperNamespace = globalConfiguration.get(prefix + '.viewHelperNamespace', 'entoj');
-        this._viewHelperUri = globalConfiguration.get(prefix + '.viewHelperUri', 'https://entoj.io/entoj');
-        this._assetsBaseUrl = globalConfiguration.get(prefix + '.assetsBaseUrl', '');
-        this._svgBaseUrl = globalConfiguration.get(prefix + '.svgBaseUrl', '');
-        this._svgBasePath = globalConfiguration.get(prefix + '.svgBasePath', '');
-        this._imageBaseUrl = globalConfiguration.get(prefix + '.imageBaseUrl', '');
-        this._jspBasePath = globalConfiguration.get(prefix + '.jspBasePath', 'includes');
+        this._configurationName = buildConfiguration.get(prefix + '.configurationName', globalConfiguration.get(prefix + '.configurationName', prefix));
+        this._exportPath = buildConfiguration.get(prefix + '.exportPath', globalConfiguration.get(prefix + '.exportPath', '${cache}/'+ prefix + '/export'));
+        this._viewHelperNamespace = buildConfiguration.get(prefix + '.viewHelperNamespace', globalConfiguration.get(prefix + '.viewHelperNamespace', 'entoj'));
+        this._viewHelperUri = buildConfiguration.get(prefix + '.viewHelperUri', globalConfiguration.get(prefix + '.viewHelperUri', 'https://entoj.io/entoj'));
+        this._assetsBaseUrl = buildConfiguration.get(prefix + '.assetsBaseUrl', globalConfiguration.get(prefix + '.assetsBaseUrl', ''));
+        this._svgBaseUrl = buildConfiguration.get(prefix + '.svgBaseUrl', globalConfiguration.get(prefix + '.svgBaseUrl', ''));
+        this._svgBasePath = buildConfiguration.get(prefix + '.svgBasePath', globalConfiguration.get(prefix + '.svgBasePath', ''));
+        this._imageBaseUrl = buildConfiguration.get(prefix + '.imageBaseUrl', globalConfiguration.get(prefix + '.imageBaseUrl', ''));
+        this._jspBasePath = buildConfiguration.get(prefix + '.jspBasePath', globalConfiguration.get(prefix + '.jspBasePath', 'includes'));
     }
 
 
@@ -45,7 +47,7 @@ class JspModuleConfiguration extends Base
      */
     static get injections()
     {
-        return { 'parameters': [GlobalConfiguration] };
+        return { 'parameters': [GlobalConfiguration, BuildConfiguration, 'configuration/JspModuleConfiguration.options'] };
     }
 
 
