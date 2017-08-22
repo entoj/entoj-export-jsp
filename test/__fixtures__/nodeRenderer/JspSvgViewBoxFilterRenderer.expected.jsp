@@ -1,0 +1,1 @@
+<jsp:include page="includes/helper/svgViewBoxes.jsp" />${ __viewBoxes[] }

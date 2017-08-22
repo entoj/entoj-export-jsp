@@ -9,7 +9,7 @@ const co = require('co');
 
 
 /**
- * Renders the |escape filter
+ * Renders the |htmlencode or |escape filter
  */
 class JspEscapeFilterRenderer extends JspFilterReplacementRenderer
 {
@@ -23,11 +23,11 @@ class JspEscapeFilterRenderer extends JspFilterReplacementRenderer
 
 
     /**
-     * @type {Boolean|Array}
+     * @inheritDoc
      */
     get filterName()
     {
-        return ['escape'];
+        return ['htmlencode', 'escape'];
     }
 
 
@@ -44,21 +44,27 @@ class JspEscapeFilterRenderer extends JspFilterReplacementRenderer
         const promise = co(function*()
         {
             let result = '';
+
             const filter = node.find('FilterNode', { name: scope.filterName });
             if (!filter)
             {
                 throw new Error('Could not locate escape filter in ' + node.type);
             }
+
+            // Get data
+            const encode = yield configuration.renderer.renderNode(filter.value, configuration);
+
+            // Set?
             if (scope.isSet(node, configuration))
             {
                 result+= '<c:set var="';
                 result+= yield configuration.renderer.renderNode(node.variable, configuration);
                 result+= '">';
             }
-            result+= '<c:out';
-            result+= ' value="${ ';
-            result+= yield configuration.renderer.renderNode(filter.value, configuration);
-            result+= ' }" />';
+
+            result+= '<c:out value="${ ' + encode + ' }" />';
+
+            // Set?
             if (scope.isSet(node, configuration))
             {
                 result+= '</c:set>';

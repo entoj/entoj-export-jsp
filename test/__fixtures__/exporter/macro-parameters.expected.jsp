@@ -14,7 +14,7 @@
         <c:if test="${ not empty settings }">
             <c:forEach var="indexAndSetting" items="${ settings }" varStatus="loop"><c:set var="index" value="${ indexAndSetting.key }" /><c:set var="setting" value="${ indexAndSetting.value }" />
                 <c:if test="${ index != 'all' }">
-                    <c:set var="mediaQuery" value="${ setting.name.mediaQuery() }" />
+                    <jsp:include page="includes/helper/mediaQueries.jsp" /><c:set var="mediaQuery" value="${ __mediaQueries[setting.name] }" />
                     <c:set var="image" value="${ model.imageUrl(setting.aspect, setting.width, setting.height) }" />
                     <source data-srcset="${ image }" media="${ mediaQuery }" />
                 </c:if>

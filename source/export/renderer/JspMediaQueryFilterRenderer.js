@@ -5,42 +5,30 @@
  * @ignore
  */
 const JspFilterReplacementRenderer = require('./JspFilterReplacementRenderer.js').JspFilterReplacementRenderer;
-const PathesConfiguration = require('entoj-system').model.configuration.PathesConfiguration;
+const GlobalConfiguration = require('entoj-system').model.configuration.GlobalConfiguration;
 const assertParameter = require('entoj-system').utils.assert.assertParameter;
 const VinylFile = require('vinyl');
 const co = require('co');
-const glob = require('glob');
-const path = require('path');
-const fs = require('fs');
 
 
 /**
- * Renders |svgViewBox filters
+ * Renders the |mediaQuery filter
  */
-class JspSvgViewBoxFilterRenderer extends JspFilterReplacementRenderer
+class JspMediaQueryFilterRenderer extends JspFilterReplacementRenderer
 {
     /**
      * @inheritDocs
      */
-    constructor(pathesConfiguration)
+    constructor(globalConfiguration)
     {
         super();
 
         // Check params
-        assertParameter(this, 'pathesConfiguration', pathesConfiguration, true, PathesConfiguration);
+        assertParameter(this, 'globalConfiguration', globalConfiguration, true, GlobalConfiguration);
 
         // Assign options
-        this._pathesConfiguration = pathesConfiguration;
-        this._dataVariableName = '__viewBoxes';
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    static get injections()
-    {
-        return { 'parameters': [PathesConfiguration] };
+        this._globalConfiguration = globalConfiguration;
+        this._dataVariableName = '__mediaQueries';
     }
 
 
@@ -49,16 +37,34 @@ class JspSvgViewBoxFilterRenderer extends JspFilterReplacementRenderer
      */
     static get className()
     {
-        return 'export.renderer/JspSvgViewBoxFilterRenderer';
+        return 'export.renderer/JspMediaQueryFilterRenderer';
     }
 
 
     /**
-     * @type {Boolean|Array}
+     * @inheritDocs
+     */
+    static get injections()
+    {
+        return { 'parameters': [GlobalConfiguration] };
+    }
+
+
+    /**
+     * @inheritDoc
      */
     get filterName()
     {
-        return ['svgViewBox'];
+        return ['mediaQuery'];
+    }
+
+
+    /**
+     * @type {model.configuration.GlobalConfiguration}
+     */
+    get globalConfiguration()
+    {
+        return this._globalConfiguration;
     }
 
 
@@ -74,37 +80,23 @@ class JspSvgViewBoxFilterRenderer extends JspFilterReplacementRenderer
     /**
      * @inheritDocs
      */
-    createAdditionalFiles(configuration)
+    createAdditionalFiles()
     {
         // Get data
-        const viewBoxes = {};
-        const baseUrl = configuration.buildConfiguration.get('export.svgBasePath', configuration.moduleConfiguration.svgBasePath);
-        const globPath = path.join(this.pathesConfiguration.sites, baseUrl, '/*.svg');
-        const files = glob.sync(globPath);
-        for (const file of files)
-        {
-            const name = path.basename(file, '.svg');
-            viewBoxes[name] = '0 0 0 0';
-            const icon = fs.readFileSync(file, { encoding: 'utf8' });
-            const viewbox = icon.match(/viewBox="([^"]*)"/i);
-            if (viewbox && viewbox[1])
-            {
-                viewBoxes[name] = viewbox[1];
-            }
-        }
+        const mediaQueries = this.globalConfiguration.get('mediaQueries');
 
         // Generate map
         let result = '';
         result+= '<c:if test="${ not empty ' + this.dataVariableName + '}">';
         result+= '<jsp:useBean id="' + this.dataVariableName + '" class="java.util.TreeMap" scope="request" />';
-        for (const viewBox in viewBoxes)
+        for (const mediaQueryName in mediaQueries)
         {
-            result+= '<c:set target="${ ' + this.dataVariableName + ' }" property="' + viewBox + '" value="' + viewBoxes[viewBox] + '" />';
+            result+= '<c:set target="${ ' + this.dataVariableName + ' }" property="' + mediaQueryName + '" value="' + mediaQueries[mediaQueryName] + '" />';
         }
         result+= '</c:if>';
         const file = new VinylFile(
             {
-                path: 'includes/helper/svgViewBoxes.jsp',
+                path: 'includes/helper/mediaQueries.jsp',
                 contents: new Buffer(result)
             });
         return Promise.resolve([file]);
@@ -124,14 +116,15 @@ class JspSvgViewBoxFilterRenderer extends JspFilterReplacementRenderer
         const promise = co(function*()
         {
             let result = '';
+
             const filter = node.find('FilterNode', { name: scope.filterName });
             if (!filter)
             {
-                throw new Error('Could not locate svgViewBox filter in ' + node.type);
+                throw new Error('Could not locate mediaQuery filter in ' + node.type);
             }
 
             // Load map
-            result+= '<jsp:include page="includes/helper/svgViewBoxes.jsp" />';
+            result+= '<jsp:include page="includes/helper/mediaQueries.jsp" />';
 
             // Set?
             if (scope.isSet(node, configuration))
@@ -162,4 +155,4 @@ class JspSvgViewBoxFilterRenderer extends JspFilterReplacementRenderer
  * Exports
  * @ignore
  */
-module.exports.JspSvgViewBoxFilterRenderer = JspSvgViewBoxFilterRenderer;
+module.exports.JspMediaQueryFilterRenderer = JspMediaQueryFilterRenderer;
