@@ -205,12 +205,15 @@ function prepareArguments(node, macroConfiguration, configuration, resultType)
         // Get arguments
         for (const argument of node.arguments)
         {
-            result[argument.name] = result[argument.name] || {};
-            result[argument.name].value = argument.value;
+            const name = (typeof argument.name !== 'undefined')
+                ? argument.name
+                : node.arguments.indexOf(argument);
+            result[name] = result[name] || {};
+            result[name].value = argument.value;
         }
 
         // Get overrides
-        if (macroConfiguration.arguments)
+        if (macroConfiguration && macroConfiguration.arguments)
         {
             for (const argument in macroConfiguration.arguments)
             {
