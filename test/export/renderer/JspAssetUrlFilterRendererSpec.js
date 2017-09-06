@@ -21,7 +21,7 @@ describe(JspAssetUrlFilterRenderer.className, function()
         {
             jsp:
             {
-                assetsBaseUrl: '/base/global/assets'
+                assetBaseUrl: '/base/global/assets'
             }
         }
     };
