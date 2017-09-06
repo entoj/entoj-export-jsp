@@ -42,3 +42,10 @@ ${ content }
 <c:set var="date"><fmt:formatDate value="${ timestamp.time }" type="date" pattern="YYYY-MM-DD" /></c:set>
 <c:set var="date"><fmt:formatDate value="${ timestamp.time }" type="date" pattern="DD.MM.YYYY" /></c:set>
 <fmt:formatDate value="${ timestamp.time }" type="date" pattern="YYYY-MM-DD" />
+
+
+
+
+
+${ pageContext.request.contextPath.concat('/images/').concat(url) }
+<c:set var="path" value="${ pageContext.request.contextPath.concat('/images/').concat('primary') }" />

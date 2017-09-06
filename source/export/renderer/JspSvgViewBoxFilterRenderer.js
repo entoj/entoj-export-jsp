@@ -78,7 +78,7 @@ class JspSvgViewBoxFilterRenderer extends JspFilterReplacementRenderer
     {
         // Get data
         const viewBoxes = {};
-        const baseUrl = configuration.buildConfiguration.get('export.svgBasePath', configuration.moduleConfiguration.svgBasePath);
+        const baseUrl = configuration.moduleConfiguration.svgBasePath;
         const globPath = path.join(this.pathesConfiguration.sites, baseUrl, '/*.svg');
         const files = glob.sync(globPath);
         for (const file of files)

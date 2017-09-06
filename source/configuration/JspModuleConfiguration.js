@@ -34,7 +34,7 @@ class JspModuleConfiguration extends Base
         this._exportPath = buildConfiguration.get(prefix + '.exportPath', globalConfiguration.get(prefix + '.exportPath', '${cache}/'+ prefix + '/export'));
         this._viewHelperNamespace = buildConfiguration.get(prefix + '.viewHelperNamespace', globalConfiguration.get(prefix + '.viewHelperNamespace', 'entoj'));
         this._viewHelperUri = buildConfiguration.get(prefix + '.viewHelperUri', globalConfiguration.get(prefix + '.viewHelperUri', 'https://entoj.io/entoj'));
-        this._assetsBaseUrl = buildConfiguration.get(prefix + '.assetsBaseUrl', globalConfiguration.get(prefix + '.assetsBaseUrl', ''));
+        this._assetBaseUrl = buildConfiguration.get(prefix + '.assetBaseUrl', globalConfiguration.get(prefix + '.assetBaseUrl', ''));
         this._svgBaseUrl = buildConfiguration.get(prefix + '.svgBaseUrl', globalConfiguration.get(prefix + '.svgBaseUrl', ''));
         this._svgBasePath = buildConfiguration.get(prefix + '.svgBasePath', globalConfiguration.get(prefix + '.svgBasePath', ''));
         this._imageBaseUrl = buildConfiguration.get(prefix + '.imageBaseUrl', globalConfiguration.get(prefix + '.imageBaseUrl', ''));
@@ -105,13 +105,24 @@ class JspModuleConfiguration extends Base
 
 
     /**
+     * The base url for images - used by imageUrl filter
+     *
+     * @type {String}
+     */
+    get imageBaseUrl()
+    {
+        return this._imageBaseUrl;
+    }
+
+
+    /**
      * The base url for assets - used by assetUrl filter
      *
      * @type {String}
      */
-    get assetsBaseUrl()
+    get assetBaseUrl()
     {
-        return this._assetsBaseUrl;
+        return this._assetBaseUrl;
     }
 
 

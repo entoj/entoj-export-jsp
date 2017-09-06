@@ -44,7 +44,7 @@ class JspSvgUrlFilterRenderer extends JspFilterNodeRenderer
         const promise = co(function*()
         {
             let result = '';
-            const baseUrl = configuration.buildConfiguration.get('export.svgBaseUrl', configuration.moduleConfiguration.svgBaseUrl);
+            const baseUrl = configuration.moduleConfiguration.svgBaseUrl;
             result+= 'pageContext.request.contextPath.concat(\'' + ensureTrailingSlash(baseUrl) + '\').concat(';
             result+= yield configuration.renderer.renderNode(node.value, configuration);
             result+= ').concat(\'.svg#icon\')';

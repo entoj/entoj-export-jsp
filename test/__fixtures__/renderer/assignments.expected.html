@@ -1,4 +1,6 @@
-<%@ page contentType="text/html; charset=UTF-8" session="false" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%><%@ taglib prefix="entoj" uri="https://entoj.io/entoj"%><c:set var="className" value="${ model.headline + '-teaser' }" />
+<%@ page contentType="text/html; charset=UTF-8" session="false" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%><%@ taglib prefix="entoj" uri="https://entoj.io/entoj"%><c:set var="className" value="${ model.headline + '\"-teaser\"' }" />
 <c:set var="model.nr" value="${ model.id + 1 }" />
 <c:set var="simple" value="${ 1.5 }" />
-<c:set var="className" value="${ (type) ? (moduleClass) : ('default') }" />
+<c:set var="className" value="${ (type) ? (moduleClass + '--' + type) : ('') }" />
+<c:set var="calculated" value="${ complex(1, 5, 'pow') }" />
+<c:set var="calculated" value="${ utils.complex() }" />

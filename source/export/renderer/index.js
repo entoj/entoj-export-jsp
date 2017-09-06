@@ -24,6 +24,7 @@ module.exports =
     JspSvgUrlFilterRenderer: require('./JspSvgUrlFilterRenderer.js').JspSvgUrlFilterRenderer,
     JspSvgViewBoxFilterRenderer: require('./JspSvgViewBoxFilterRenderer.js').JspSvgViewBoxFilterRenderer,
     JspMediaQueryFilterRenderer: require('./JspMediaQueryFilterRenderer.js').JspMediaQueryFilterRenderer,
+    JspImageUrlFilterRenderer: require('./JspImageUrlFilterRenderer.js').JspImageUrlFilterRenderer,
 
     // Standards
     JspArrayNodeRenderer: require('./JspArrayNodeRenderer.js').JspArrayNodeRenderer,
@@ -33,6 +34,7 @@ module.exports =
     JspConditionNodeRenderer: require('./JspConditionNodeRenderer.js').JspConditionNodeRenderer,
     JspExpressionNodeRenderer: require('./JspExpressionNodeRenderer.js').JspExpressionNodeRenderer,
     JspForNodeRenderer: require('./JspForNodeRenderer.js').JspForNodeRenderer,
+    JspFunctionCallNodeRenderer: require('./JspFunctionCallNodeRenderer.js').JspFunctionCallNodeRenderer,
     JspGroupNodeRenderer: require('./JspGroupNodeRenderer.js').JspGroupNodeRenderer,
     JspIfNodeRenderer: require('./JspIfNodeRenderer.js').JspIfNodeRenderer,
     JspLiteralNodeRenderer: require('./JspLiteralNodeRenderer.js').JspLiteralNodeRenderer,
@@ -65,6 +67,7 @@ module.exports =
         require('./JspSvgUrlFilterRenderer.js').JspSvgUrlFilterRenderer,
         require('./JspSvgViewBoxFilterRenderer.js').JspSvgViewBoxFilterRenderer,
         require('./JspMediaQueryFilterRenderer.js').JspMediaQueryFilterRenderer,
+        require('./JspImageUrlFilterRenderer.js').JspImageUrlFilterRenderer,
 
         // Standards
         require('./JspArrayNodeRenderer.js').JspArrayNodeRenderer,
@@ -74,6 +77,7 @@ module.exports =
         require('./JspExpressionNodeRenderer.js').JspExpressionNodeRenderer,
         require('./JspFilterNodeRenderer.js').JspFilterNodeRenderer,
         require('./JspForNodeRenderer.js').JspForNodeRenderer,
+        require('./JspFunctionCallNodeRenderer.js').JspFunctionCallNodeRenderer,
         require('./JspGroupNodeRenderer.js').JspGroupNodeRenderer,
         require('./JspIfNodeRenderer.js').JspIfNodeRenderer,
         require('./JspLiteralNodeRenderer.js').JspLiteralNodeRenderer,

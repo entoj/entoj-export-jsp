@@ -25,16 +25,17 @@ describe(JspRenderer.className, function()
         {
             jsp:
             {
-                assetsBaseUrl: '/base/global/assets'
+                assetBaseUrl: '/base/global/assets',
+                imageBaseUrl: '/images'
             }
         }
     };
     const testFixtures =
     {
         'should render conditions': 'conditions',
+        'should render assignments': 'assignments',
         'should render loops': 'loops',
         'should render filter': 'filter',
-        'should render assignments': 'assignments',
         'should render calls': 'calls'
     };
     const options =

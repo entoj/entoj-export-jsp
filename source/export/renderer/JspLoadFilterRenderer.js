@@ -29,16 +29,6 @@ class JspLoadFilterRenderer extends JspFilterReplacementRenderer
         return ['load'];
     }
 
-
-    /**
-     * @type {model.configuration.GlobalConfiguration}
-     */
-    get globalConfiguration()
-    {
-        return this._globalConfiguration;
-    }
-
-
     /**
      * @return {Promise<String>}
      */

@@ -45,3 +45,7 @@
 
 {# load #}
 {% set model = model|load %}
+
+{# imageUrl #}
+{{ url|imageUrl }}
+{% set path = 'primary'|imageUrl() %}
