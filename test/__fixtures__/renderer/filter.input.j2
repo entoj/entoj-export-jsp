@@ -48,4 +48,8 @@
 
 {# imageUrl #}
 {{ url|imageUrl }}
-{% set path = 'primary'|imageUrl() %}
+{% set path = 'primary'|imageUrl %}
+
+{# linkUrl #}
+{{ url|linkUrl }}
+{% set path = model|linkUrl %}

@@ -47,5 +47,9 @@ ${ content }
 
 
 
-${ pageContext.request.contextPath.concat('/images/').concat(url) }
-<c:set var="path" value="${ pageContext.request.contextPath.concat('/images/').concat('primary') }" />
+${ pageContext.request.contextPath.concat('/images/').concat(url.src) }
+<c:set var="path" value="${ pageContext.request.contextPath.concat('/images/').concat('primary'.src) }" />
+
+
+${ pageContext.request.contextPath.concat('/images/').concat(url.url) }
+<c:set var="path" value="${ pageContext.request.contextPath.concat('/images/').concat(model.url) }" />

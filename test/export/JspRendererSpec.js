@@ -50,6 +50,8 @@ describe(JspRenderer.className, function()
     };
     const prepareParameters = (parameters) =>
     {
+        global.fixtures.context.di.map('nunjucks.filter/ImageUrlFilter.dataProperties', ['src']);
+        global.fixtures.context.di.map('nunjucks.filter/LinkUrlFilter.dataProperties', ['url']);
         const classes = JspNodeRenderers.rendererList;
         const nodeRenderers = global.fixtures.context.createInstances(classes);
         return [nodeRenderers];
