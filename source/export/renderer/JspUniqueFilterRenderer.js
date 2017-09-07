@@ -52,8 +52,8 @@ class JspUniqueFilterRenderer extends JspFilterReplacementRenderer
             let result = '';
 
             // Prepare uniqueId
-            result+= '<c:if test="${ empty entojUniqueIdFilter }"><c:set var="entojUniqueIdFilter" value="0" scope="page" /></c:if>';
-            result+= '<c:set var="entojUniqueIdFilter" value="${ entojUniqueIdFilter +  1 }" scope="page" />';
+            result+= '<c:if test="${ empty entojUniqueIdFilter }"><c:set var="entojUniqueIdFilter" value="0" scope="request" /></c:if>';
+            result+= '<c:set var="entojUniqueIdFilter" value="${ entojUniqueIdFilter +  1 }" scope="request" />';
 
             // Set
             if (scope.isSet(node, configuration))
