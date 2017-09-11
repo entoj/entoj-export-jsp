@@ -63,6 +63,15 @@ class JspSvgViewBoxFilterRenderer extends JspFilterReplacementRenderer
 
 
     /**
+     * @type {model.configuration.PathesConfiguration}
+     */
+    get pathesConfiguration()
+    {
+        return this._pathesConfiguration;
+    }
+
+
+    /**
      * @type {String}
      */
     get dataVariableName()
