@@ -4,30 +4,16 @@
  * Requirements
  * @ignore
  */
-const JspFilterNodeRenderer = require('./JspFilterNodeRenderer.js').JspFilterNodeRenderer;
-const ensureTrailingSlash = require('entoj-system').utils.urls.ensureTrailingSlash;
+const JspFilterReplacementRenderer = require('./JspFilterReplacementRenderer.js').JspFilterReplacementRenderer;
+const Node = require('entoj-system').export.ast.Node;
 const co = require('co');
 
 
 /**
- * Renders the |linkUrl filters
- *
- * This will use the first dataProperties config of the actual filter
+ * Renders |linkUrl filters
  */
-class JspLinkUrlFilterRenderer extends JspFilterNodeRenderer
+class JspLinkUrlFilterRenderer extends JspFilterReplacementRenderer
 {
-    /**
-     * @inheritDocs
-     */
-    constructor(dataProperties)
-    {
-        super();
-
-        // Assign options
-        this._dataProperties = dataProperties || [];
-    }
-
-
     /**
      * @inheritDoc
      */
@@ -38,30 +24,11 @@ class JspLinkUrlFilterRenderer extends JspFilterNodeRenderer
 
 
     /**
-     * @inheritDocs
-     */
-    static get injections()
-    {
-        // We are sharing the dataProperties config with the actual filter
-        return { 'parameters': ['nunjucks.filter/LinkUrlFilter.dataProperties'] };
-    }
-
-
-    /**
      * @type {Boolean|Array}
      */
     get filterName()
     {
-        return ['linkUrl'];
-    }
-
-
-    /**
-     * @type {Array}
-     */
-    get dataProperties()
-    {
-        return this._dataProperties;
+        return ['linkUrl', 'link'];
     }
 
 
@@ -78,14 +45,49 @@ class JspLinkUrlFilterRenderer extends JspFilterNodeRenderer
         const promise = co(function*()
         {
             let result = '';
-            const baseUrl = configuration.moduleConfiguration.imageBaseUrl;
-            result+= 'pageContext.request.contextPath.concat(\'' + ensureTrailingSlash(baseUrl) + '\').concat(';
-            result+= yield configuration.renderer.renderNode(node.value, configuration);
-            if (scope.dataProperties.length)
+            const filter = node.find('FilterNode', { name: scope.filterName });
+            if (!filter)
             {
-                result+= '.' + scope.dataProperties[0];
+                throw new Error('Could not locate linkUrl filter in ' + node.type);
             }
-            result+= ')';
+
+            result+= '<c:url ';
+            if (scope.isSet(node, configuration))
+            {
+                result+= 'var="';
+                result+= yield configuration.renderer.renderNode(node.variable, configuration);
+                result+= '" ';
+            }
+            result+= 'url="${ ';
+            result+= yield configuration.renderer.renderNode(filter.value, configuration);
+            result+= ' }"';
+
+            if (filter.arguments.length &&
+                filter.arguments[0].find('ComplexVariableNode'))
+            {
+                result+= '>';
+                const params = filter.arguments[0].find('ComplexVariableNode').value;
+                for (const key in params)
+                {
+                    result+= '<c:param name="' + key + '" ';
+                    result+= 'value="${ ';
+                    if (params[key] instanceof Node)
+                    {
+                        result+= yield configuration.renderer.renderNode(params[key], configuration);
+                    }
+                    else
+                    {
+                        result+= params[key];
+                    }
+                    result+= ' }" />';
+                }
+                result+= '</c:url>';
+            }
+            else
+            {
+                result+=' />';
+            }
+
             return result;
         });
         return promise;

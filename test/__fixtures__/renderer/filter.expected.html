@@ -51,6 +51,6 @@ ${ pageContext.request.contextPath.concat('/images/').concat(url.src) }
 <c:set var="path" value="${ pageContext.request.contextPath.concat('/images/').concat('primary'.src) }" />
 
 
-${ pageContext.request.contextPath.concat('/images/').concat(url.url) }
-<c:set var="path" value="${ pageContext.request.contextPath.concat('/images/').concat(model.url) }" />
-<jsp:useBean id="path" class="java.util.LinkedHashMap" /><c:set target="${ path }" property="p" value="[export.ast/VariableNode#13]" /><c:set target="${ path }" property="s" value="15" />
+<c:url url="${ url }" />
+<c:url var="path" url="${ model }" />
+<c:url var="path" url="${ model }"><c:param name="p" value="${ page }" /><c:param name="s" value="${ 15 }" /></c:url>
