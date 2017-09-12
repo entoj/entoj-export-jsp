@@ -5,6 +5,7 @@
  * @ignore
  */
 const NodeRenderer = require('entoj-system').export.renderer.NodeRenderer;
+const Node = require('entoj-system').export.ast.Node;
 const isPlainObject = require('lodash.isplainobject');
 const htmlspecialchars = require('htmlspecialchars');
 const co = require('co');
@@ -56,23 +57,34 @@ class JspSetNodeRenderer extends NodeRenderer
                 result+= '<jsp:useBean id="' + name + '" class="java.util.LinkedHashMap" />';
                 const render = (name, data) =>
                 {
-                    let result = '';
-                    for (const key in data)
+                    const promise = co(function*()
                     {
-                        if (isPlainObject(data[key]))
+                        let result = '';
+                        for (const key in data)
                         {
-                            result+= '<jsp:useBean id="' + name + '_' + key + '" class="java.util.LinkedHashMap" />';
-                            result+= render(name + '_' + key, data[key]);
-                            result+= '<c:set target="${ ' + name + ' }" property="' + key + '" value="${ ' + name + '_' + key + ' }" />';
+                            if (isPlainObject(data[key]) && !(data[key] instanceof Node))
+                            {
+                                result+= '<jsp:useBean id="' + name + '_' + key + '" class="java.util.LinkedHashMap" />';
+                                result+= yield render(name + '_' + key, data[key]);
+                                result+= '<c:set target="${ ' + name + ' }" property="' + key + '" value="${ ' + name + '_' + key + ' }" />';
+                            }
+                            else
+                            {
+                                let value = htmlspecialchars(data[key] || '');
+                                if (data[key] instanceof Node)
+                                {
+                                    value = '${ ';
+                                    value+= yield configuration.renderer.renderNode(data[key], configuration);
+                                    value+= ' }';
+                                }
+                                result+= '<c:set target="${ ' + name + ' }" property="' + key + '" value="' + value + '" />';
+                            }
                         }
-                        else
-                        {
-                            result+= '<c:set target="${ ' + name + ' }" property="' + key + '" value="' + htmlspecialchars(data[key] || '') + '" />';
-                        }
-                    }
-                    return result;
+                        return result;
+                    });
+                    return promise;
                 };
-                result+= render(name, data);
+                result+= yield render(name, data);
             }
             // Standard
             else
