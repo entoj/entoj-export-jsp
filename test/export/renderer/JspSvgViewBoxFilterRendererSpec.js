@@ -19,7 +19,6 @@ describe(JspSvgViewBoxFilterRenderer.className, function()
     {
         return [global.fixtures.pathesConfiguration];
     };
-
     const fixtureConfiguration =
     {
         settings:
