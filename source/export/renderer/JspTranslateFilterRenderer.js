@@ -44,21 +44,12 @@ class JspTranslateFilterRenderer extends JspFilterReplacementRenderer
         const promise = co(function*()
         {
             let result = '';
-            let key = '';
             const filter = node.find('FilterNode', { name: scope.filterName });
             if (!filter)
             {
                 throw new Error('Could not locate translate filter in ' + node.type);
             }
-            if (filter.arguments &&
-                filter.arguments.length)
-            {
-                key = yield configuration.renderer.renderNode(filter.arguments[0].value, configuration);
-            }
-            else
-            {
-                key = yield configuration.renderer.renderNode(filter.value, configuration);
-            }
+            const key = yield configuration.renderer.renderNode(filter.value, configuration);
             result+= '<fmt:message';
             if (scope.isSet(node, configuration))
             {
@@ -67,7 +58,22 @@ class JspTranslateFilterRenderer extends JspFilterReplacementRenderer
                 result+= '"';
             }
             result+= ' key="${ ' + key + ' }"';
-            result+= ' />';
+            if (filter.arguments &&
+                filter.arguments.length)
+            {
+                result+= ' >';
+                for (const arg of filter.arguments)
+                {
+                    result+= '<fmt:param value="${ ';
+                    result+= yield configuration.renderer.renderNode(arg.value, configuration);
+                    result+= ' }"/>';
+                }
+                result+= '</fmt:message>';
+            }
+            else
+            {
+                result+= ' />';
+            }
 
             return result;
         });
