@@ -89,9 +89,6 @@ module.exports =
         require('./JspSetNodeRenderer.js').JspSetNodeRenderer,
         require('./JspVariableNodeRenderer.js').JspVariableNodeRenderer,
         require('entoj-system').export.renderer.TextNodeRenderer,
-        require('entoj-system').export.renderer.NodeListRenderer,
-
-        // Fallback
-        require('entoj-system').export.renderer.AnyNodeRenderer
+        require('entoj-system').export.renderer.NodeListRenderer
     ]
 };
