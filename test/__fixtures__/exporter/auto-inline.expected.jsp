@@ -13,7 +13,7 @@
 
     
     <div class="${ moduleClasses } ${ classes }" data-entity="${ moduleClass }">
-        <jsp:include page="includes/elements/e-image.jsp"><jsp:param name="model" value="${ model.image }" /><jsp:param name="settings" value="${ imageSettings }" /><jsp:param name="classes" value="${ moduleClass.concat('__image') }" /></jsp:include>
+        <jsp:include page="/includes/elements/e-image.jsp"><jsp:param name="model" value="${ model.image }" /><jsp:param name="settings" value="${ imageSettings }" /><jsp:param name="classes" value="${ moduleClass.concat('__image') }" /></jsp:include>
         <div class="${ moduleClass }__body">
             <c:set var="text_u1" value="${ '' }" /><c:set var="level_u1" value="${ 3 }" /><c:set var="skin_u1" value="${ 'light' }" /><c:set var="classes_u1" value="${ moduleClass.concat('__headline') }" />
 
@@ -30,9 +30,9 @@
 
             <p class="${ moduleClass }__copy">${ model.copy }</p>
             <c:choose><c:when test="${ type == 'content' }">
-                <jsp:include page="includes/elements/e-cta.jsp"><jsp:param name="type" value="${ 'tertiary' }" /><jsp:param name="skin" value="${ 'light' }" /><jsp:param name="text" value="${ model.cta }" /><jsp:param name="link" value="${ model.link }" /><jsp:param name="classes" value="${ moduleClass.concat('__cta') }" /></jsp:include>
+                <jsp:include page="/includes/elements/e-cta.jsp"><jsp:param name="type" value="${ 'tertiary' }" /><jsp:param name="skin" value="${ 'light' }" /><jsp:param name="text" value="${ model.cta }" /><jsp:param name="link" value="${ model.link }" /><jsp:param name="classes" value="${ moduleClass.concat('__cta') }" /></jsp:include>
             </c:when><c:otherwise>
-                <jsp:include page="includes/elements/e-cta.jsp"><jsp:param name="type" value="${ 'secondary' }" /><jsp:param name="skin" value="${ 'light' }" /><jsp:param name="text" value="${ model.cta }" /><jsp:param name="link" value="${ model.link }" /><jsp:param name="classes" value="${ moduleClass.concat('__cta') }" /></jsp:include>
+                <jsp:include page="/includes/elements/e-cta.jsp"><jsp:param name="type" value="${ 'secondary' }" /><jsp:param name="skin" value="${ 'light' }" /><jsp:param name="text" value="${ model.cta }" /><jsp:param name="link" value="${ model.link }" /><jsp:param name="classes" value="${ moduleClass.concat('__cta') }" /></jsp:include>
             </c:otherwise></c:choose>
         </div>
     </div>

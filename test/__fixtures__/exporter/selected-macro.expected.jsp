@@ -3,6 +3,6 @@
 <!-- macro m_teaser_hero body -->
 
 
-    <jsp:include page="includes/modules/m-teaser.jsp"><jsp:param name="type" value="${ 'hero' }" /><jsp:param name="classes" value="${ '' }" /><jsp:param name="model" value="${ model }" /></jsp:include>
+    <jsp:include page="/includes/modules/m-teaser.jsp"><jsp:param name="type" value="${ 'hero' }" /><jsp:param name="classes" value="${ '' }" /><jsp:param name="model" value="${ model }" /></jsp:include>
 
 <!-- /macro m_teaser_hero body -->

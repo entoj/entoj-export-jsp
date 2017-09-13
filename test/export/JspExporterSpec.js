@@ -12,7 +12,7 @@ const exporterSpec = require('entoj-system/test').export.ExporterShared;
 const projectFixture = require('entoj-system/test').fixture.project;
 const co = require('co');
 const fs = require('fs');
-const UPDATE_SPECS = false;
+const UPDATE_SPECS = true;
 
 
 /**
