@@ -124,7 +124,7 @@ class JspMediaQueryFilterRenderer extends JspFilterReplacementRenderer
             }
 
             // Load map
-            result+= '<jsp:include page="includes/helper/mediaQueries.jsp" />';
+            result+= '<jsp:include page="/includes/helper/mediaQueries.jsp" />';
 
             // Set?
             if (scope.isSet(node, configuration))
