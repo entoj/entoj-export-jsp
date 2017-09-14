@@ -140,7 +140,7 @@ class JspSvgViewBoxFilterRenderer extends JspFilterReplacementRenderer
             }
 
             // Load map
-            result+= '<jsp:include page="/includes/helper/svgViewBoxes.jsp" />';
+            result+= '<jsp:include page="' + configuration.moduleConfiguration.jspIncludePath + '/helper/svgViewBoxes.jsp" />';
 
             // Set?
             if (scope.isSet(node, configuration))

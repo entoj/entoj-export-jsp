@@ -39,6 +39,7 @@ class JspModuleConfiguration extends Base
         this._svgBasePath = buildConfiguration.get(prefix + '.svgBasePath', globalConfiguration.get(prefix + '.svgBasePath', ''));
         this._imageBaseUrl = buildConfiguration.get(prefix + '.imageBaseUrl', globalConfiguration.get(prefix + '.imageBaseUrl', ''));
         this._jspBasePath = buildConfiguration.get(prefix + '.jspBasePath', globalConfiguration.get(prefix + '.jspBasePath', 'includes'));
+        this._jspIncludePath = buildConfiguration.get(prefix + '.jspIncludePath', globalConfiguration.get(prefix + '.jspIncludePath', '/includes'));
     }
 
 
@@ -156,6 +157,17 @@ class JspModuleConfiguration extends Base
     get jspBasePath()
     {
         return this._jspBasePath;
+    }
+
+
+    /**
+     * The base url for included jsp artefacts
+     *
+     * @type {String}
+     */
+    get jspIncludePath()
+    {
+        return this._jspIncludePath;
     }
 }
 

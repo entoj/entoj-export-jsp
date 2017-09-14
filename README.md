@@ -50,6 +50,7 @@ configuration.settings =
     {
     	exportPath: '${cache}/export',
 		jspBasePath: 'includes',
+        jspBaseUrl: '/includes',
         assetBaseUrl: '/assets/base',
         svgBaseUrl: '/assets/base/icons',
         svgBasePath: '/base/global/assets/icons',
@@ -63,10 +64,13 @@ configuration.settings =
 
 The default base path used to store exported artefacts. Standard directories can be used as variables.
 
-
 #### jsp.jspBasePath
 
 The default path used to store exported jsp artefacts. This is relative to cm.exportPath.
+
+#### jsp.jspBaseUrl
+
+The default base url used to include exported jsp artefacts.
 
 #### jsp.assetBaseUrl
 

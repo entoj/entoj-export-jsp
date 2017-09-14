@@ -79,6 +79,32 @@ class JspConfiguration extends Configuration
             result.filename+= '.jsp';
         }
 
+        if (this.settings.includePath)
+        {
+            result.includePath = '';
+            if (this.settings.includePath.indexOf('/') === -1)
+            {
+                result.includePath+= this.moduleConfiguration.jspIncludePath + '/' + result.entity.id.category.pluralName.urlify() + '/';
+            }
+            result.includePath+= (this.settings.includePath.substr(0, this.settings.includePath.lastIndexOf('.')) || this.settings.includePath);
+        }
+        else
+        {
+            result.includePath = this.moduleConfiguration.jspIncludePath + '/' + result.entity.id.category.pluralName.urlify() + '/';
+            if (result.macro)
+            {
+                result.includePath+= result.macro.name.replace(/_/g, '-');
+            }
+            else
+            {
+                result.includePath+= result.entity.idString.replace(/_/g, '-');
+            }
+        }
+        if (!result.includePath.endsWith('.jsp'))
+        {
+            result.includePath+= '.jsp';
+        }
+
         return Promise.resolve(result);
     }
 }
