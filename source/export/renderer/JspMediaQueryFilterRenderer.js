@@ -87,7 +87,7 @@ class JspMediaQueryFilterRenderer extends JspFilterReplacementRenderer
 
         // Generate map
         let result = '';
-        result+= '<c:if test="${ not empty ' + this.dataVariableName + '}">';
+        result+= '<c:if test="${ empty ' + this.dataVariableName + '}">';
         result+= '<jsp:useBean id="' + this.dataVariableName + '" class="java.util.TreeMap" scope="request" />';
         for (const mediaQueryName in mediaQueries)
         {
