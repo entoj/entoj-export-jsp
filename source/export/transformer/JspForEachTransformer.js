@@ -35,21 +35,6 @@ class JspForEachTransformer extends NodeTransformer
             {
                 node.fields[1] = 'count';
             }
-            // loop.isFirst
-            if (node.fields.length === 2 &&
-                node.fields[0] === 'loop' &&
-                node.fields[1] === 'isFirst')
-            {
-console.log('WTF....', node.fields);
-                node.fields[1] = 'first';
-            }
-            // loop.isLast
-            if (node.fields.length === 2 &&
-                node.fields[0] === 'loop' &&
-                node.fields[1] === 'isLast')
-            {
-                node.fields[1] = 'last';
-            }
             // loop.index0
             if (node.fields.length === 2 &&
                 node.fields[0] === 'loop' &&
