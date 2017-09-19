@@ -94,7 +94,7 @@ function prepareValue(value, type)
             ? trimQuotes(value.toString())
             : null;
     }
-    if (value === null || typeof value === 'undefined')
+    if (value === null || value === 'null' || typeof value === 'undefined')
     {
         result = null;
     }
@@ -160,15 +160,6 @@ function prepareParameters(node, macroConfiguration, configuration, resultType)
             result[parameter.name].value = prepareValue(defaultValue, type);
         }
 
-        // Set model default
-        /*
-        if (macroConfiguration.modelParameter)
-        {
-            result[macroConfiguration.modelParameter.name] = result[macroConfiguration.modelParameter.name] || {};
-            result[macroConfiguration.modelParameter.name].value = 'self';
-        }
-        */
-
         // Override configured arguments
         if (macroConfiguration.parameters)
         {
@@ -181,6 +172,8 @@ function prepareParameters(node, macroConfiguration, configuration, resultType)
                 result[parameter].value = new LiteralNode({ value: prepareValue(macroConfiguration.parameters[parameter], type) });
             }
         }
+
+console.log(result);
 
         // Prepare result
         result = (resultType === 'nodes')
