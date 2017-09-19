@@ -173,8 +173,6 @@ function prepareParameters(node, macroConfiguration, configuration, resultType)
             }
         }
 
-console.log(result);
-
         // Prepare result
         result = (resultType === 'nodes')
             ? yield convertToNodes(result, configuration)
