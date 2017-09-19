@@ -42,44 +42,19 @@ class JspVariableNodeRenderer extends NodeRenderer
         let result = '';
         if (node.fields && node.fields.length > 0)
         {
-            // Loop variables
-            if (node.fields[0] === 'loop' && node.fields.length === 2)
+            for (const field of node.fields)
             {
-                result+= 'loop.';
-                if (node.fields[1] === 'length')
+                if (typeof field == 'number')
                 {
-                    result+= 'count';
-                }
-                else if (node.fields[1] === 'first')
-                {
-                    result+= 'isFirst';
-                }
-                else if (node.fields[1] === 'last')
-                {
-                    result+= 'isLast';
+                    result = result.substring(0, result.length - 1);
+                    result+= '[' + field + '].';
                 }
                 else
                 {
-                    result+= node.fields[1];
+                    result+= field + '.';
                 }
             }
-            // Default
-            else
-            {
-                for (const field of node.fields)
-                {
-                    if (typeof field == 'number')
-                    {
-                        result = result.substring(0, result.length - 1);
-                        result+= '[' + field + '].';
-                    }
-                    else
-                    {
-                        result+= field + '.';
-                    }
-                }
-                result = result.substring(0, result.length - 1);
-            }
+            result = result.substring(0, result.length - 1);
         }
         return Promise.resolve(result);
     }
