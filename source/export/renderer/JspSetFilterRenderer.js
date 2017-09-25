@@ -62,8 +62,13 @@ class JspSetFilterRenderer extends JspFilterReplacementRenderer
                 ? yield configuration.renderer.renderNode(filter.arguments[1].value, configuration)
                 : '';
 
+            // Get scope
+            const variableScope = (source == 'global')
+				? 'request'
+				: 'page';
+
             // Render
-            result+= '<c:if test="${ empty ' + source + ' }"><jsp:useBean id="' + source + '" class="java.util.LinkedHashMap" /></c:if>';
+            result+= '<c:if test="${ empty ' + source + ' }"><jsp:useBean id="' + source + '" class="java.util.LinkedHashMap" scope="' + variableScope + '" /></c:if>';
             result+= '<c:set target="${ ' + source + ' }" property="${ ' + propertyName + ' }" value="${ ' + propertyValue + ' }" />';
 
             if (scope.isSet(node, configuration))
