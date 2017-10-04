@@ -5,6 +5,7 @@
  * @ignore
  */
 const JspFilterReplacementRenderer = require('./JspFilterReplacementRenderer.js').JspFilterReplacementRenderer;
+const trimQuotes = require('entoj-system').utils.string.trimQuotes;
 const co = require('co');
 
 
@@ -57,7 +58,7 @@ class JspAttributesFilterRenderer extends JspFilterReplacementRenderer
                 ? yield configuration.renderer.renderNode(node.variable, configuration)
                 : '';
             const prefixName = filter.arguments && filter.arguments.length
-                ? (yield configuration.renderer.renderNode(filter.arguments[0].value, configuration)) + '-'
+                ? trimQuotes(yield configuration.renderer.renderNode(filter.arguments[0].value, configuration)) + '-'
                 : '';
 
             let result = '';
