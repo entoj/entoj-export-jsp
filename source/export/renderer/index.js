@@ -26,6 +26,7 @@ module.exports =
     JspMediaQueryFilterRenderer: require('./JspMediaQueryFilterRenderer.js').JspMediaQueryFilterRenderer,
     JspImageUrlFilterRenderer: require('./JspImageUrlFilterRenderer.js').JspImageUrlFilterRenderer,
     JspLinkUrlFilterRenderer: require('./JspLinkUrlFilterRenderer.js').JspLinkUrlFilterRenderer,
+    JspGetFilterRenderer: require('./JspGetFilterRenderer.js').JspGetFilterRenderer,
 
     // Standards
     JspArrayNodeRenderer: require('./JspArrayNodeRenderer.js').JspArrayNodeRenderer,
@@ -70,6 +71,7 @@ module.exports =
         require('./JspMediaQueryFilterRenderer.js').JspMediaQueryFilterRenderer,
         require('./JspImageUrlFilterRenderer.js').JspImageUrlFilterRenderer,
         require('./JspLinkUrlFilterRenderer.js').JspLinkUrlFilterRenderer,
+        require('./JspGetFilterRenderer.js').JspGetFilterRenderer,
 
         // Standards
         require('./JspArrayNodeRenderer.js').JspArrayNodeRenderer,
