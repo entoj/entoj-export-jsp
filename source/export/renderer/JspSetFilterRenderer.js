@@ -64,8 +64,8 @@ class JspSetFilterRenderer extends JspFilterReplacementRenderer
 
             // Get scope
             const variableScope = (source == 'global')
-				? 'request'
-				: 'page';
+                ? 'request'
+                : 'page';
 
             // Render
             result+= '<c:if test="${ empty ' + source + ' }"><jsp:useBean id="' + source + '" class="java.util.LinkedHashMap" scope="' + variableScope + '" /></c:if>';
