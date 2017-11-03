@@ -2,7 +2,7 @@
   "name": "entoj-export-jsp",
   "version": "0.1.10",
   "engines": {
-    "node": "6.x"
+    "node": ">=6.x"
   },
   "main": "source/index.js",
   "scripts": {
@@ -12,25 +12,22 @@
     "test": "bash scripts/test"
   },
   "dependencies": {
-    "entoj-html": "^0.1.4",
-    "entoj-system": "^0.1.11",
+    "co": "^4.6.0",
+    "entoj-html": "^0.1.5",
+    "entoj-system": "^0.1.17",
     "htmlspecialchars": "^1.0.5",
     "lodash.isplainobject": "^4.0.6"
   },
   "devDependencies": {
-    "chai": "*",
-    "chai-as-promised": "*",
-    "chai-string": "*",
-    "chai-subset": "*",
-    "chai-things": "*",
-    "coveralls": "*",
-    "git-changelog": "*",
-    "ink-docstrap": "*",
-    "istanbul": "*",
-    "jsdoc": "*",
-    "mocha": "*",
-    "sinon": "*",
-    "eslint": "*",
-    "entoj-test-fixture": "*"
+    "chai": "^4.1.2",
+    "coveralls": "^2.13.3",
+    "entoj-test-fixture": "^0.9.5",
+    "eslint": "^4.10.0",
+    "git-changelog": "^1.1.2",
+    "ink-docstrap": "^1.3.0",
+    "istanbul": "^0.4.5",
+    "jsdoc": "^3.5.5",
+    "mocha": "^3.5.3",
+    "sinon": "^2.4.1"
   }
 }
