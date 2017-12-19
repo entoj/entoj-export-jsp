@@ -31,7 +31,7 @@ class JspModuleConfiguration extends Base
             ? options.prefix || 'jsp'
             : 'jsp';
         this._configurationName = buildConfiguration.get(prefix + '.configurationName', globalConfiguration.get(prefix + '.configurationName', prefix));
-        this._exportPath = buildConfiguration.get(prefix + '.exportPath', globalConfiguration.get(prefix + '.exportPath', '${cache}/'+ prefix + '/export'));
+        this._exportPath = buildConfiguration.get(prefix + '.exportPath', globalConfiguration.get(prefix + '.exportPath', '${cache}/${configurationName}/export'));
         this._viewHelperNamespace = buildConfiguration.get(prefix + '.viewHelperNamespace', globalConfiguration.get(prefix + '.viewHelperNamespace', 'entoj'));
         this._viewHelperUri = buildConfiguration.get(prefix + '.viewHelperUri', globalConfiguration.get(prefix + '.viewHelperUri', 'https://entoj.io/entoj'));
         this._assetBaseUrl = buildConfiguration.get(prefix + '.assetBaseUrl', globalConfiguration.get(prefix + '.assetBaseUrl', ''));
@@ -58,6 +58,19 @@ class JspModuleConfiguration extends Base
     static get className()
     {
         return 'configuration/JspModuleConfiguration';
+    }
+
+
+    /**
+     * Provides variables to use in path resolving
+     *
+     * @type {Object}
+     */
+    get variables()
+    {
+        return {
+            configurationName: this._configurationName
+        };
     }
 
 

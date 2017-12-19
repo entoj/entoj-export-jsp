@@ -23,7 +23,7 @@ class JspExporter extends Exporter
      */
     constructor(globalRepository, buildConfiguration, moduleConfiguration, renderer, transformer)
     {
-        super(globalRepository, buildConfiguration, new JinjaParser(), renderer,transformer);
+        super(globalRepository, buildConfiguration, new JinjaParser(), renderer, transformer);
 
         // Check params
         assertParameter(this, 'moduleConfiguration', moduleConfiguration, true, JspModuleConfiguration);
