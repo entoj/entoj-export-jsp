@@ -5,7 +5,7 @@
  * @ignore
  */
 const InlineMacroCallTransformer = require('entoj-system').export.transformer.InlineMacroCallTransformer;
-const prepareParameters = require('../renderer/helper.js').prepareParameters;
+const prepareParameters = require('entoj-system').export.renderer.helper.prepareParameters;
 
 
 /**

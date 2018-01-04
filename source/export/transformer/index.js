@@ -12,10 +12,11 @@ module.exports =
     [
         [
             require('entoj-system').export.transformer.RemoveLoadModelTransformer,
+            require('entoj-system').export.transformer.MapParametersTransformer,
             require('./JspConcatTransformer.js').JspConcatTransformer,
             require('./JspEmptyTransformer.js').JspEmptyTransformer,
             require('./JspForEachTransformer.js').JspForEachTransformer,
-            require('./JspInlineMacroCallTransformer.js').JspInlineMacroCallTransformer
+            require('./JspInlineMacroCallTransformer.js').JspInlineMacroCallTransformer,
         ],
         [
             require('entoj-system').export.transformer.RemoveYieldTransformer

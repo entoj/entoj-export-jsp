@@ -5,7 +5,7 @@
  * @ignore
  */
 const NodeListRenderer = require('entoj-system').export.renderer.NodeListRenderer;
-const prepareParameters = require('./helper.js').prepareParameters;
+const prepareParameters = require('entoj-system').export.renderer.helper.prepareParameters;
 const co = require('co');
 const EOL = '\n';
 

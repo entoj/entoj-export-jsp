@@ -4,6 +4,9 @@
 const Configuration = require('entoj-system').export.Configuration;
 const JspModuleConfiguration = require('../configuration/JspModuleConfiguration.js').JspModuleConfiguration;
 const assertParameter = require('entoj-system').utils.assert.assertParameter;
+const templateString = require('es6-template-strings');
+const trim = require('lodash.trim');
+const trimEnd = require('lodash.trimend');
 
 
 /**
@@ -47,31 +50,58 @@ class JspConfiguration extends Configuration
 
 
     /**
-     * @inheritDocs
+     * @param {Object} configuration
+     * @param {String} template
+     * @param {Object} data
+     */
+    renderTemplate(configuration, template, data)
+    {
+        const templateData = Object.assign({}, data || {});
+        templateData.macro = configuration.macro;
+        templateData.site = configuration.entity.id.site;
+        templateData.entityCategory = configuration.entity.id.category;
+        templateData.entityId = configuration.entity.id;
+        return templateString(template, templateData);
+    }
+
+
+    /**
+     * @inheritDoc
      */
     refineConfiguration(configuration)
     {
         const result = configuration;
         result.moduleConfiguration = this.moduleConfiguration;
+
+        // Determine full path to file
+        result.filename = '';
         if (this.settings.filename)
         {
-            result.filename = '';
             if (this.settings.filename.indexOf('/') === -1)
             {
-                result.filename+= this.moduleConfiguration.jspBasePath + '/' + result.entity.id.category.pluralName.urlify() + '/';
+                result.filename+= trimEnd(this.moduleConfiguration.jspBasePath, '/');
+                result.filename+= '/';
+                result.filename+= trim(this.renderTemplate(configuration, this.moduleConfiguration.entityPathTemplate), '/');
+            }
+            if (!result.filename.endsWith('/'))
+            {
+                result.filename+= '/';
             }
             result.filename+= (this.settings.filename.substr(0, this.settings.filename.lastIndexOf('.')) || this.settings.filename);
         }
         else
         {
-            result.filename = this.moduleConfiguration.jspBasePath + '/' + result.entity.id.category.pluralName.urlify() + '/';
+            result.filename+= trimEnd(this.moduleConfiguration.jspBasePath, '/');
+            result.filename+= '/';
+            result.filename+= trim(this.renderTemplate(configuration, this.moduleConfiguration.entityPathTemplate), '/');
+            result.filename+= '/';
             if (result.macro)
             {
-                result.filename+= result.macro.name.replace(/_/g, '-');
+                result.filename+= this.renderTemplate(configuration, this.moduleConfiguration.entityMacroFilenameTemplate);
             }
             else
             {
-                result.filename+= result.entity.idString.replace(/_/g, '-');
+                result.filename+= this.renderTemplate(configuration, this.moduleConfiguration.entityFilenameTemplate);
             }
         }
         if (!result.filename.endsWith('.jsp'))
@@ -79,32 +109,13 @@ class JspConfiguration extends Configuration
             result.filename+= '.jsp';
         }
 
-        // ?? Needed ??
-        if (this.settings.includePath)
+        // Determine includePath
+        result.includePath = result.filename;
+        if (result.includePath.startsWith(this.moduleConfiguration.jspBasePath))
         {
-            result.includePath = '';
-            if (this.settings.includePath.indexOf('/') === -1)
-            {
-                result.includePath+= this.moduleConfiguration.jspIncludePath + '/' + result.entity.id.category.pluralName.urlify() + '/';
-            }
-            result.includePath+= (this.settings.includePath.substr(0, this.settings.includePath.lastIndexOf('.')) || this.settings.includePath);
+            result.includePath = result.includePath.substr(this.moduleConfiguration.jspBasePath.length);
         }
-        else
-        {
-            result.includePath = this.moduleConfiguration.jspIncludePath + '/' + result.entity.id.category.pluralName.urlify() + '/';
-            if (result.macro)
-            {
-                result.includePath+= result.macro.name.replace(/_/g, '-');
-            }
-            else
-            {
-                result.includePath+= result.entity.idString.replace(/_/g, '-');
-            }
-        }
-        if (!result.includePath.endsWith('.jsp'))
-        {
-            result.includePath+= '.jsp';
-        }
+        result.includePath = this.moduleConfiguration.jspIncludePath + result.includePath;
 
         return Promise.resolve(result);
     }

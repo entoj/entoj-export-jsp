@@ -6,7 +6,7 @@
  */
 const NodeRenderer = require('entoj-system').export.renderer.NodeRenderer;
 const MissingConfigurationError = require('entoj-system').error.MissingConfigurationError;
-const prepareArguments = require('./helper.js').prepareArguments;
+const prepareArguments = require('entoj-system').export.renderer.helper.prepareArguments;
 const co = require('co');
 
 

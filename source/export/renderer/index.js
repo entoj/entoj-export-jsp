@@ -49,7 +49,6 @@ module.exports =
     JspTextNodeRenderer: require('entoj-system').export.renderer.TextNodeRenderer,
     JspNodeListRenderer: require('entoj-system').export.renderer.NodeListRenderer,
 
-    helper: require('./helper.js'),
     rendererList:
     [
         // Filters

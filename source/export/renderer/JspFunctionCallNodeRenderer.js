@@ -5,7 +5,7 @@
  * @ignore
  */
 const NodeRenderer = require('entoj-system').export.renderer.NodeRenderer;
-const prepareArguments = require('./helper.js').prepareArguments;
+const prepareArguments = require('entoj-system').export.renderer.helper.prepareArguments;
 const co = require('co');
 
 

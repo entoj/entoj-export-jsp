@@ -32,6 +32,9 @@ class JspModuleConfiguration extends Base
             : 'jsp';
         this._configurationName = buildConfiguration.get(prefix + '.configurationName', globalConfiguration.get(prefix + '.configurationName', prefix));
         this._exportPath = buildConfiguration.get(prefix + '.exportPath', globalConfiguration.get(prefix + '.exportPath', '${cache}/${configurationName}/export'));
+        this._entityPathTemplate = buildConfiguration.get(prefix + '.entityPathTemplate', globalConfiguration.get(prefix + '.entityPathTemplate', '/${entityCategory.pluralName.urlify()}'));
+        this._entityFilenameTemplate = buildConfiguration.get(prefix + '.entityFilenameTemplate', globalConfiguration.get(prefix + '.entityFilenameTemplate', '${entityId.idString.urlify()}'));
+        this._entityMacroFilenameTemplate = buildConfiguration.get(prefix + '.entityMacroFilenameTemplate', globalConfiguration.get(prefix + '.entityMacroFilenameTemplate', '${macro.name.urlify().dasherize()}'));
         this._viewHelperNamespace = buildConfiguration.get(prefix + '.viewHelperNamespace', globalConfiguration.get(prefix + '.viewHelperNamespace', 'entoj'));
         this._viewHelperUri = buildConfiguration.get(prefix + '.viewHelperUri', globalConfiguration.get(prefix + '.viewHelperUri', 'https://entoj.io/entoj'));
         this._assetBaseUrl = buildConfiguration.get(prefix + '.assetBaseUrl', globalConfiguration.get(prefix + '.assetBaseUrl', ''));
@@ -93,6 +96,39 @@ class JspModuleConfiguration extends Base
     get exportPath()
     {
         return this._exportPath;
+    }
+
+
+    /**
+     * Template for generating the entity export path (relative to exportPath)
+     *
+     * @type {String}
+     */
+    get entityPathTemplate()
+    {
+        return this._entityPathTemplate;
+    }
+
+
+    /**
+     * Template for generating a entity filename (relative to entityPathTemplate)
+     *
+     * @type {String}
+     */
+    get entityFilenameTemplate()
+    {
+        return this._entityFilenameTemplate;
+    }
+
+
+    /**
+     * Template for generating a entity macro filename (relative to entityPathTemplate)
+     *
+     * @type {String}
+     */
+    get entityMacroFilenameTemplate()
+    {
+        return this._entityMacroFilenameTemplate;
     }
 
 
