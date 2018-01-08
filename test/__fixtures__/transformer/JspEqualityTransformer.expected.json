@@ -1,0 +1,179 @@
+{
+    "type": "NodeList",
+    "children": [
+        {
+            "type": "IfNode",
+            "children": [],
+            "condition": {
+                "type": "ConditionNode",
+                "children": [
+                    {
+                        "type": "LiteralNode",
+                        "value": "string"
+                    },
+                    {
+                        "type": "OperandNode",
+                        "value": "=="
+                    },
+                    {
+                        "type": "VariableNode",
+                        "fields": [
+                            "variable"
+                        ]
+                    }
+                ]
+            },
+            "elseIfChildren": [],
+            "elseChildren": []
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "IfNode",
+            "children": [],
+            "condition": {
+                "type": "ConditionNode",
+                "children": [
+                    {
+                        "type": "LiteralNode",
+                        "value": "string"
+                    },
+                    {
+                        "type": "OperandNode",
+                        "value": "=="
+                    },
+                    {
+                        "type": "VariableNode",
+                        "fields": [
+                            "variable"
+                        ]
+                    }
+                ]
+            },
+            "elseIfChildren": [],
+            "elseChildren": []
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "IfNode",
+            "children": [],
+            "condition": {
+                "type": "ConditionNode",
+                "children": [
+                    {
+                        "type": "LiteralNode",
+                        "value": "string"
+                    },
+                    {
+                        "type": "OperandNode",
+                        "value": "=="
+                    },
+                    {
+                        "type": "LiteralNode",
+                        "value": true
+                    }
+                ]
+            },
+            "elseIfChildren": [],
+            "elseChildren": []
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "IfNode",
+            "children": [],
+            "condition": {
+                "type": "ConditionNode",
+                "children": [
+                    {
+                        "type": "LiteralNode",
+                        "value": "string"
+                    },
+                    {
+                        "type": "OperandNode",
+                        "value": "=="
+                    },
+                    {
+                        "type": "LiteralNode",
+                        "value": true
+                    }
+                ]
+            },
+            "elseIfChildren": [],
+            "elseChildren": []
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "IfNode",
+            "children": [],
+            "condition": {
+                "type": "ConditionNode",
+                "children": [
+                    {
+                        "type": "VariableNode",
+                        "fields": [
+                            "foo"
+                        ]
+                    },
+                    {
+                        "type": "OperandNode",
+                        "value": "!="
+                    },
+                    {
+                        "type": "VariableNode",
+                        "fields": [
+                            "bar"
+                        ]
+                    }
+                ]
+            },
+            "elseIfChildren": [],
+            "elseChildren": []
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        },
+        {
+            "type": "IfNode",
+            "children": [],
+            "condition": {
+                "type": "ConditionNode",
+                "children": [
+                    {
+                        "type": "VariableNode",
+                        "fields": [
+                            "foo"
+                        ]
+                    },
+                    {
+                        "type": "OperandNode",
+                        "value": "!="
+                    },
+                    {
+                        "type": "VariableNode",
+                        "fields": [
+                            "bar"
+                        ]
+                    }
+                ]
+            },
+            "elseIfChildren": [],
+            "elseChildren": []
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        }
+    ]
+}
