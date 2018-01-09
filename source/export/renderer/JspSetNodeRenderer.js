@@ -47,44 +47,14 @@ class JspSetNodeRenderer extends NodeRenderer
         {
             let result = '';
 
-            // Complex
+            // Complex - Make use of JavaEE EL3 JSON to Object Feature
             if (node.value &&
                 node.value.is('ExpressionNode') &&
                 node.value.find('ComplexVariableNode'))
             {
                 const name = yield configuration.renderer.renderNode(node.variable, configuration);
                 const data = node.value.find('ComplexVariableNode').value;
-                result+= '<jsp:useBean id="' + name + '" class="java.util.LinkedHashMap" />';
-                const render = (name, data) =>
-                {
-                    const promise = co(function*()
-                    {
-                        let result = '';
-                        for (const key in data)
-                        {
-                            if (isPlainObject(data[key]) && !(data[key] instanceof Node))
-                            {
-                                result+= '<jsp:useBean id="' + name + '_' + key + '" class="java.util.LinkedHashMap" />';
-                                result+= yield render(name + '_' + key, data[key]);
-                                result+= '<c:set target="${ ' + name + ' }" property="' + key + '" value="${ ' + name + '_' + key + ' }" />';
-                            }
-                            else
-                            {
-                                let value = htmlspecialchars(data[key] || '');
-                                if (data[key] instanceof Node)
-                                {
-                                    value = '${ ';
-                                    value+= yield configuration.renderer.renderNode(data[key], configuration);
-                                    value+= ' }';
-                                }
-                                result+= '<c:set target="${ ' + name + ' }" property="' + key + '" value="' + value + '" />';
-                            }
-                        }
-                        return result;
-                    });
-                    return promise;
-                };
-                result+= yield render(name, data);
+                result+= '<c:set var="' + name + '" value=\'${' + JSON.stringify(data) + '}\' />';
             }
             // Standard
             else
