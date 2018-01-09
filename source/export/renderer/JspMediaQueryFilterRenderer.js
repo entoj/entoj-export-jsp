@@ -85,16 +85,11 @@ class JspMediaQueryFilterRenderer extends JspFilterReplacementRenderer
         // Get data
         const mediaQueries = this.globalConfiguration.get('mediaQueries');
 
-        // Generate map
         let result = '';
         result+= '<%@ page contentType="text/html; charset=UTF-8" session="false" %>';
         result+= '<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>';
         result+= '<c:if test="${ empty ' + this.dataVariableName + '}">';
-        result+= '<jsp:useBean id="' + this.dataVariableName + '" class="java.util.TreeMap" scope="request" />';
-        for (const mediaQueryName in mediaQueries)
-        {
-            result+= '<c:set target="${ ' + this.dataVariableName + ' }" property="' + mediaQueryName + '" value="' + mediaQueries[mediaQueryName] + '" />';
-        }
+        result+= '<c:set var="' + this.dataVariableName + '" value=\'${' + JSON.stringify(mediaQueries) + '}\' />';
         result+= '</c:if>';
         const file = new VinylFile(
             {
