@@ -9,7 +9,7 @@
     
     <c:set var="moduleClass" value="${ 'm-teaser' }" />
     <c:set var="moduleClasses" value="${ moduleClass } ${ not empty type ? moduleClass.concat('--').concat(type) : '' }" />
-    <jsp:useBean id="imageSettings" class="java.util.LinkedHashMap" /><jsp:useBean id="imageSettings_mobile" class="java.util.LinkedHashMap" /><c:set target="${ imageSettings_mobile }" property="name" value="mobile" /><c:set target="${ imageSettings_mobile }" property="aspect" value="1x1" /><c:set target="${ imageSettings_mobile }" property="width" value="410" /><c:set target="${ imageSettings }" property="mobile" value="${ imageSettings_mobile }" /><jsp:useBean id="imageSettings_all" class="java.util.LinkedHashMap" /><c:set target="${ imageSettings_all }" property="aspect" value="16x9" /><c:set target="${ imageSettings_all }" property="width" value="830" /><c:set target="${ imageSettings }" property="all" value="${ imageSettings_all }" />
+    <c:set var="imageSettings" value='${{"mobile":{"name":"mobile","aspect":"1x1","width":410},"all":{"aspect":"16x9","width":830}}}' />
 
     
     <div class="${ moduleClasses } ${ classes }" data-entity="${ moduleClass }">
