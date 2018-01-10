@@ -5,9 +5,6 @@
  * @ignore
  */
 const NodeRenderer = require('entoj-system').export.renderer.NodeRenderer;
-const Node = require('entoj-system').export.ast.Node;
-const isPlainObject = require('lodash.isplainobject');
-const htmlspecialchars = require('htmlspecialchars');
 const co = require('co');
 
 
