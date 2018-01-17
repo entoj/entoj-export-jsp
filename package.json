@@ -1,6 +1,6 @@
 {
   "name": "entoj-export-jsp",
-  "version": "0.1.12",
+  "version": "0.2.2",
   "engines": {
     "node": ">=6.x"
   },
@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "co": "^4.6.0",
-    "entoj-html": "^0.1.6",
-    "entoj-system": "^0.1.23",
+    "entoj-html": "^0.2.2",
+    "entoj-system": "^0.2.6",
     "es6-template-strings": "^2.0.1",
     "htmlspecialchars": "^1.0.5",
     "lodash.isplainobject": "^4.0.6",

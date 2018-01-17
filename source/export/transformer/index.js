@@ -4,6 +4,7 @@
 module.exports =
 {
     JspConcatTransformer: require('./JspConcatTransformer.js').JspConcatTransformer,
+    JspEqualityTransformer: require('./JspEqualityTransformer.js').JspEqualityTransformer,
     JspEmptyTransformer: require('./JspEmptyTransformer.js').JspEmptyTransformer,
     JspForEachTransformer: require('./JspForEachTransformer.js').JspForEachTransformer,
     JspInlineMacroCallTransformer: require('./JspInlineMacroCallTransformer.js').JspInlineMacroCallTransformer,
@@ -14,6 +15,7 @@ module.exports =
             require('entoj-system').export.transformer.RemoveLoadModelTransformer,
             require('entoj-system').export.transformer.MapParametersTransformer,
             require('./JspConcatTransformer.js').JspConcatTransformer,
+            require('./JspEqualityTransformer.js').JspEqualityTransformer,
             require('./JspEmptyTransformer.js').JspEmptyTransformer,
             require('./JspForEachTransformer.js').JspForEachTransformer,
             require('./JspInlineMacroCallTransformer.js').JspInlineMacroCallTransformer,
