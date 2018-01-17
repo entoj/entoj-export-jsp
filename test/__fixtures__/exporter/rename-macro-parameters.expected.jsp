@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" session="false" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%><%@ taglib prefix="entoj" uri="https://entoj.io/entoj"%><!-- macro e_image parameters -->
-<c:set var="classes" value="${ not empty param.classes ? param.classes : '' }" />
+<c:set var="style" value="${ not empty param.style ? param.style : '' }" />
 <!-- /macro e_image parameters -->
 <!-- macro e_image body -->
 
@@ -9,7 +9,7 @@
     <c:set var="moduleClass" value="${ 'e-image' }" />
 
     
-    <picture class="${ moduleClass } ${ classes }">
+    <picture class="${ moduleClass } ${ style }">
         <c:set var="image" value="${ null }" />
         <c:if test="${ not empty settings }">
             <c:forEach var="indexAndSetting" items="${ settings }" varStatus="loop"><c:set var="index" value="${ indexAndSetting.key }" /><c:set var="setting" value="${ indexAndSetting.value }" />

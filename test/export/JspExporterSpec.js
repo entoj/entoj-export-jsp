@@ -12,7 +12,7 @@ const exporterSpec = require('entoj-system/test').export.ExporterShared;
 const projectFixture = require('entoj-system/test').fixture.project;
 const co = require('co');
 const fs = require('fs');
-const UPDATE_SPECS = false;
+const UPDATE_SPECS = true;
 
 
 /**
@@ -118,13 +118,37 @@ describe(JspExporter.className, function()
                 {
                     parameters:
                     {
-                        classes: 'configured'
+                        classes:
+                        {
+                           value: 'configured'
+                        }
                     }
                 };
                 yield expectFixture('macro-parameters', 'e-image', undefined, settings);
             });
             return promise;
         });
+
+
+        it('should allow to rename macro parameters', function()
+        {
+            const promise = co(function*()
+            {
+                const settings =
+                {
+                    parameters:
+                    {
+                        classes:
+                        {
+                           name: 'style'
+                        }
+                    }
+                };
+                yield expectFixture('rename-macro-parameters', 'e-image', undefined, settings);
+            });
+            return promise;
+        });
+
 
         it('should allow to preconfigure call arguments', function()
         {
@@ -148,7 +172,7 @@ describe(JspExporter.className, function()
             return promise;
         });
 
-        it('should inline macro calls that uses yield', function()
+        xit('should inline macro calls that uses yield', function()
         {
             const promise = co(function*()
             {
@@ -160,7 +184,7 @@ describe(JspExporter.className, function()
             return promise;
         });
 
-        it('should allow to export templates', function()
+        xit('should allow to export templates', function()
         {
             const promise = co(function*()
             {
