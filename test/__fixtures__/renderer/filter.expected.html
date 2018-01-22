@@ -10,7 +10,7 @@ ${ empty url ? 'string' : url }
 ${ empty url ? 1 : url }
 ${ empty url ? variable : url }
 <c:set var="value" value="${ empty false ? 'hooraa' : false }" />
-<c:if test="${ empty false ? '' : false == 'yes' }"></c:if>
+<c:if test="${empty false ? '' : false == 'yes' }"></c:if>
 
 
 <c:out value="${ url }" />
@@ -19,7 +19,7 @@ ${ empty url ? variable : url }
 
 ${ empty url }
 <c:set var="value" value="${ empty false }" />
-<c:if test="${ not empty false }"></c:if>
+<c:if test="${not empty false }"></c:if>
 
 
 ${  } ${ not empty url ? .concat('--').concat(url) : '' }
