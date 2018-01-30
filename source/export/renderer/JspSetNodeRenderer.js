@@ -9,7 +9,7 @@ const Node = require('entoj-system').export.ast.Node;
 const isPlainObject = require('lodash.isplainobject');
 const htmlspecialchars = require('htmlspecialchars');
 const co = require('co');
-const LINEBREAK = '\n\t\t';
+const LINEBREAK = '\n         ';
 
 /**
  *
