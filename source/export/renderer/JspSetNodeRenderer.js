@@ -9,7 +9,7 @@ const Node = require('entoj-system').export.ast.Node;
 const isPlainObject = require('lodash.isplainobject');
 const htmlspecialchars = require('htmlspecialchars');
 const co = require('co');
-
+const LINEBREAK = '\n\t\t';
 
 /**
  *
@@ -69,7 +69,7 @@ class JspSetNodeRenderer extends NodeRenderer
 
                             if (isPlainObject(data[key]) && !(data[key] instanceof Node))
                             {
-                                result+= '"' + key + '":{';
+                                result+= LINEBREAK + '"' + key + '":{';
                                 result+= yield render(key, data[key]);
                                 result+= '}';
                             }
@@ -90,7 +90,7 @@ class JspSetNodeRenderer extends NodeRenderer
                     return promise;
                 };
                 result+= yield render(name, data);
-                result+= '}}\' />';
+                result+= LINEBREAK + '}}\' />';
             }
             // Standard
             else
