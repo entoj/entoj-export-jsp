@@ -62,7 +62,7 @@ class JspSetNodeRenderer extends NodeRenderer
                         let result = '';
                         for (const key in data)
                         {
-                            if (result.length > 0)
+                            if (result != '')
                             {
                                 result += ', ';
                             }
