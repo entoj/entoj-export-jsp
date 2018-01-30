@@ -5,6 +5,9 @@
  * @ignore
  */
 const NodeRenderer = require('entoj-system').export.renderer.NodeRenderer;
+const Node = require('entoj-system').export.ast.Node;
+const isPlainObject = require('lodash.isplainobject');
+const htmlspecialchars = require('htmlspecialchars');
 const co = require('co');
 
 
@@ -51,7 +54,43 @@ class JspSetNodeRenderer extends NodeRenderer
             {
                 const name = yield configuration.renderer.renderNode(node.variable, configuration);
                 const data = node.value.find('ComplexVariableNode').value;
-                result+= '<c:set var="' + name + '" value=\'${' + JSON.stringify(data) + '}\' />';
+                result+= '<c:set var="' + name + '" value=\'${{';
+                const render = (name, data) =>
+                {
+                    const promise = co(function*()
+                    {
+                        let result = '';
+                        for (const key in data)
+                        {
+                            if (result.length > 0)
+                            {
+                                result += ', ';
+                            }
+
+                            if (isPlainObject(data[key]) && !(data[key] instanceof Node))
+                            {
+                                result+= '"' + key + '":{';
+                                result+= yield render(key, data[key]);
+                                result+= '}';
+                            }
+                            else
+                            {
+                                if (data[key] instanceof Node)
+                                {
+                                    let value = yield configuration.renderer.renderNode(data[key], configuration);
+                                    result += '"' + key + '": ' + value + '';
+                                } else {
+                                    let value = htmlspecialchars(data[key] || '');
+                                    result += '"' + key + '": "' + value + '"';
+                                }
+                            }
+                        }
+                        return result;
+                    });
+                    return promise;
+                };
+                result+= yield render(name, data);
+                result+= '}}\' />';
             }
             // Standard
             else
