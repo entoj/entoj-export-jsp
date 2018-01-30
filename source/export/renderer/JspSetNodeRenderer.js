@@ -77,10 +77,12 @@ class JspSetNodeRenderer extends NodeRenderer
                             {
                                 if (data[key] instanceof Node)
                                 {
-                                    let value = yield configuration.renderer.renderNode(data[key], configuration);
+                                    const value = yield configuration.renderer.renderNode(data[key], configuration);
                                     result += '"' + key + '": ' + value + '';
-                                } else {
-                                    let value = htmlspecialchars(data[key] || '');
+                                }
+                                else
+                                {
+                                    const value = htmlspecialchars(data[key] || '');
                                     result += '"' + key + '": "' + value + '"';
                                 }
                             }
