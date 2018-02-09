@@ -9,10 +9,7 @@
     
     <c:set var="moduleClass" value="${ 'm-teaser' }" />
     <c:set var="moduleClasses" value="${ moduleClass } ${ not empty type ? moduleClass.concat('--').concat(type) : '' }" />
-    <c:set var="imageSettings" value='${{
-         "mobile":{"name": "mobile", "aspect": "1x1", "width": "410"}, 
-         "all":{"aspect": "16x9", "width": "830"}
-         }}' />
+    <c:set var="imageSettings" value="${ { \"mobile\": { \"name\": \"mobile\", \"aspect\": \"1x1\", \"width\": 410 }, \"all\": { \"aspect\": \"16x9\", \"width\": 830 } } }" />
 
     
     <div class="${ moduleClasses } ${ classes }" data-entity="${ moduleClass }">

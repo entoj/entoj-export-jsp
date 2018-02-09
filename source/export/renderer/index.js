@@ -32,7 +32,7 @@ module.exports =
     JspArrayNodeRenderer: require('./JspArrayNodeRenderer.js').JspArrayNodeRenderer,
     JspBooleanOperandNodeRenderer: require('./JspBooleanOperandNodeRenderer.js').JspBooleanOperandNodeRenderer,
     JspCallNodeRenderer: require('./JspCallNodeRenderer.js').JspCallNodeRenderer,
-    //JspComplexVariableNodeRenderer: require('./JspComplexVariableNodeRenderer.js').JspComplexVariableNodeRenderer,
+    JspComplexVariableNodeRenderer: require('./JspComplexVariableNodeRenderer.js').JspComplexVariableNodeRenderer,
     JspConditionNodeRenderer: require('./JspConditionNodeRenderer.js').JspConditionNodeRenderer,
     JspExpressionNodeRenderer: require('./JspExpressionNodeRenderer.js').JspExpressionNodeRenderer,
     JspForNodeRenderer: require('./JspForNodeRenderer.js').JspForNodeRenderer,
@@ -90,6 +90,7 @@ module.exports =
         require('./JspOutputNodeRenderer.js').JspOutputNodeRenderer,
         require('./JspSetNodeRenderer.js').JspSetNodeRenderer,
         require('./JspVariableNodeRenderer.js').JspVariableNodeRenderer,
+        require('./JspComplexVariableNodeRenderer.js').JspComplexVariableNodeRenderer,
         require('entoj-system').export.renderer.TextNodeRenderer,
         require('entoj-system').export.renderer.NodeListRenderer
     ]
