@@ -69,11 +69,11 @@ class JspComplexVariableNodeRenderer extends NodeRenderer
                     const key = keys[index];
                     if (isPlainObject(data[key]) || Array.isArray(data[key]))
                     {
-                        result+= '\\"' + key + '\\": ' + render(data[key]);
+                        result+= '\'' + key + '\': ' + render(data[key]);
                     }
                     else
                     {
-                        result+= '\\"' + key + '\\": ' + render(data[key]);
+                        result+= '\'' + key + '\': ' + render(data[key]);
                     }
                     if (index < keys.length - 1)
                     {
@@ -101,7 +101,7 @@ class JspComplexVariableNodeRenderer extends NodeRenderer
             {
                 if (typeof data === 'string')
                 {
-                    result+= '\\"' + data + '\\"';
+                    result+= '\'' + data + '\'';
                 }
                 else
                 {
