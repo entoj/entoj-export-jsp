@@ -48,7 +48,7 @@ class JspComplexVariableNodeRenderer extends NodeRenderer
         }
         const render = (data) =>
         {
-            if (!data)
+            if (typeof data === 'undefined')
             {
                 return '';
             }
