@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "co": "^4.6.0",
-    "entoj-html": "^0.2.5",
-    "entoj-system": "^0.2.16",
+    "entoj-html": "^0.2.6",
+    "entoj-system": "^0.2.20",
     "htmlspecialchars": "^1.0.5",
     "lodash.isplainobject": "^4.0.6"
   },
