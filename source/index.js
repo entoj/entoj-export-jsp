@@ -7,6 +7,16 @@ function register(configuration, options)
 {
     // Commands
     configuration.commands.add(require('./command/JspExportCommand.js').JspExportCommand);
+
+    // Export
+    configuration.mappings.add(require('./index.js').export.JspRenderer,
+        {
+            '!nodeRenderers': require('./index.js').export.renderer.rendererList
+        });
+    configuration.mappings.add(require('./index.js').export.JspTransformer,
+        {
+            '!nodeTransformers': require('./index.js').export.transformer.transformerList
+        });    
 }
 
 
