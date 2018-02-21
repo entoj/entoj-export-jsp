@@ -9,7 +9,7 @@
     
     <c:set var="moduleClass" value="${ 'm-teaser' }" />
     <c:set var="moduleClasses" value="${ moduleClass } ${ not empty type ? moduleClass.concat('--').concat(type) : '' }" />
-    <c:set var="imageSettings" value='${{"mobile":{"name":"mobile","aspect":"1x1","width":410},"all":{"aspect":"16x9","width":830}}}' />
+    <c:set var="imageSettings" value="${ { 'mobile': { 'name': 'mobile', 'aspect': '1x1', 'width': 410 }, 'all': { 'aspect': '16x9', 'width': 830 } } }" />
 
     
     <div class="${ moduleClasses } ${ classes }" data-entity="${ moduleClass }">
@@ -29,7 +29,7 @@
 
 
             <p class="${ moduleClass }__copy">${ model.copy }</p>
-            <c:choose><c:when test="${ type == 'content' }">
+            <c:choose><c:when test="${type == 'content'}">
                 <jsp:include page="/includes/elements/e-cta.jsp"><jsp:param name="type" value="${ 'tertiary' }" /><jsp:param name="skin" value="${ 'dark' }" /><jsp:param name="text" value="${ model.cta }" /><jsp:param name="link" value="${ model.link }" /><jsp:param name="classes" value="${ moduleClass.concat('__cta') }" /></jsp:include>
             </c:when><c:otherwise>
                 <jsp:include page="/includes/elements/e-cta.jsp"><jsp:param name="type" value="${ 'secondary' }" /><jsp:param name="skin" value="${ 'dark' }" /><jsp:param name="text" value="${ model.cta }" /><jsp:param name="link" value="${ model.link }" /><jsp:param name="classes" value="${ moduleClass.concat('__cta') }" /></jsp:include>

@@ -60,7 +60,7 @@ class JspIfNodeRenderer extends NodeRenderer
             // If ...
             else if (!node.elseChildren.length && !node.elseIfChildren.length)
             {
-                result+= '<c:if test="${ ';
+                result+= '<c:if test="${';
                 result+= yield configuration.renderer.renderNode(node.condition, configuration);
                 result+= ' }">';
                 result+= yield configuration.renderer.renderList(node.children, configuration);
@@ -70,18 +70,18 @@ class JspIfNodeRenderer extends NodeRenderer
             else
             {
                 result+= '<c:choose>';
-                result+= '<c:when test="${ ';
+                result+= '<c:when test="${';
                 result+= yield configuration.renderer.renderNode(node.condition, configuration);
-                result+= ' }">';
+                result+= '}">';
                 result+= yield configuration.renderer.renderList(node.children, configuration);
                 result+= '</c:when>';
                 if (node.elseIfChildren.length)
                 {
                     for (const elseIfNode of node.elseIfChildren)
                     {
-                        result+= '<c:when test="${ ';
+                        result+= '<c:when test="${';
                         result+= yield configuration.renderer.renderNode(elseIfNode.condition, configuration);
-                        result+= ' }">';
+                        result+= '}">';
                         result+= yield configuration.renderer.renderList(elseIfNode.children, configuration);
                         result+= '</c:when>';
                     }

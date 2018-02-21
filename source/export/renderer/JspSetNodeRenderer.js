@@ -9,7 +9,7 @@ const co = require('co');
 
 
 /**
- *
+ * Renders variable assigments
  */
 class JspSetNodeRenderer extends NodeRenderer
 {
@@ -43,29 +43,14 @@ class JspSetNodeRenderer extends NodeRenderer
         const promise = co(function*()
         {
             let result = '';
-
-            // Complex - Make use of JavaEE EL3 JSON to Object Feature
-            if (node.value &&
-                node.value.is('ExpressionNode') &&
-                node.value.find('ComplexVariableNode'))
-            {
-                const name = yield configuration.renderer.renderNode(node.variable, configuration);
-                const data = node.value.find('ComplexVariableNode').value;
-                result+= '<c:set var="' + name + '" value=\'${' + JSON.stringify(data) + '}\' />';
-            }
-            // Standard
-            else
-            {
-                result+= '<c:set';
-                result+= ' var="';
-                result+= yield configuration.renderer.renderNode(node.variable, configuration);
-                result+= '"';
-                result+= ' value="${ ';
-                result+= yield configuration.renderer.renderNode(node.value, configuration);
-                result+= ' }"';
-                result+= ' />';
-            }
-
+            result+= '<c:set';
+            result+= ' var="';
+            result+= yield configuration.renderer.renderNode(node.variable, configuration);
+            result+= '"';
+            result+= ' value="${ ';
+            result+= yield configuration.renderer.renderNode(node.value, configuration);
+            result+= ' }"';
+            result+= ' />';
             return result;
         });
         return promise;

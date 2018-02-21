@@ -8,19 +8,15 @@ function register(configuration, options)
     // Commands
     configuration.commands.add(require('./command/JspExportCommand.js').JspExportCommand);
 
-    // Renderer
-    configuration.mappings.add(require('./export/index.js').JspRenderer,
+    // Export
+    configuration.mappings.add(require('./index.js').export.JspRenderer,
         {
-            '!nodeRenderers': require('./export/index.js').renderer.rendererList
-        }
-    );
-
-    // Transformer
-    configuration.mappings.add(require('./export/index.js').JspTransformer,
+            '!nodeRenderers': require('./index.js').export.renderer.rendererList
+        });
+    configuration.mappings.add(require('./index.js').export.JspTransformer,
         {
-            '!nodeTransformers': require('./export/index.js').transformer.transformerList
-        }
-    );
+            '!nodeTransformers': require('./index.js').export.transformer.transformerList
+        });    
 }
 
 
