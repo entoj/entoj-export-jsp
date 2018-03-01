@@ -120,7 +120,7 @@ describe(JspExporter.className, function()
                     {
                         classes:
                         {
-                           value: 'configured'
+                            value: 'configured'
                         }
                     }
                 };
@@ -140,7 +140,7 @@ describe(JspExporter.className, function()
                     {
                         classes:
                         {
-                           name: 'style'
+                            name: 'style'
                         }
                     }
                 };
