@@ -172,7 +172,7 @@ describe(JspExporter.className, function()
             return promise;
         });
 
-        xit('should inline macro calls that uses yield', function()
+        it('should inline macro calls that uses yield', function()
         {
             const promise = co(function*()
             {
@@ -184,7 +184,7 @@ describe(JspExporter.className, function()
             return promise;
         });
 
-        xit('should allow to export templates', function()
+        it('should allow to export templates', function()
         {
             const promise = co(function*()
             {

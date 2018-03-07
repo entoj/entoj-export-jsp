@@ -54,3 +54,13 @@ ${ pageContext.request.contextPath.concat('/images/').concat(url.src) }
 <c:url url="${ url }" />
 <c:url var="path" url="${ model }" />
 <c:url var="path" url="${ model }"><c:param name="p" value="${ page }" /><c:param name="s" value="${ 15 }" /></c:url>
+
+
+${ url['key'] }
+<c:set var="${ model }" value="${ model['key'] }" />
+<c:set var="${ other }" value="${ model['key'] }" />
+
+
+<c:if test="${ empty url }"><jsp:useBean id="url" class="java.util.LinkedHashMap" scope="page" /></c:if><c:set target="${ url }" property="${ 'key' }" value="${ 'value' }" />
+<c:if test="${ empty model }"><jsp:useBean id="model" class="java.util.LinkedHashMap" scope="page" /></c:if><c:set target="${ model }" property="${ 'key' }" value="${ value }" />
+<c:if test="${ empty model }"><jsp:useBean id="model" class="java.util.LinkedHashMap" scope="page" /></c:if><c:set target="${ model }" property="${ 'key' }" value="${ value }" /><c:set var="${ other }" value="${ model }" />

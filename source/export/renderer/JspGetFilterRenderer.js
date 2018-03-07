@@ -68,10 +68,11 @@ class JspGetFilterRenderer extends JspFilterReplacementRenderer
                     : '';
 
                 // Render
-                if (source != target)
-                {
-                    result+= '<c:set var="${ ' + target + ' }" value="${ ' + source + '[' + propertyName + '] }" />';
-                }
+                result+= '<c:set var="${ ' + target + ' }" value="${ ' + source + '[' + propertyName + '] }" />';
+            }
+            else
+            {
+                result+= '${ ' + source + '[' + propertyName + '] }';
             }
             return result;
         }).catch(ErrorHandler.handler(scope));

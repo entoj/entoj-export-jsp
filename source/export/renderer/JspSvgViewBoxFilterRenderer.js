@@ -106,8 +106,8 @@ class JspSvgViewBoxFilterRenderer extends JspFilterReplacementRenderer
         let result = '';
         result+= '<%@ page contentType="text/html; charset=UTF-8" session="false" %>';
         result+= '<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>';
-        result+= '<c:if test="${ empty ' + this.dataVariableName + '}">';
-        result+= '<c:set var="' + this.dataVariableName + '" value=\'${' + JSON.stringify(viewBoxes) + '}\' scope="request" />';
+        result+= '<c:if test="${ empty ' + this.dataVariableName + ' }">';
+        result+= '<c:set var="' + this.dataVariableName + '" value=\'${ ' + JSON.stringify(viewBoxes) + ' }\' scope="request" />';
         result+= '</c:if>';
         const file = new VinylFile(
             {

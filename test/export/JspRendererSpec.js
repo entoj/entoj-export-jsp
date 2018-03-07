@@ -45,7 +45,7 @@ describe(JspRenderer.className, function()
             const jspModuleConfiguration = new JspModuleConfiguration(global.fixtures.globalConfiguration, global.fixtures.buildConfiguration);
             return new JspConfiguration(entity, macro, settings, parser, renderer, transformer, globalRepository, buildConfiguration, jspModuleConfiguration);
         },
-        fixtureInputPath: require('entoj-system/test').fixture.export.renderer,
+        fixtureInputPath: JSP_FIXTURES + '/renderer',
         fixtureExpectedPath: JSP_FIXTURES + '/renderer',
         createFixture: () => projectFixture.createDynamic(fixtureConfiguration)
     };

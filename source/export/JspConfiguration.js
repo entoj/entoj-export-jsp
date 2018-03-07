@@ -2,7 +2,12 @@
 
 // Requirements
 const Configuration = require('entoj-system').export.Configuration;
+const GlobalRepository = require('entoj-system').model.GlobalRepository;
+const BuildConfiguration = require('entoj-system').model.configuration.BuildConfiguration;
+const Parser = require('entoj-system').export.Parser;
 const JspModuleConfiguration = require('../configuration/JspModuleConfiguration.js').JspModuleConfiguration;
+const JspRenderer = require('./JspRenderer.js').JspRenderer;
+const JspTransformer = require('./JspTransformer.js').JspTransformer;
 const assertParameter = require('entoj-system').utils.assert.assertParameter;
 const templateString = require('es6-template-strings');
 const trim = require('lodash.trim');
@@ -37,6 +42,16 @@ class JspConfiguration extends Configuration
     static get className()
     {
         return 'export/JspConfiguration';
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    static get injections()
+    {
+        return { 'parameters': ['export/JspConfiguration.entity', 'export/JspConfiguration.macro', 'export/JspConfiguration.settings',
+            Parser, JspRenderer, JspTransformer, GlobalRepository, BuildConfiguration, JspModuleConfiguration] };
     }
 
 
@@ -86,6 +101,10 @@ class JspConfiguration extends Configuration
             if (!result.filename.endsWith('/'))
             {
                 result.filename+= '/';
+            }
+            if (result.filename.startsWith('/'))
+            {
+                result.filename = result.filename.substr(1);
             }
             result.filename+= (this.settings.filename.substr(0, this.settings.filename.lastIndexOf('.')) || this.settings.filename);
         }

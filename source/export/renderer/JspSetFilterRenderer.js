@@ -46,8 +46,10 @@ class JspSetFilterRenderer extends JspFilterReplacementRenderer
         {
             let result = '';
             const filter = node.find('FilterNode', { name: scope.filterName });
+            /* istanbul ignore next */
             if (!filter)
             {
+                /* istanbul ignore next */
                 throw new Error('Could not locate set filter in ' + node.type);
             }
 
@@ -70,7 +72,6 @@ class JspSetFilterRenderer extends JspFilterReplacementRenderer
             // Render
             result+= '<c:if test="${ empty ' + source + ' }"><jsp:useBean id="' + source + '" class="java.util.LinkedHashMap" scope="' + variableScope + '" /></c:if>';
             result+= '<c:set target="${ ' + source + ' }" property="${ ' + propertyName + ' }" value="${ ' + propertyValue + ' }" />';
-
             if (scope.isSet(node, configuration))
             {
                 // Get variable names

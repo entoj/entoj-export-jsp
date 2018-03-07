@@ -1,0 +1,45 @@
+{
+    "type": "NodeList",
+    "children": [
+        {
+            "type": "ForNode",
+            "children": [
+                {
+                    "type": "OutputNode",
+                    "children": [
+                        {
+                            "type": "VariableNode",
+                            "fields": [
+                                "loop",
+                                "count"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "OutputNode",
+                    "children": [
+                        {
+                            "type": "VariableNode",
+                            "fields": [
+                                "loop",
+                                "index"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "value": {
+                "type": "VariableNode",
+                "fields": [
+                    "y"
+                ]
+            },
+            "valueName": "x"
+        },
+        {
+            "type": "TextNode",
+            "value": "\n"
+        }
+    ]
+}

@@ -45,8 +45,10 @@ class JspTranslateFilterRenderer extends JspFilterReplacementRenderer
         {
             let result = '';
             const filter = node.find('FilterNode', { name: scope.filterName });
+            /* istanbul ignore next */
             if (!filter)
             {
+                /* istanbul ignore next */
                 throw new Error('Could not locate translate filter in ' + node.type);
             }
             const key = yield configuration.renderer.renderNode(filter.value, configuration);
