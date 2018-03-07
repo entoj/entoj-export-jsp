@@ -5,6 +5,7 @@
  */
 const JspMediaQueryFilterRenderer = require(JSP_SOURCE + '/export/renderer/JspMediaQueryFilterRenderer.js').JspMediaQueryFilterRenderer;
 const nodeRendererSpec = require('entoj-system/test').export.NodeRendererShared;
+const projecFixture = require('entoj-system/test').fixture.project;
 const co = require('co');
 
 
@@ -31,8 +32,10 @@ describe(JspMediaQueryFilterRenderer.className, function()
         {
             const promise = co(function*()
             {
+                const fixture = projecFixture.createDynamic();
+                const configuration = fixture.context.di.create(require(JSP_SOURCE + '/export/JspConfiguration.js').JspConfiguration);
                 const testee = new JspMediaQueryFilterRenderer(global.fixtures.globalConfiguration);
-                const files = yield testee.createAdditionalFiles();
+                const files = yield testee.createAdditionalFiles(configuration);
                 expect(files).to.have.length(1);
                 expect(files[0].contents.toString()).to.contain('tabletAndAbove');
                 expect(files[0].contents.toString()).to.contain('tablet');

@@ -6,7 +6,6 @@
 const JspConfiguration = require(JSP_SOURCE + '/export/JspConfiguration.js').JspConfiguration;
 const JspModuleConfiguration = require(JSP_SOURCE + '/configuration/JspModuleConfiguration.js').JspModuleConfiguration;
 const configurationSpec = require('entoj-system/test').export.ConfigurationShared;
-const projectFixture = require('entoj-system/test').fixture.project;
 const co = require('co');
 
 
@@ -20,8 +19,7 @@ describe(JspConfiguration.className, function()
      */
     function prepareParameters(parameters)
     {
-        const fixture = projectFixture.createStatic(true);
-        const moduleConfiguration = new JspModuleConfiguration(fixture.globalConfiguration, fixture.buildConfiguration);
+        const moduleConfiguration = new JspModuleConfiguration(global.fixtures.globalConfiguration, global.fixtures.buildConfiguration);
         if (parameters && parameters.length)
         {
             parameters.push(moduleConfiguration);
@@ -29,7 +27,7 @@ describe(JspConfiguration.className, function()
         }
         else
         {
-            return [undefined, undefined, {}, undefined, undefined, undefined, fixture.globalRepository, fixture.buildConfiguration, moduleConfiguration];
+            return [undefined, undefined, {}, undefined, undefined, undefined, global.fixtures.globalRepository, global.fixtures.buildConfiguration, moduleConfiguration];
         }
     }
     configurationSpec(JspConfiguration, 'export/JspConfiguration', prepareParameters, { identifier: 'jsp' });
@@ -130,6 +128,38 @@ describe(JspConfiguration.className, function()
                 const testee = createTestee(entity, macro, settings);
                 const config = yield testee.getMacroConfiguration();
                 expect(config.includePath).to.be.equal('/includes/elements/Headline.jsp');
+            });
+            return promise;
+        });
+
+        it('should allow to configure the template for the filename path', function()
+        {
+            const promise = co(function *()
+            {
+                configurationSpec.createEntity('base/elements/e-headline');
+                const settings = {};
+                global.fixtures.buildConfiguration.set('jsp.entityPathTemplate', '/${site.name.urlify()}/${entityCategory.pluralName.urlify()}');
+                const entity = yield global.fixtures.entitiesRepository.getById('e-headline', global.fixtures.siteBase);
+                const macro = yield global.fixtures.globalRepository.resolveMacro(global.fixtures.siteBase, 'e_headline');
+                const testee = createTestee(entity, macro, settings);
+                const config = yield testee.getMacroConfiguration();
+                expect(config.filename).to.be.equal('base/elements/e-headline.jsp');
+            });
+            return promise;
+        });
+
+        it('should allow to configure the template for the filename', function()
+        {
+            const promise = co(function *()
+            {
+                configurationSpec.createEntity('base/elements/e-headline');
+                const settings = {};
+                global.fixtures.buildConfiguration.set('jsp.entityMacroFilenameTemplate', 'macro-${macro.name.urlify().dasherize()}');
+                const entity = yield global.fixtures.entitiesRepository.getById('e-headline', global.fixtures.siteBase);
+                const macro = yield global.fixtures.globalRepository.resolveMacro(global.fixtures.siteBase, 'e_headline');
+                const testee = createTestee(entity, macro, settings);
+                const config = yield testee.getMacroConfiguration();
+                expect(config.filename).to.be.equal('includes/elements/macro-e-headline.jsp');
             });
             return promise;
         });

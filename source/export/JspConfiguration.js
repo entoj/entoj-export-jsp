@@ -72,11 +72,15 @@ class JspConfiguration extends Configuration
     renderTemplate(configuration, template, data)
     {
         const templateData = Object.assign({}, data || {});
-        templateData.macro = configuration.macro;
-        templateData.site = configuration.entity.id.site;
-        templateData.entityCategory = configuration.entity.id.category;
-        templateData.entityId = configuration.entity.id;
-        return templateString(template, templateData);
+        if (configuration)
+        {
+            templateData.macro = configuration.macro;
+            templateData.site = configuration.entity.id.site;
+            templateData.entityCategory = configuration.entity.id.category;
+            templateData.entityId = configuration.entity.id;
+        }
+        templateData.basePathTemplate = this.moduleConfiguration.basePathTemplate;
+        return templateString(templateString(template, templateData), templateData);
     }
 
 
@@ -94,8 +98,6 @@ class JspConfiguration extends Configuration
         {
             if (this.settings.filename.indexOf('/') === -1)
             {
-                result.filename+= trimEnd(this.moduleConfiguration.jspBasePath, '/');
-                result.filename+= '/';
                 result.filename+= trim(this.renderTemplate(configuration, this.moduleConfiguration.entityPathTemplate), '/');
             }
             if (!result.filename.endsWith('/'))
@@ -110,8 +112,6 @@ class JspConfiguration extends Configuration
         }
         else
         {
-            result.filename+= trimEnd(this.moduleConfiguration.jspBasePath, '/');
-            result.filename+= '/';
             result.filename+= trim(this.renderTemplate(configuration, this.moduleConfiguration.entityPathTemplate), '/');
             result.filename+= '/';
             if (result.macro)
@@ -128,13 +128,8 @@ class JspConfiguration extends Configuration
             result.filename+= '.jsp';
         }
 
-        // Determine includePath
-        result.includePath = result.filename;
-        if (result.includePath.startsWith(this.moduleConfiguration.jspBasePath))
-        {
-            result.includePath = result.includePath.substr(this.moduleConfiguration.jspBasePath.length);
-        }
-        result.includePath = this.moduleConfiguration.jspIncludePath + result.includePath;
+        // Get includePath
+        result.includePath = '/' + result.filename;
 
         return Promise.resolve(result);
     }

@@ -80,7 +80,7 @@ class JspMediaQueryFilterRenderer extends JspFilterReplacementRenderer
     /**
      * @inheritDocs
      */
-    createAdditionalFiles()
+    createAdditionalFiles(configuration)
     {
         // Get data
         const mediaQueries = this.globalConfiguration.get('mediaQueries');
@@ -93,7 +93,7 @@ class JspMediaQueryFilterRenderer extends JspFilterReplacementRenderer
         result+= '</c:if>';
         const file = new VinylFile(
             {
-                path: 'includes/helper/mediaQueries.jsp',
+                path: configuration.renderTemplate(false, configuration.moduleConfiguration.basePathTemplate) + '/helper/mediaQueries.jsp',
                 contents: new Buffer(result)
             });
         return Promise.resolve([file]);
@@ -121,7 +121,7 @@ class JspMediaQueryFilterRenderer extends JspFilterReplacementRenderer
             }
 
             // Load map
-            result+= '<jsp:include page="' + configuration.moduleConfiguration.jspIncludePath + '/helper/mediaQueries.jsp" />';
+            result+= '<jsp:include page="/' + configuration.renderTemplate(false, configuration.moduleConfiguration.basePathTemplate) + '/helper/mediaQueries.jsp" />';
 
             // Set?
             if (scope.isSet(node, configuration))
