@@ -78,10 +78,16 @@ class JspMediaQueryFilterRenderer extends JspFilterReplacementRenderer
 
 
     /**
-     * @inheritDocs
+     * @inheritDoc
      */
-    createAdditionalFiles(configuration)
+    createAdditionalFiles(configuration, stage)
     {
+        // Only on prepare stage
+        if (stage !== 'prepare')
+        {
+            return Promise.resolve([]);
+        }
+
         // Get data
         const mediaQueries = this.globalConfiguration.get('mediaQueries');
 
