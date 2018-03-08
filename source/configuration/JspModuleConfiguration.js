@@ -16,7 +16,9 @@ const assertParameter = require('entoj-system').utils.assert.assertParameter;
 class JspModuleConfiguration extends Base
 {
     /**
-     * @param  {model.configuration.GlobalConfiguration} globalConfiguration
+     * @param {model.configuration.GlobalConfiguration} globalConfiguration
+     * @param {model.configuration.BuildConfiguration} buildConfiguration
+     * @param {Object} options
      */
     constructor(globalConfiguration, buildConfiguration, options)
     {
