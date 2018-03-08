@@ -39,7 +39,7 @@ class JspExportCommand extends ExportCommand
 
 
     /**
-     * @inheritDocs
+     * @inheritDoc
      */
     static get className()
     {
@@ -48,7 +48,17 @@ class JspExportCommand extends ExportCommand
 
 
     /**
-     * @inheritDocs
+     * @inheritDoc
+     */
+    addTaskOptions(options)
+    {
+        options.exportMinimal = true;
+        return Promise.resolve(options);
+    }
+
+
+    /**
+     * @inheritDoc
      */
     addTasks(task, mapping)
     {
