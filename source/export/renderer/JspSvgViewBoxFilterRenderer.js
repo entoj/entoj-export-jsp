@@ -111,7 +111,7 @@ class JspSvgViewBoxFilterRenderer extends JspFilterReplacementRenderer
         result+= '</c:if>';
         const file = new VinylFile(
             {
-                path: configuration.renderTemplate(false, configuration.moduleConfiguration.basePathTemplate) + '/helper/svgViewBoxes.jsp',
+                path: configuration.renderTemplate(false, configuration.moduleConfiguration.globalPathTemplate) + '/helper/svgViewBoxes.jsp',
                 contents: new Buffer(result)
             });
         return Promise.resolve([file]);
@@ -138,7 +138,7 @@ class JspSvgViewBoxFilterRenderer extends JspFilterReplacementRenderer
             }
 
             // Load map
-            result+= '<jsp:include page="/' + configuration.renderTemplate(false, configuration.moduleConfiguration.basePathTemplate) + '/helper/svgViewBoxes.jsp" />';
+            result+= '<jsp:include page="/' + configuration.renderTemplate(false, configuration.moduleConfiguration.globalPathTemplate) + '/helper/svgViewBoxes.jsp" />';
 
             // Set?
             if (scope.isSet(node, configuration))

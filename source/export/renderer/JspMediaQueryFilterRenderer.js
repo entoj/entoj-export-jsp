@@ -17,7 +17,7 @@ const co = require('co');
 class JspMediaQueryFilterRenderer extends JspFilterReplacementRenderer
 {
     /**
-     * @inheritDocs
+     * @inheritDoc
      */
     constructor(globalConfiguration)
     {
@@ -42,7 +42,7 @@ class JspMediaQueryFilterRenderer extends JspFilterReplacementRenderer
 
 
     /**
-     * @inheritDocs
+     * @inheritDoc
      */
     static get injections()
     {
@@ -93,7 +93,7 @@ class JspMediaQueryFilterRenderer extends JspFilterReplacementRenderer
         result+= '</c:if>';
         const file = new VinylFile(
             {
-                path: configuration.renderTemplate(false, configuration.moduleConfiguration.basePathTemplate) + '/helper/mediaQueries.jsp',
+                path: configuration.renderTemplate(false, configuration.moduleConfiguration.globalPathTemplate) + '/helper/mediaQueries.jsp',
                 contents: new Buffer(result)
             });
         return Promise.resolve([file]);
@@ -121,7 +121,7 @@ class JspMediaQueryFilterRenderer extends JspFilterReplacementRenderer
             }
 
             // Load map
-            result+= '<jsp:include page="/' + configuration.renderTemplate(false, configuration.moduleConfiguration.basePathTemplate) + '/helper/mediaQueries.jsp" />';
+            result+= '<jsp:include page="/' + configuration.renderTemplate(false, configuration.moduleConfiguration.globalPathTemplate) + '/helper/mediaQueries.jsp" />';
 
             // Set?
             if (scope.isSet(node, configuration))

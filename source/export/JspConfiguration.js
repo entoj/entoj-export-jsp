@@ -11,7 +11,6 @@ const JspTransformer = require('./JspTransformer.js').JspTransformer;
 const assertParameter = require('entoj-system').utils.assert.assertParameter;
 const templateString = require('es6-template-strings');
 const trim = require('lodash.trim');
-const trimEnd = require('lodash.trimend');
 
 
 /**
@@ -61,6 +60,15 @@ class JspConfiguration extends Configuration
     get moduleConfiguration()
     {
         return this._moduleConfiguration;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    getMacroEntity(macro)
+    {
+        return this.globalRepository.resolveEntityForMacro(this.site, macro, true);
     }
 
 

@@ -32,9 +32,10 @@ class JspModuleConfiguration extends Base
             : 'jsp';
         this._configurationName = buildConfiguration.get(prefix + '.configurationName', globalConfiguration.get(prefix + '.configurationName', prefix));
         this._exportPath = buildConfiguration.get(prefix + '.exportPath', globalConfiguration.get(prefix + '.exportPath', '${cache}/${configurationName}/export'));
-        this._basePathTemplate = buildConfiguration.get(prefix + '.basePathTemplate', globalConfiguration.get(prefix + '.basePathTemplate', 'includes'));
-        this._entityPathTemplate = buildConfiguration.get(prefix + '.entityPathTemplate', globalConfiguration.get(prefix + '.entityPathTemplate', '${basePathTemplate}/${entityCategory.pluralName.urlify()}'));
-        this._entityFilenameTemplate = buildConfiguration.get(prefix + '.entityFilenameTemplate', globalConfiguration.get(prefix + '.entityFilenameTemplate', '${basePathTemplate}/${entityId.idString.urlify()}'));
+        this._basePathTemplate = buildConfiguration.get(prefix + '.basePathTemplate', globalConfiguration.get(prefix + '.basePathTemplate', ''));
+        this._globalPathTemplate = buildConfiguration.get(prefix + '.globalPathTemplate', globalConfiguration.get(prefix + '.globalPathTemplate', 'includes'));
+        this._entityPathTemplate = buildConfiguration.get(prefix + '.entityPathTemplate', globalConfiguration.get(prefix + '.entityPathTemplate', '${basePathTemplate}${basePathTemplate ? "/" : ""}includes/${entityCategory.pluralName.urlify()}'));
+        this._entityFilenameTemplate = buildConfiguration.get(prefix + '.entityFilenameTemplate', globalConfiguration.get(prefix + '.entityFilenameTemplate', '${basePathTemplate}${basePathTemplate ? "/" : ""}includes/${entityId.idString.urlify()}'));
         this._entityMacroFilenameTemplate = buildConfiguration.get(prefix + '.entityMacroFilenameTemplate', globalConfiguration.get(prefix + '.entityMacroFilenameTemplate', '${macro.name.urlify().dasherize()}'));
         this._viewHelperNamespace = buildConfiguration.get(prefix + '.viewHelperNamespace', globalConfiguration.get(prefix + '.viewHelperNamespace', 'entoj'));
         this._viewHelperUri = buildConfiguration.get(prefix + '.viewHelperUri', globalConfiguration.get(prefix + '.viewHelperUri', 'https://entoj.io/entoj'));
@@ -42,13 +43,11 @@ class JspModuleConfiguration extends Base
         this._svgBaseUrl = buildConfiguration.get(prefix + '.svgBaseUrl', globalConfiguration.get(prefix + '.svgBaseUrl', ''));
         this._svgBasePath = buildConfiguration.get(prefix + '.svgBasePath', globalConfiguration.get(prefix + '.svgBasePath', ''));
         this._imageBaseUrl = buildConfiguration.get(prefix + '.imageBaseUrl', globalConfiguration.get(prefix + '.imageBaseUrl', ''));
-        //this._jspBasePath = buildConfiguration.get(prefix + '.jspBasePath', globalConfiguration.get(prefix + '.jspBasePath', 'includes'));
-        //this._jspIncludePath = buildConfiguration.get(prefix + '.jspIncludePath', globalConfiguration.get(prefix + '.jspIncludePath', '/includes'));
     }
 
 
     /**
-     * @inheritDocs
+     * @inheritDoc
      */
     static get injections()
     {
@@ -57,7 +56,7 @@ class JspModuleConfiguration extends Base
 
 
     /**
-     * @inheritDocss
+     * @inheritDoc
      */
     static get className()
     {
@@ -108,6 +107,17 @@ class JspModuleConfiguration extends Base
     get basePathTemplate()
     {
         return this._basePathTemplate;
+    }
+
+
+    /**
+     * Template for generating the base path for global exports (relative to exportPath)
+     *
+     * @type {String}
+     */
+    get globalPathTemplate()
+    {
+        return this._globalPathTemplate;
     }
 
 
