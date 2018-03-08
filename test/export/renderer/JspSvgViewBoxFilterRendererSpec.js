@@ -56,7 +56,7 @@ describe(JspSvgViewBoxFilterRenderer.className, function()
                     });
                 const configuration = fixture.context.di.create(require(JSP_SOURCE + '/export/JspConfiguration.js').JspConfiguration);
                 const testee = new JspSvgViewBoxFilterRenderer(fixture.pathesConfiguration);
-                const files = yield testee.createAdditionalFiles(configuration);
+                const files = yield testee.createAdditionalFiles(configuration, 'prepare');
                 expect(files).to.have.length(1);
                 expect(files[0].contents.toString()).to.contain('{"arrow":"0 0 82.42 154.57"}');
             });

@@ -35,7 +35,7 @@ describe(JspMediaQueryFilterRenderer.className, function()
                 const fixture = projecFixture.createDynamic();
                 const configuration = fixture.context.di.create(require(JSP_SOURCE + '/export/JspConfiguration.js').JspConfiguration);
                 const testee = new JspMediaQueryFilterRenderer(global.fixtures.globalConfiguration);
-                const files = yield testee.createAdditionalFiles(configuration);
+                const files = yield testee.createAdditionalFiles(configuration, 'prepare');
                 expect(files).to.have.length(1);
                 expect(files[0].contents.toString()).to.contain('tabletAndAbove');
                 expect(files[0].contents.toString()).to.contain('tablet');
