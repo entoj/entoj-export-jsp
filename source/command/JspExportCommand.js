@@ -52,8 +52,9 @@ class JspExportCommand extends ExportCommand
      */
     addTaskOptions(options)
     {
-        options.exportMinimal = true;
-        return Promise.resolve(options);
+        const result = options || {};
+        result.exportMinimal = true;
+        return Promise.resolve(result);
     }
 
 
