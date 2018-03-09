@@ -29,7 +29,7 @@
 
 
             <p class="${ moduleClass }__copy">${ model.copy }</p>
-            <c:choose><c:when test="${type == 'content'}">
+            <c:choose><c:when test="${ type == 'content' }">
                 <jsp:include page="/includes/elements/e-cta.jsp"><jsp:param name="type" value="${ 'tertiary' }" /><jsp:param name="skin" value="${ 'light' }" /><jsp:param name="text" value="${ model.cta }" /><jsp:param name="link" value="${ model.link }" /><jsp:param name="classes" value="${ moduleClass.concat('__cta') }" /></jsp:include>
             </c:when><c:otherwise>
                 <jsp:include page="/includes/elements/e-cta.jsp"><jsp:param name="type" value="${ 'secondary' }" /><jsp:param name="skin" value="${ 'light' }" /><jsp:param name="text" value="${ model.cta }" /><jsp:param name="link" value="${ model.link }" /><jsp:param name="classes" value="${ moduleClass.concat('__cta') }" /></jsp:include>
