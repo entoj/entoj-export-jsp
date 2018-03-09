@@ -78,6 +78,22 @@ describe(JspConfiguration.className, function()
             return promise;
         });
 
+        it('should allow to configure the template for the base path of the include path', function()
+        {
+            const promise = co(function *()
+            {
+                configurationSpec.createEntity('base/elements/e-headline');
+                const settings = {};
+                global.fixtures.buildConfiguration.set('jsp.includePathTemplate', '/META-INF/path/to');
+                const entity = yield global.fixtures.entitiesRepository.getById('e-headline', global.fixtures.siteBase);
+                const macro = yield global.fixtures.globalRepository.resolveMacro(global.fixtures.siteBase, 'e_headline');
+                const testee = createTestee(entity, macro, settings);
+                const config = yield testee.getMacroConfiguration();
+                expect(config.includePath).to.be.equal('/META-INF/path/to/includes/elements/e-headline.jsp');
+            });
+            return promise;
+        });
+
         it('should auto complete provided incomplete filename', function()
         {
             const promise = co(function *()

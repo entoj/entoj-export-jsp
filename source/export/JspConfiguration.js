@@ -137,7 +137,12 @@ class JspConfiguration extends Configuration
         }
 
         // Get includePath
-        result.includePath = '/' + result.filename;
+        result.includePath = this.renderTemplate(configuration, this.moduleConfiguration.includePathTemplate);
+        if (!result.includePath.endsWith('/'))
+        {
+            result.includePath+= '/';
+        }
+        result.includePath+= result.filename;
 
         return Promise.resolve(result);
     }
