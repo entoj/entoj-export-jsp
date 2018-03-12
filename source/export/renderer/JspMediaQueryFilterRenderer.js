@@ -9,6 +9,8 @@ const GlobalConfiguration = require('entoj-system').model.configuration.GlobalCo
 const assertParameter = require('entoj-system').utils.assert.assertParameter;
 const VinylFile = require('vinyl');
 const co = require('co');
+const trimEnd = require('lodash.trimend');
+const trim = require('lodash.trim');
 
 
 /**
@@ -99,7 +101,7 @@ class JspMediaQueryFilterRenderer extends JspFilterReplacementRenderer
         result+= '</c:if>';
         const file = new VinylFile(
             {
-                path: configuration.renderTemplate(false, configuration.moduleConfiguration.globalPathTemplate) + '/helper/mediaQueries.jsp',
+                path: trimEnd(configuration.renderTemplate(false, configuration.moduleConfiguration.globalPathTemplate), '/') + '/helper/mediaQueries.jsp',
                 contents: new Buffer(result)
             });
         return Promise.resolve([file]);
@@ -127,7 +129,7 @@ class JspMediaQueryFilterRenderer extends JspFilterReplacementRenderer
             }
 
             // Load map
-            result+= '<jsp:include page="/' + configuration.renderTemplate(false, configuration.moduleConfiguration.globalPathTemplate) + '/helper/mediaQueries.jsp" />';
+            result+= '<jsp:include page="/' + trim(configuration.renderTemplate(false, configuration.moduleConfiguration.globalPathTemplate), '/') + '/helper/mediaQueries.jsp" />';
 
             // Set?
             if (scope.isSet(node, configuration))

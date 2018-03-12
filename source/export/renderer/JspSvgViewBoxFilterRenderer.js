@@ -8,6 +8,8 @@ const JspFilterReplacementRenderer = require('./JspFilterReplacementRenderer.js'
 const PathesConfiguration = require('entoj-system').model.configuration.PathesConfiguration;
 const assertParameter = require('entoj-system').utils.assert.assertParameter;
 const VinylFile = require('vinyl');
+const trim = require('lodash.trim');
+const trimEnd = require('lodash.trimend');
 const co = require('co');
 const glob = require('glob');
 const path = require('path');
@@ -117,7 +119,7 @@ class JspSvgViewBoxFilterRenderer extends JspFilterReplacementRenderer
         result+= '</c:if>';
         const file = new VinylFile(
             {
-                path: configuration.renderTemplate(false, configuration.moduleConfiguration.globalPathTemplate) + '/helper/svgViewBoxes.jsp',
+                path: trimEnd(configuration.renderTemplate(false, configuration.moduleConfiguration.globalPathTemplate), '/') + '/helper/svgViewBoxes.jsp',
                 contents: new Buffer(result)
             });
         return Promise.resolve([file]);
@@ -144,7 +146,7 @@ class JspSvgViewBoxFilterRenderer extends JspFilterReplacementRenderer
             }
 
             // Load map
-            result+= '<jsp:include page="/' + configuration.renderTemplate(false, configuration.moduleConfiguration.globalPathTemplate) + '/helper/svgViewBoxes.jsp" />';
+            result+= '<jsp:include page="/' + trim(configuration.renderTemplate(false, configuration.moduleConfiguration.globalPathTemplate), '/') + '/helper/svgViewBoxes.jsp" />';
 
             // Set?
             if (scope.isSet(node, configuration))
