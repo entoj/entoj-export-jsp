@@ -5,6 +5,7 @@
  * @ignore
  */
 const NodeTransformer = require('entoj-system').export.transformer.NodeTransformer;
+const metrics = require('entoj-system').utils.performance.metrics;
 
 
 /**
@@ -26,6 +27,8 @@ class JspForEachTransformer extends NodeTransformer
      */
     transformNode(node, transformer, options)
     {
+        metrics.start(this.className + '::transformNode');
+
         if (node.is('VariableNode'))
         {
             // loop.length
@@ -43,6 +46,8 @@ class JspForEachTransformer extends NodeTransformer
                 node.fields[1] = 'index';
             }
         }
+
+        metrics.stop(this.className + '::transformNode');
         return Promise.resolve(node);
     }
 }

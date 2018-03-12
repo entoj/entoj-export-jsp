@@ -6,6 +6,7 @@
  */
 const NodeTransformer = require('entoj-system').export.transformer.NodeTransformer;
 const FilterNode = require('entoj-system').export.ast.FilterNode;
+const metrics = require('entoj-system').utils.performance.metrics;
 
 
 /**
@@ -49,6 +50,8 @@ class JspEmptyTransformer extends NodeTransformer
      */
     transformNode(node, transformer, options)
     {
+        metrics.start(this.className + '::transformNode');
+
         if (node.is('ConditionNode'))
         {
             for (const currentNode of node.children)
@@ -103,6 +106,8 @@ class JspEmptyTransformer extends NodeTransformer
                 }
             }
         }
+
+        metrics.stop(this.className + '::transformNode');
         return Promise.resolve(node);
     }
 }
