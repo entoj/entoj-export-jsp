@@ -36,7 +36,8 @@ class JspModuleConfiguration extends Base
         this._exportPath = buildConfiguration.get(prefix + '.exportPath', globalConfiguration.get(prefix + '.exportPath', '${cache}/${configurationName}/export'));
         this._basePathTemplate = buildConfiguration.get(prefix + '.basePathTemplate', globalConfiguration.get(prefix + '.basePathTemplate', ''));
         this._includePathTemplate = buildConfiguration.get(prefix + '.includePathTemplate', globalConfiguration.get(prefix + '.includePathTemplate', '/'));
-        this._globalPathTemplate = buildConfiguration.get(prefix + '.globalPathTemplate', globalConfiguration.get(prefix + '.globalPathTemplate', 'includes'));
+        this._globalFilePathTemplate = buildConfiguration.get(prefix + '.globalFilePathTemplate', globalConfiguration.get(prefix + '.globalFilePathTemplate', 'includes/helper'));
+        this._globalIncludePathTemplate = buildConfiguration.get(prefix + '.globalIncludePathTemplate', globalConfiguration.get(prefix + '.globalIncludePathTemplate', '/includes/helper'));
         this._entityPathTemplate = buildConfiguration.get(prefix + '.entityPathTemplate', globalConfiguration.get(prefix + '.entityPathTemplate', '${basePathTemplate}${basePathTemplate ? "/" : ""}includes/${entityCategory.pluralName.urlify()}'));
         this._entityFilenameTemplate = buildConfiguration.get(prefix + '.entityFilenameTemplate', globalConfiguration.get(prefix + '.entityFilenameTemplate', '${basePathTemplate}${basePathTemplate ? "/" : ""}includes/${entityId.idString.urlify()}'));
         this._entityMacroFilenameTemplate = buildConfiguration.get(prefix + '.entityMacroFilenameTemplate', globalConfiguration.get(prefix + '.entityMacroFilenameTemplate', '${macro.name.urlify().dasherize()}'));
@@ -129,9 +130,20 @@ class JspModuleConfiguration extends Base
      *
      * @type {String}
      */
-    get globalPathTemplate()
+    get globalFilePathTemplate()
     {
-        return this._globalPathTemplate;
+        return this._globalFilePathTemplate;
+    }
+
+
+    /**
+     * Template for generating the include path for global exports
+     *
+     * @type {String}
+     */
+    get globalIncludePathTemplate()
+    {
+        return this._globalIncludePathTemplate;
     }
 
 

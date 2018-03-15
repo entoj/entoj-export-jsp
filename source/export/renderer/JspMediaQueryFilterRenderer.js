@@ -101,7 +101,7 @@ class JspMediaQueryFilterRenderer extends JspFilterReplacementRenderer
         result+= '</c:if>';
         const file = new VinylFile(
             {
-                path: trimEnd(configuration.renderTemplate(false, configuration.moduleConfiguration.globalPathTemplate), '/') + '/helper/mediaQueries.jsp',
+                path: trimEnd(configuration.renderTemplate(false, configuration.moduleConfiguration.globalFilePathTemplate), '/') + '/mediaQueries.jsp',
                 contents: new Buffer(result)
             });
         return Promise.resolve([file]);
@@ -129,7 +129,7 @@ class JspMediaQueryFilterRenderer extends JspFilterReplacementRenderer
             }
 
             // Load map
-            result+= '<jsp:include page="/' + trim(configuration.renderTemplate(false, configuration.moduleConfiguration.globalPathTemplate), '/') + '/helper/mediaQueries.jsp" />';
+            result+= '<jsp:include page="/' + trim(configuration.renderTemplate(false, configuration.moduleConfiguration.globalIncludePathTemplate), '/') + '/mediaQueries.jsp" />';
 
             // Set?
             if (scope.isSet(node, configuration))
